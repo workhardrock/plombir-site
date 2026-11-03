@@ -53,6 +53,7 @@ export const artists = [
   { name: 'Disharino', photo: '/img/ar-disharino.webp' },
   { name: 'Maydellin', photo: '/img/ar-maydellin.webp' },
   { name: 'Anton Make', photo: '/img/ar-antonmake.webp' },
+  { name: 'Fanky', photo: '/img/ar-fanky.webp' },
 ];
 
 export const cases = [

@@ -1,5 +1,6 @@
 ---
 import { upcoming } from '../data/site';
+import Mark from './Mark.astro';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
 const next = { ...upcoming[0], ...t.upcoming[0] };
@@ -18,7 +19,15 @@ const units = ['d', 'h', 'm', 's'];
     <span class="hero__word display hero__word--bottom" aria-hidden="true">PLOMBIR</span>
   </div>
 
-  <p class="hero__lead" set:html={t.hero.lead} />
+  <span class="palm hero__palm" aria-hidden="true"></span>
+  <span class="palm hero__palm hero__palm--left" aria-hidden="true"></span>
+
+  <div class="hero__lead">
+    <p class="hero__tags">
+      {t.hero.tags.map((w, i) => <>{i > 0 && <Mark class="hero__sep" />}<span>{w}</span></>)}
+    </p>
+    <p class="hero__sub" set:html={t.hero.lead} />
+  </div>
 
   <div class="hero__next" data-ink="light">
     <a class="hero__poster" href={next.tickets} aria-label={`${t.hero.poster}: ${next.title}`}>
@@ -40,22 +49,34 @@ const units = ['d', 'h', 'm', 's'];
     --seam: 58svh;
     position: relative; background: var(--orange); color: var(--black);
     min-height: 100svh; padding-bottom: 0; overflow: hidden;
-    display: grid; grid-template-rows: var(--seam) auto auto;
+    display: grid; grid-template-rows: var(--seam) auto auto; grid-template-columns: minmax(0, 1fr);
   }
   .hero__photo { grid-row: 1; position: relative; overflow: hidden; background: var(--black); }
   .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; animation: drift 18s var(--ease) both; }
   .hero__photo::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / .28); }
   @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
 
-  .hero__type { position: absolute; left: 0; right: 0; top: var(--seam); transform: translateY(-50%); height: 0.88em; font-size: var(--t-giant); pointer-events: none; }
+  .hero__type { position: absolute; left: 0; right: 0; top: var(--seam); transform: translateY(-50%); height: 0.88em; font-size: var(--t-giant); pointer-events: none; z-index: 2; }
   .hero__word { position: absolute; inset: 0; display: block; text-align: center; font-size: 1em; white-space: nowrap; }
   .hero__word--top { color: var(--cream); clip-path: inset(0 0 50% 0); }
   .hero__word--bottom { color: var(--orange-deep); clip-path: inset(50% 0 0 0); }
 
   .hero__lead {
-    grid-row: 2; max-width: 34ch; margin: calc(var(--t-giant) * 0.62) auto 0; padding-inline: var(--m);
-    text-align: center; font-size: clamp(18px, 1.5vw, 22px); font-weight: 500; line-height: 1.35;
+    grid-row: 2; position: relative; z-index: 1; margin: calc(var(--t-giant) * 0.62) auto 0; padding-inline: var(--m);
+    display: grid; justify-items: center; gap: 14px; text-align: center;
   }
+  .hero__tags {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.3em 0.55em;
+    font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1;
+    font-size: clamp(22px, 2.6vw, 44px);
+  }
+  .hero__tags :global(.hero__sep) { width: 0.62em; color: var(--orange-deep); }
+  .hero__sub { font-size: clamp(15px, 1.2vw, 18px); font-weight: 500; letter-spacing: 0.01em; }
+  .hero__sub::before, .hero__sub::after { content: ''; display: inline-block; width: 28px; height: 1.5px; margin: 0 12px; vertical-align: middle; background: currentColor; }
+
+  .hero__palm { right: -4vw; bottom: -6svh; width: min(56vw, 70svh); transform: scaleY(-1) rotate(-8deg); }
+  .hero__palm--left { right: auto; left: -6vw; bottom: auto; top: calc(var(--seam) + 2svh); width: min(36vw, 48svh); transform: scaleX(-1) rotate(10deg); opacity: .7; }
+  .hero__next { position: relative; z-index: 1; }
 
   .hero__next {
     grid-row: 3; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: clamp(16px, 3vw, 48px);
@@ -76,7 +97,12 @@ const units = ['d', 'h', 'm', 's'];
   @media (max-width: 960px) {
     .hero { --seam: 46svh; }
     .hero__type { font-size: 15.4vw; }
-    .hero__lead { margin-top: calc(15.4vw * 0.62); font-size: 17px; max-width: 30ch; }
+    .hero__lead { margin-top: calc(15.4vw * 0.62); gap: 10px; }
+    .hero__tags { font-size: 3.6vw; gap: 0.3em 0.4em; }
+    .hero__sub { font-size: 14px; max-width: 30ch; }
+    .hero__sub::before, .hero__sub::after { display: none; }
+    .hero__palm { width: 78vw; right: -14vw; bottom: -2svh; }
+    .hero__palm--left { width: 46vw; }
     .hero__next { grid-template-columns: auto 1fr; padding: 14px; gap: 14px 16px; border-radius: 16px; }
     .hero__poster { width: 64px; grid-row: span 1; }
     .hero__count { grid-column: 1 / -1; justify-content: space-between; }

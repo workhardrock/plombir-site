@@ -45,6 +45,7 @@ const jobs = [
   ['artists/aaron.jpg', 'ar-aaron', 640, 800],
   ['artists/acrobat.png', 'ar-acrobat', 640, 800],
   ['artists/antonmake.jpg', 'ar-antonmake', 640, 800],
+  ['artists/fanky.jpg', 'ar-fanky', 640, 800],
   ['artists/arches.jpg', 'ar-arches', 640, 800],
   ['artists/dinamica.jpg', 'ar-dinamica', 640, 800],
   ['brand/img8660.png', 'mark-grain', 900],
@@ -65,3 +66,21 @@ await sharp(svg).resize(48, 48).png().toFile(path.join(PUB, 'favicon.png'));
 await sharp(svg).resize(180, 180).png().toFile(path.join(PUB, 'apple-touch-icon.png'));
 await sharp(path.join(SRC, 'photos/p07.jpg')).rotate().resize(1200, 630, { fit: 'cover', position: 'attention' }).jpeg({ quality: 82 }).toFile(path.join(PUB, 'og.jpg'));
 console.log('icons + og ready');
+
+// Тени пальм с логотипа: тёмные пиксели становятся силуэтом с прозрачностью, остальное убирается.
+{
+  const { data, info } = await sharp(path.join(SRC, 'brand/palm-mark.jpg')).resize(1280).raw().toBuffer({ resolveWithObject: true });
+  const px = Buffer.alloc(info.width * info.height * 4);
+  for (let i = 0, j = 0; i < data.length; i += info.channels, j += 4) {
+    const lum = (0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]) / 255;
+    // логотип в центре вырезаем с мягким краем: остаются пальмы сверху и справа
+    const x = (j / 4) % info.width / info.width * 640, y = Math.floor(j / 4 / info.width) / info.height * 640;
+    const c = (v) => Math.min(1, Math.max(0, v));
+    const keep = Math.max(c((175 - y) / 50), c((x - 495) / 70), c((y - 470) / 50) * c((x - 400) / 80));
+    const a = c((0.34 - lum) / 0.2) * keep;
+    px[j] = 0x2a; px[j + 1] = 0x0c; px[j + 2] = 0x02; px[j + 3] = Math.round(a * 255);
+  }
+  const out = await sharp(px, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .webp({ quality: 80, alphaQuality: 70 }).toFile(path.join(OUT, 'palm.webp'));
+  console.log('palm', out.width + 'x' + out.height, Math.round(out.size / 1024) + 'kb');
+}

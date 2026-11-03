@@ -4,6 +4,7 @@ import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
 ---
 <section class="demo on-orange reveal" data-ink="on-orange" data-circle="music" aria-labelledby="demo-title">
+  <span class="palm demo__palm" aria-hidden="true"></span>
   <div class="demo__plate" data-r>
     <img src="/img/pl066.webp" width="900" height="900" alt={t.demo.alt} loading="lazy" />
     <span class="demo__ring" aria-hidden="true"></span>
@@ -28,6 +29,8 @@ const t = useT(Astro.currentLocale);
 </section>
 
 <style>
+  .demo__palm { right: -6vw; bottom: -14%; width: min(34vw, 560px); transform: scaleY(-1); opacity: .7; }
+  @media (max-width: 760px) { .demo__palm { width: 80vw; } }
   .demo { display: grid; grid-template-columns: 1fr 1fr; min-height: 88svh; }
   .demo__plate { position: relative; align-self: center; margin: clamp(40px, 5vw, 80px) var(--m); aspect-ratio: 1; }
   .demo__plate img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; animation: spin 24s linear infinite; animation-play-state: paused; }

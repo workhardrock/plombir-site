@@ -5,6 +5,7 @@ const t = useT(Astro.currentLocale);
 const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
 ---
 <section class="prod chapter on-orange reveal" data-ink="on-orange" data-circle="places" id="production" aria-labelledby="prod-title">
+  <span class="palm prod__palm" aria-hidden="true"></span>
   <div class="wrap">
     <h2 id="prod-title" class="display h2 prod__title" data-r set:html={t.production.title} />
 
@@ -43,6 +44,8 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
 </section>
 
 <style>
+  .prod__palm { top: -8%; right: -6vw; width: min(52vw, 820px); opacity: .8; }
+  @media (max-width: 760px) { .prod__palm { width: 90vw; top: -4%; right: -24vw; } }
   .prod__title { margin-bottom: clamp(48px, 6vw, 96px); }
   .prod__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--gap); align-items: start; }
   .prod__copy { grid-column: 1 / 7; display: grid; gap: 40px; padding-right: 24px; }

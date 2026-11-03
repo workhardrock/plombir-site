@@ -20,7 +20,8 @@ const en: Dict = {
   hero: {
     alt: 'The PLOMBIR festival entrance arch with an inflatable moon at night',
     h1Extra: ' — festivals, parties and a music label, Kazan',
-    lead: 'Festivals, themed parties and an&nbsp;electronic music label from&nbsp;Kazan. Since&nbsp;2015.',
+    tags: ['Festivals', 'Parties', 'Label'],
+    lead: 'Electronic music and Kazan night culture since&nbsp;2015',
     poster: 'Poster',
     countdown: 'Time until the event starts',
     units: ['days', 'hours', 'minutes', 'seconds'],
@@ -36,7 +37,7 @@ const en: Dict = {
     alt: 'A performer holding a glowing orb in front of an inflatable moon',
     facts: [
       { n: '60+', text: 'releases on&nbsp;the PLOMBIR MUSIC label' },
-      { n: '1000', text: 'guests at&nbsp;the White Night festival' },
+      { n: '50\u00a0000', text: 'happy guests at&nbsp;PLOMBIR events' },
       { n: '11', text: 'years of&nbsp;events in&nbsp;Kazan and&nbsp;beyond' },
     ],
     text: [
@@ -86,7 +87,7 @@ const en: Dict = {
     title: 'Artists',
     booking: 'Book an artist',
     subject: 'PLOMBIR artist booking',
-    styles: ['Downtempo, progressive, indie dance', 'Indie dance, organic house', 'Top 5 progressive house'],
+    styles: ['Downtempo, progressive, indie dance', 'Indie dance, organic house', 'Top 5 progressive house', 'Deep, soulful, funky house'],
   },
   production: {
     title: 'Your event<br />as a brand',

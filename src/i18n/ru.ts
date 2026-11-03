@@ -19,7 +19,8 @@ const ru = {
   hero: {
     alt: 'Входная арка фестиваля PLOMBIR с надувной луной, ночь',
     h1Extra: ' — фестивали, вечеринки и музыкальный лейбл, Казань',
-    lead: 'Фестивали, тематические вечеринки и&nbsp;лейбл электронной музыки из&nbsp;Казани. С&nbsp;2015&nbsp;года.',
+    tags: ['Фестивали', 'Вечеринки', 'Лейбл'],
+    lead: 'Электронная музыка и&nbsp;ночная культура Казани с&nbsp;2015&nbsp;года',
     poster: 'Афиша',
     countdown: 'До начала события',
     units: ['дней', 'часов', 'минут', 'секунд'],
@@ -35,7 +36,7 @@ const ru = {
     alt: 'Перформер со светящимся шаром на фоне надувной луны',
     facts: [
       { n: '60+', text: 'релизов на&nbsp;лейбле PLOMBIR MUSIC' },
-      { n: '1000', text: 'гостей на&nbsp;фестивале White Night' },
+      { n: '50\u00a0000', text: 'счастливых гостей событий PLOMBIR' },
       { n: '11', text: 'лет событий в&nbsp;Казани и&nbsp;за&nbsp;её&nbsp;пределами' },
     ],
     text: [
@@ -85,7 +86,7 @@ const ru = {
     title: 'Артисты',
     booking: 'Букинг артиста',
     subject: 'Букинг артиста PLOMBIR',
-    styles: ['Downtempo, progressive, indie dance', 'Indie dance, organic house', 'Топ-5 progressive house'],
+    styles: ['Downtempo, progressive, indie dance', 'Indie dance, organic house', 'Топ-5 progressive house', 'Deep, soulful, funky house'],
   },
   production: {
     title: 'Ваше событие<br />как бренд',
