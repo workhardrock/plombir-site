@@ -100,3 +100,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .palm { position: absolute; z-index: 0; aspect-ratio: 1; pointer-events: none; background: url(/img/palm.webp) center / contain no-repeat; mix-blend-mode: multiply; }
 .on-orange:has(> .palm) { position: relative; overflow: hidden; }
 .on-orange:has(> .palm) > :not(.palm) { position: relative; z-index: 1; }
+
+/* В Unbounded после M буква B подменяется наклонной (контекстная альтернатива) — отключаем */
+body { font-variant-ligatures: none; font-feature-settings: 'calt' 0, 'liga' 0; }
