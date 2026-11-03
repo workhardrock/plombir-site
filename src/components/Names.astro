@@ -18,7 +18,7 @@ const line = [...playedHere, ...playedHere];
       <ul class="press__list">
         {t.names.articles.map((p, i) => (
           <li data-r style={`--i:${i}`}>
-            <a href={tilda.press}>
+            <a href={'url' in p ? p.url : tilda.press}>
               <span class="press__outlet">{p.outlet}</span>
               <span class="press__headline">{p.title}</span>
             </a>
