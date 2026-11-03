@@ -58,9 +58,9 @@ export const artists = [
 ];
 
 export const cases = [
-  { guests: '1000', year: '2022' },
-  { guests: '500', year: '2023' },
-  { guests: '450', year: '2024' },
+  { guests: '1580', year: '2024' },
+  { guests: '1340', year: '2024' },
+  { guests: '1200', year: '' },
 ];
 
 // Артисты, игравшие на событиях PLOMBIR (по архиву событий).

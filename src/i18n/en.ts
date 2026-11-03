@@ -122,9 +122,9 @@ const en: Dict = {
     guests: 'guests',
     city: 'Kazan',
     cases: [
-      { name: 'White Night festival', brief: 'A party with an all-white dress code and well-known DJs' },
-      { name: 'Mexican party', brief: 'A themed night with guest DJs' },
-      { name: 'Dune-themed party', brief: 'Vasilchuki restaurant, decor inspired by the film' },
+      { name: 'Lukomorye festival', brief: 'A festival inspired by&nbsp;Russian fairy tales' },
+      { name: 'Tantana', brief: 'A festival of contemporary Tatar culture, White Place' },
+      { name: 'Cosmonautics Day', brief: 'A space-themed visual show, Ak&nbsp;Bars Retro Cars' },
     ],
   },
   names: {

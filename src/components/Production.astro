@@ -36,9 +36,9 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
             <p class="case__guests display">{c.guests}</p>
             <div>
               <p class="case__name">{c.name}</p>
-              <p>{c.brief}</p>
+              <p set:html={c.brief} />
             </div>
-            <p class="case__where">{c.guests} {t.production.guests}<br />{t.production.city}, {c.year}</p>
+            <p class="case__where">{c.guests} {t.production.guests}<br />{t.production.city}{c.year && `, ${c.year}`}</p>
           </li>
         ))}
       </ul>
