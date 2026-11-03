@@ -51,6 +51,7 @@ const jobs = [
   ['brand/img8660.png', 'mark-grain', 900],
   ['photos/stage-v.jpg', 'stage-v', 1000, 1250],
   ['photos/stage-h.jpg', 'stage-h', 1200, 900],
+  ['photos/visual.jpg', 'hero-visual', 2400],
   // Лента «Наши ночи»
   ['photos/p29.jpg', 'gal-01', 900, 1200],
   ['photos/p02.jpg', 'gal-02', 900, 1200],
@@ -97,3 +98,6 @@ console.log('icons + og ready');
     .webp({ quality: 80, alphaQuality: 70 }).toFile(path.join(OUT, 'palm.webp'));
   console.log('palm', out.width + 'x' + out.height, Math.round(out.size / 1024) + 'kb');
 }
+
+// Мобильный кадр визуала первого экрана: левая часть, чтобы яркое ядро не попадало под текст
+await sharp(path.join(SRC, 'photos/visual.jpg')).extract({ left: 60, top: 0, width: 865, height: 1125 }).resize(1000, 1300).webp({ quality: 66 }).toFile(path.join(OUT, 'hero-visual-m.webp'));
