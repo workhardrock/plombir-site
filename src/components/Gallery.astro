@@ -1,0 +1,40 @@
+---
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+const [altA, altB, altC] = t.gallery.alts;
+---
+<section class="gal on-black reveal" data-ink="light" data-circle="people" aria-labelledby="gal-title">
+  <h2 id="gal-title" class="display gal__title" data-r set:html={t.gallery.title} />
+  <figure class="print print--a" data-r style="--i:1">
+    <img src="/img/performer.webp" width="720" height="1080" alt={altA} loading="lazy" />
+  </figure>
+  <figure class="print print--b" data-r style="--i:2">
+    <img src="/img/dj-hands.webp" width="900" height="1260" alt={altB} loading="lazy" />
+  </figure>
+  <figure class="print print--c" data-r style="--i:3">
+    <img src="/img/orange-crowd.webp" width="1280" height="852" alt={altC} loading="lazy" />
+  </figure>
+  <p class="gal__note small" set:html={t.gallery.note} />
+</section>
+
+<style>
+  .gal { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: var(--section-y) var(--m); }
+  .gal__title { font-size: clamp(110px, 17vw, 300px); text-align: center; line-height: .85; color: var(--orange); }
+  .print { position: absolute; margin: 0; padding: 8px; background: var(--cream); border-radius: 4px; transition: opacity .8s var(--ease), filter .8s var(--ease), transform .8s var(--ease), rotate .35s var(--ease); cursor: zoom-in; }
+  .print img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .print--a { width: 24vw; left: 26vw; top: 22%; rotate: -8deg; z-index: 2; }
+  .print--b { width: 24vw; left: 46vw; top: 30%; rotate: 6deg; z-index: 3; }
+  .print--c { width: 18vw; right: 6vw; bottom: -6%; rotate: -3deg; z-index: 1; }
+  .print--c img { aspect-ratio: 4 / 3; }
+  .print:hover { rotate: 0deg; z-index: 5; transform: scale(1.04); transition: rotate .25s var(--ease), transform .25s var(--ease); }
+  .gal__note { position: absolute; left: var(--m); bottom: 24px; max-width: 34ch; }
+
+  @media (max-width: 760px) {
+    .gal { min-height: 86svh; }
+    .gal__title { font-size: 22vw; }
+    .print--a { width: 50vw; left: 6vw; top: 26%; }
+    .print--b { width: 50vw; left: 42vw; top: 34%; }
+    .print--c { display: none; }
+    .gal__note { left: 16px; right: 16px; bottom: 20px; }
+  }
+</style>

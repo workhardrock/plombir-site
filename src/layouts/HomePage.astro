@@ -1,0 +1,129 @@
+---
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
+import '../styles/global.css';
+import Metrika from '../components/Metrika.astro';
+import { useT, homeHref } from '../i18n';
+import Loader from '../components/Loader.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Intro from '../components/Intro.astro';
+import Events from '../components/Events.astro';
+import Releases from '../components/Releases.astro';
+import Demo from '../components/Demo.astro';
+import Gallery from '../components/Gallery.astro';
+import Artists from '../components/Artists.astro';
+import Production from '../components/Production.astro';
+import Names from '../components/Names.astro';
+import Telegram from '../components/Telegram.astro';
+import Footer from '../components/Footer.astro';
+const t = useT(Astro.currentLocale);
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = site + homeHref(t.lang as 'ru' | 'en');
+---
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="theme-color" content="#121413" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ru" href={site + '/'} />
+    <link rel="alternate" hreflang="en" href={site + '/en/'} />
+    <link rel="alternate" hreflang="x-default" href={site + '/'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PLOMBIR" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={site + '/og.jpg'} />
+    <meta property="og:locale" content={t.lang === 'en' ? 'en_US' : 'ru_RU'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/img/hero-gate.webp" as="image" media="(min-width: 701px)" />
+    <Metrika />
+  </head>
+  <body data-circle="places">
+    <Loader />
+    <Header />
+    <main>
+      <Hero />
+      <Intro />
+      <Events />
+      <Releases />
+      <Demo />
+      <Gallery />
+      <Artists />
+      <Production />
+      <Names />
+      <Telegram />
+    </main>
+    <Footer />
+
+    <script>
+      // Появление частей секций
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      }, { rootMargin: '0px 0px -12% 0px' });
+      document.querySelectorAll('.reveal [data-r]').forEach((el) => io.observe(el));
+
+      // Шапка берёт цвет главы под собой, знак подсвечивает свой круг
+      const head = document.querySelector<HTMLElement>('.head')!;
+      let ticking = false;
+      const pending = [...document.querySelectorAll<HTMLElement>('.reveal [data-r]')];
+      const sync = () => {
+        ticking = false;
+        // страховка: показать всё, что уже проскроллили (быстрый скролл, якоря)
+        for (let k = pending.length - 1; k >= 0; k--) {
+          if (pending[k].getBoundingClientRect().top < innerHeight) { pending[k].classList.add('is-in'); pending.splice(k, 1); }
+        }
+        const y = head.offsetHeight / 2;
+        const under = document.elementsFromPoint(window.innerWidth / 2, y).find((el) => !head.contains(el) && !el.closest('.menu'));
+        const ink = under?.closest<HTMLElement>('[data-ink]')?.dataset.ink;
+        const circle = under?.closest<HTMLElement>('[data-circle]')?.dataset.circle;
+        if (ink && head.dataset.ink !== ink) head.dataset.ink = ink;
+        // фон шапки — цвет поля под ней; над фото в начале страницы шапка прозрачная
+        let bg = 'transparent';
+        if (scrollY > 40) for (let el = under as HTMLElement | null; el; el = el.parentElement) {
+          if (el.tagName === 'IMG') break;
+          const c = getComputedStyle(el).backgroundColor;
+          if (c && c !== 'transparent' && !c.endsWith(', 0)')) { bg = c; break; }
+        }
+        head.style.setProperty('--head-bg', bg);
+        if (circle && document.body.dataset.circle !== circle) document.body.dataset.circle = circle;
+      };
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }, { passive: true });
+      addEventListener('resize', sync);
+      sync();
+
+      // Обратный отсчёт до ближайшего события
+      const cd = document.querySelector<HTMLElement>('[data-countdown]');
+      if (cd) {
+        const target = new Date(cd.dataset.countdown!).getTime();
+        const units = { d: 86400, h: 3600, m: 60, s: 1 } as const;
+        const tick = () => {
+          let left = Math.max(0, Math.floor((target - Date.now()) / 1000));
+          for (const [u, size] of Object.entries(units)) {
+            const v = Math.floor(left / size); left -= v * size;
+            const el = cd.querySelector(`[data-u="${u}"]`);
+            if (el) el.textContent = String(v).padStart(2, '0');
+          }
+        };
+        tick(); setInterval(tick, 1000);
+      }
+
+      // Мобильное меню
+      const btn = document.querySelector<HTMLButtonElement>('.head__menu')!;
+      const menu = document.getElementById('menu')!;
+      const toggle = (open: boolean) => { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); btn.textContent = (open ? btn.dataset.close : btn.dataset.open) ?? ''; document.body.style.overflow = open ? 'hidden' : ''; if (open) head.dataset.ink = 'on-orange'; else sync(); };
+      btn.addEventListener('click', () => toggle(menu.hidden));
+      menu.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) toggle(false); });
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) toggle(false); });
+    </script>
+  </body>
+</html>

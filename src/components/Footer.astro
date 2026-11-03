@@ -1,0 +1,85 @@
+---
+import Mark from './Mark.astro';
+import { contacts, music, legalHrefs, tilda } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+const letters = [
+  ['P', 100, 'orange'], ['L', 72, 'cream'], ['O', 88, 'graphite'], ['M', 64, 'orange'],
+  ['B', 94, 'cream'], ['I', 70, 'graphite'], ['R', 84, 'orange'],
+] as const;
+const links = ['#events', '#label', '#artists', '#production', tilda.shop].map((href, i) => ({ href, label: t.header.nav[i] }));
+const legal = legalHrefs.map((href, i) => ({ href, label: t.footer.legal[i] }));
+const year = new Date().getFullYear();
+---
+<footer class="foot on-black" data-ink="light" data-circle="music">
+  <div class="foot__blocks wrap" aria-label="PLOMBIR" role="img">
+    {letters.map(([l, h, c]) => (
+      <span class={`blk blk--${c}`} style={`--h:${h}%`} aria-hidden="true">{l}</span>
+    ))}
+    <span class="blk blk--mark" style="--h:100%" aria-hidden="true"><Mark /></span>
+  </div>
+
+  <div class="foot__grid wrap">
+    <nav aria-label={t.footer.sections}>
+      <h2 class="foot__h">{t.footer.sections}</h2>
+      {links.map((n) => <a class="link" href={n.href}>{n.label}</a>)}
+    </nav>
+    <nav aria-label={t.footer.music}>
+      <h2 class="foot__h">{t.footer.music}</h2>
+      <a class="link" href={music.beatport}>Beatport</a>
+      <a class="link" href={music.spotify}>Spotify</a>
+      <a class="link" href={music.soundcloud}>SoundCloud</a>
+      <a class="link" href={music.youtube}>YouTube</a>
+    </nav>
+    <nav aria-label={t.footer.social}>
+      <h2 class="foot__h">{t.footer.social}</h2>
+      <a class="link" href={contacts.telegram}>Telegram</a>
+      <a class="link" href={contacts.instagram}>Instagram</a>
+      <a class="link" href={tilda.press} set:html={t.footer.press} />
+    </nav>
+    <nav aria-label={t.footer.docs}>
+      <h2 class="foot__h">{t.footer.docs}</h2>
+      {legal.map((l) => <a class="link" href={l.href}>{l.label}</a>)}
+    </nav>
+    <address class="foot__contacts">
+      <p><span>{t.footer.general}</span><a class="link" href={`mailto:${contacts.email}`}>{contacts.email}</a><a class="link" href={`tel:${contacts.phone.replace(/\s/g, '')}`}>{contacts.phone}</a></p>
+      <p><span>{t.footer.partners}</span><a class="link" href={`tel:${contacts.partnersPhone.replace(/\s/g, '')}`}>{contacts.partnersPhone}</a></p>
+      <p><span set:html={t.footer.tickets} /><a class="link" href={`mailto:${contacts.ticketsEmail}`}>{contacts.ticketsEmail}</a></p>
+    </address>
+  </div>
+
+  <div class="foot__last wrap">
+    <p class="small">© 2015–{year} {contacts.company} · {t.footer.inn} {contacts.inn}</p>
+    <a class="btn btn--cream" href="#top">{t.footer.top}</a>
+  </div>
+</footer>
+
+<style>
+  .foot { padding-top: var(--section-y); padding-bottom: var(--m); }
+  .foot__blocks { display: flex; align-items: flex-end; gap: 4px; height: 34svh; min-height: 220px; }
+  .blk { flex: 1 1 0; height: var(--h); border-radius: 12px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden;
+    font-family: var(--display); font-weight: 800; color: var(--black); font-size: clamp(36px, 7.4vw, 128px); line-height: .78; padding-bottom: 6px; }
+  .blk--orange { background: var(--orange); }
+  .blk--cream { background: var(--cream); }
+  .blk--graphite { background: var(--graphite); color: var(--cream); }
+  .blk--mark { flex: 0 0 16%; background: var(--cream); color: var(--black); align-items: center; padding: 3%; }
+  .blk--mark :global(svg) { width: 100%; }
+
+  .foot__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 2fr)) minmax(0, 3fr); gap: 32px; margin-top: 56px; font-size: 15px; }
+  .foot__grid nav { display: grid; gap: 10px; align-content: start; }
+  .foot__h { font-family: var(--text); font-weight: 500; font-size: 15px; color: var(--orange); margin-bottom: 4px; }
+  .foot__contacts { font-style: normal; display: grid; gap: 20px; align-content: start; }
+  .foot__contacts p { display: grid; gap: 4px; }
+  .foot__contacts span { color: var(--sand); }
+  .foot__last { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 72px; }
+  .foot__last .small { color: var(--sand); }
+
+  @media (max-width: 960px) {
+    .foot__grid { grid-template-columns: 1fr 1fr; }
+    .foot__contacts { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .foot__blocks { height: 22svh; min-height: 140px; gap: 3px; }
+    .blk { font-size: 11vw; border-radius: 6px; }
+  }
+</style>

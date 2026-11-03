@@ -1,0 +1,88 @@
+---
+import { releases, music } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+const tones = ['graphite', 'orange', 'cream', 'graphite', 'orange'];
+const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', cream: 'dark' };
+---
+<section class="rel on-black reveal" data-ink="light" data-circle="music" id="label" aria-labelledby="rel-title">
+  <div class="wrap section-head rel__head">
+    <h2 id="rel-title" class="display h2" data-r>{t.releases.title}</h2>
+    <a class="btn btn--ghost" href={music.beatport} data-r style="--i:1" set:html={t.releases.all} />
+  </div>
+
+  <ol class="rel__stack">
+    {releases.map((r, i) => (
+      <li class={`band band--${tones[i]}`} style={`--n:${i}`} data-ink={inks[tones[i]]}>
+        <div class="band__strip">
+          <span class="band__tab">{r.cat}</span>
+          <span class="band__meta">{r.artist}</span>
+        </div>
+        <div class="band__body">
+          <img class="band__cover" src={r.cover} width="900" height="900" alt={t.releases.cover(r.artist, r.track)} loading="lazy" />
+          <div class="band__text">
+            <h3 class="display band__track">{r.track}</h3>
+            <p class="h3">{r.artist}</p>
+            <p set:html={t.releases.note(r.cat)} />
+            <div class="band__links">
+              <a class="btn" href={music.beatport}>Beatport</a>
+              <a class="btn btn--ghost" href={music.spotify}>Spotify</a>
+              <a class="btn btn--ghost" href={music.soundcloud}>SoundCloud</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ol>
+  <a class="rel__more" href={music.beatport}>
+    <span class="display">{t.releases.more}</span>
+    <span>{t.releases.moreText}</span>
+  </a>
+</section>
+
+<style>
+  .rel { padding-top: var(--section-y); }
+  .rel__head { margin-bottom: clamp(40px, 5vw, 84px); }
+  .rel__stack { position: relative; }
+  .band {
+    position: sticky; top: calc(84px + var(--n) * 60px);
+    min-height: calc(86svh - var(--n) * 60px);
+    border-radius: 20px 20px 0 0; overflow: hidden;
+  }
+  .band--graphite { background: var(--graphite); color: var(--cream); }
+  .band--orange { background: var(--orange); color: var(--black); }
+  .band--cream { background: var(--cream); color: var(--black); }
+  .band__strip { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); }
+  .band__tab {
+    display: inline-flex; align-items: center; height: 40px; padding: 0 28px 0 18px;
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+    background: var(--black); color: var(--cream);
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
+    border-radius: 10px 0 0 10px;
+  }
+  .band--graphite .band__tab { background: var(--orange); color: var(--black); }
+  .band__meta { font-size: 16px; font-weight: 500; }
+  .band__body { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--gap); padding: clamp(16px, 2vw, 32px) var(--m) clamp(32px, 4vw, 64px); align-items: start; }
+  .band__cover { grid-column: 1 / 6; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; max-height: calc(100svh - 84px - var(--n) * 60px - 140px); max-width: calc(100svh - 84px - var(--n) * 60px - 140px); }
+  .band__text { grid-column: 7 / 13; display: grid; gap: 18px; align-content: start; }
+  .band__track { font-size: clamp(44px, 5.2vw, 92px); }
+  .band__text p:not(.h3) { max-width: 36ch; }
+  .band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .band--graphite .band__links .btn:first-child { background: var(--orange); color: var(--black); }
+
+  .rel__more {
+    position: relative; z-index: 1; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    padding: clamp(32px, 4vw, 56px) var(--m); background: var(--black); color: var(--cream); transition: color .25s;
+  }
+  .rel__more .display { font-size: clamp(36px, 5vw, 88px); color: var(--orange); transition: transform .35s var(--ease); }
+  .rel__more:hover .display { transform: translateX(12px); }
+
+  @media (max-width: 760px) {
+    .band { position: relative; top: auto; min-height: 0; border-radius: 16px 16px 0 0; }
+    .band__body { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .band__cover, .band__text { grid-column: 1; max-width: none; max-height: none; }
+    .band__track { font-size: 11vw; }
+    .band__tab { font-size: 15px; }
+    .band__meta { font-size: 14px; text-align: right; }
+  }
+</style>

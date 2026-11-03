@@ -1,0 +1,37 @@
+---
+import { contacts } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+---
+<section class="tg on-cream reveal" data-ink="dark" data-circle="people" aria-labelledby="tg-title">
+  <div class="tg__row">
+    <figure class="tg__flank tg__flank--photo" data-r>
+      <img src="/img/crowd-blue.webp" width="1200" height="798" alt={t.telegram.alt} loading="lazy" />
+    </figure>
+    <div class="tg__main" data-r style="--i:1">
+      <h2 id="tg-title" class="display tg__title">{t.telegram.title}</h2>
+      <p set:html={t.telegram.text} />
+      <a class="btn" href={contacts.telegram} set:html={t.telegram.cta} />
+    </div>
+    <div class="tg__flank tg__flank--ink" data-r style="--i:2"></div>
+  </div>
+</section>
+
+<style>
+  .tg { padding-bottom: var(--section-y); overflow: hidden; }
+  .tg__row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; margin-inline: -40px; }
+  .tg__row > * { height: 380px; border-radius: 20px; }
+  .tg__flank--photo { grid-column: 1 / 3; margin: 0; overflow: hidden; }
+  .tg__flank--photo img { width: 100%; height: 100%; object-fit: cover; }
+  .tg__flank--ink { grid-column: 11 / 13; background: var(--black); }
+  .tg__main { grid-column: 3 / 11; background: var(--orange); color: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding: 40px clamp(32px, 4vw, 64px); }
+  .tg__title { font-size: clamp(36px, 4.4vw, 76px); }
+  .tg__main p { max-width: 40ch; }
+
+  @media (max-width: 760px) {
+    .tg__row { grid-template-columns: 1fr 1fr; margin-inline: var(--m); gap: 8px; }
+    .tg__main { grid-column: 1 / -1; grid-row: 1; height: auto; padding: 28px 20px; }
+    .tg__title { font-size: 9vw; }
+    .tg__flank--photo, .tg__flank--ink { grid-column: auto; height: 120px; }
+  }
+</style>

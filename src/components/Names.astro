@@ -1,0 +1,58 @@
+---
+import { playedHere, tilda } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+const line = [...playedHere, ...playedHere];
+---
+<section class="names" data-ink="light" data-circle="people" aria-labelledby="names-title">
+  <h2 id="names-title" class="sr-only">{t.names.title}</h2>
+  <div class="names__band on-black" aria-hidden="true">
+    <div class="names__track display">
+      {line.map((n) => <span>{n}<i></i></span>)}
+    </div>
+  </div>
+  <div class="names__after on-cream reveal" data-ink="dark">
+    <p class="wrap names__sentence" data-r set:html={t.names.sentence} />
+    <div class="wrap press">
+      <h2 class="display press__title" data-r set:html={t.names.press} />
+      <ul class="press__list">
+        {t.names.articles.map((p, i) => (
+          <li data-r style={`--i:${i}`}>
+            <a href={tilda.press}>
+              <span class="press__outlet">{p.outlet}</span>
+              <span class="press__headline">{p.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .names__band { height: 34vh; min-height: 220px; display: flex; align-items: center; overflow: hidden; }
+  .names__track { display: flex; white-space: nowrap; font-size: 8vw; color: var(--cream); animation: run 60s linear infinite; }
+  .names__track span { display: inline-flex; align-items: center; }
+  .names__track i { display: inline-block; width: .26em; height: .26em; margin: 0 .5em; border-radius: 50%; background: var(--orange); }
+  @keyframes run { to { transform: translateX(-50%); } }
+
+  .names__after { padding-bottom: var(--section-y); }
+  .names__sentence { padding-top: 28px; font-size: 18px; max-width: 60ch; }
+  .press { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--gap); margin-top: clamp(96px, 10vw, 160px); }
+  .press__title { grid-column: 1 / 6; font-size: clamp(40px, 4.6vw, 80px); }
+  .press__list { grid-column: 6 / 13; display: grid; gap: 8px; }
+  .press__list a { display: grid; grid-template-columns: 10em 1fr; gap: 24px; padding: 22px 24px; border-radius: 20px; background: var(--paper); transition: background-color .25s, color .25s; }
+  .press__list a:hover { background: var(--black); color: var(--cream); }
+  .press__outlet { font-weight: 500; }
+  .press__headline { font-size: var(--t-body); }
+
+  @media (max-width: 760px) {
+    .names__band { height: 22vh; min-height: 140px; }
+    .names__track { font-size: 15vw; }
+    .names__sentence { font-size: 16px; }
+    .press { display: block; }
+    .press__title { margin-bottom: 24px; font-size: 9vw; }
+    .press__list a { grid-template-columns: 1fr; gap: 6px; padding: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .names__track { animation: none; } }
+</style>

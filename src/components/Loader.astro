@@ -1,0 +1,38 @@
+---
+import Mark from './Mark.astro';
+---
+<div class="loader" aria-hidden="true">
+  <span class="loader__word">PLOMBIR</span>
+  <Mark class="loader__mark" />
+</div>
+<script is:inline>
+  // Прелоадер показываем один раз за сессию
+  try { if (sessionStorage.getItem('plmbr-intro')) document.documentElement.classList.add('no-intro'); sessionStorage.setItem('plmbr-intro', '1'); } catch (e) {}
+</script>
+
+<style>
+  .loader {
+    position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+    background: var(--black); color: var(--cream); pointer-events: none;
+    animation: loader-out .7s var(--ease) 2.45s forwards;
+  }
+  .loader > * { grid-area: 1 / 1; opacity: 0; }
+  .loader__word {
+    font-family: var(--display); font-weight: 800; letter-spacing: -0.02em;
+    font-size: clamp(44px, 9vw, 140px);
+    animation: pop 1.2s cubic-bezier(.18, 1.18, .4, 1) .1s forwards;
+  }
+  .loader :global(.loader__mark) {
+    width: clamp(88px, 12vw, 150px); color: var(--orange);
+    animation: pop 1.2s cubic-bezier(.18, 1.18, .4, 1) 1.3s forwards;
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(.82); }
+    34% { opacity: 1; transform: scale(1.16); }
+    72% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+  @keyframes loader-out { to { opacity: 0; visibility: hidden; } }
+  :global(.no-intro) .loader { display: none; }
+  @media (prefers-reduced-motion: reduce) { .loader { display: none; } }
+</style>

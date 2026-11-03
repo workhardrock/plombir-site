@@ -1,0 +1,84 @@
+---
+import Mark from './Mark.astro';
+import { tilda } from '../data/site';
+import { useT, homeHref } from '../i18n';
+const t = useT(Astro.currentLocale);
+const lang = t.lang as 'ru' | 'en';
+const links = ['#events', '#label', '#artists', '#production', tilda.shop].map((href, i) => ({ href, label: t.header.nav[i] }));
+const langs = [{ code: 'ru', label: 'RU' }, { code: 'en', label: 'EN' }] as const;
+---
+<header class="head" data-ink="light" id="top">
+  <a class="head__brand" href={homeHref(lang)} aria-label={t.header.home}>
+    <Mark class="head__mark" />
+    <span class="head__word">PLOMBIR</span>
+  </a>
+  <nav class="head__nav" aria-label={t.header.navLabel}>
+    {links.map((n) => <a class="link" href={n.href}>{n.label}</a>)}
+  </nav>
+  <div class="head__end">
+    <nav class="lang" aria-label={t.header.langLabel}>
+      {langs.map((l) => (
+        <a class="lang__opt" href={homeHref(l.code)} hreflang={l.code} lang={l.code} aria-current={l.code === lang ? 'true' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+    <a class="btn btn--orange head__cta" href="#events">{t.header.tickets}</a>
+    <button class="head__menu" aria-expanded="false" aria-controls="menu" data-open={t.header.menu} data-close={t.header.close}>{t.header.menu}</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label={t.header.mobileNavLabel}>
+    {links.map((n) => <a class="display" href={n.href}>{n.label}</a>)}
+  </nav>
+</div>
+
+<style>
+  .head {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;
+    padding: 18px var(--m);
+    color: var(--ink, var(--cream));
+    background: var(--head-bg, transparent);
+    transition: color .3s, background-color .3s, transform .45s var(--ease);
+    --hl: var(--orange);
+  }
+  .head[data-ink='light'] { --ink: var(--cream); --hl: var(--orange); }
+  .head[data-ink='dark'] { --ink: var(--black); --hl: var(--orange); }
+  .head[data-ink='on-orange'] { --ink: var(--black); --hl: var(--cream); }
+  .head.is-hidden { transform: translateY(-110%); }
+  .head[data-ink='on-orange'] .head__cta { background: var(--black); color: var(--cream); }
+
+  .head__brand { display: inline-flex; align-items: center; gap: 12px; }
+  .head__brand :global(.head__mark) { width: 34px; height: auto; }
+  .head__word { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.02em; }
+  :global(body[data-circle='music']) .head :global(.mark__c--music),
+  :global(body[data-circle='people']) .head :global(.mark__c--people),
+  :global(body[data-circle='places']) .head :global(.mark__c--places) { fill: var(--hl); transform: scale(1.12); }
+
+  .head__nav { display: flex; justify-content: center; gap: clamp(16px, 2vw, 32px); font-size: 16px; font-weight: 500; }
+  .head__end { display: flex; align-items: center; gap: 12px; }
+  .lang { display: inline-flex; padding: 3px; border-radius: var(--radius); border: 1.5px solid currentColor; font-size: 13px; font-weight: 500; line-height: 1; }
+  .lang__opt { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; border-radius: var(--radius); transition: background-color .25s, color .25s; }
+  .lang__opt:not([aria-current]):hover { background: color-mix(in srgb, currentColor 16%, transparent); }
+  .lang__opt[aria-current] { background: var(--ink); color: var(--head-on-ink, var(--black)); }
+  .head[data-ink='light'] { --head-on-ink: var(--black); }
+  .head[data-ink='dark'], .head[data-ink='on-orange'] { --head-on-ink: var(--cream); }
+  .head__menu { display: none; font-weight: 500; font-size: 16px; min-height: 44px; padding: 0 4px; }
+
+  .menu { position: fixed; inset: 0; z-index: 40; background: var(--orange); color: var(--black); padding: 96px var(--m) 32px; }
+  .menu nav { display: grid; gap: 14px; }
+  .menu a { font-size: clamp(32px, 9vw, 56px); }
+
+  @media (max-width: 960px) {
+    .head { grid-template-columns: 1fr auto; }
+    .head__nav { display: none; }
+    .head__menu { display: inline-block; }
+    .head__cta { min-height: 40px; padding: 0 18px; }
+    .lang__opt { min-width: 32px; height: 32px; }
+    .head__end { gap: 8px; }
+  }
+  @media (max-width: 520px) {
+    .head__cta { display: none; }
+    .head__word { font-size: 18px; }
+  }
+</style>

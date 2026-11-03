@@ -1,0 +1,85 @@
+---
+import { upcoming } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+const next = { ...upcoming[0], ...t.upcoming[0] };
+const units = ['d', 'h', 'm', 's'];
+---
+<section class="hero" data-ink="on-orange" data-circle="places" aria-labelledby="hero-title">
+  <div class="hero__photo" data-ink="light">
+    <picture>
+      <source media="(max-width: 700px)" srcset="/img/hero-gate-m.webp" />
+      <img src="/img/hero-gate.webp" width="2400" height="1600" alt={t.hero.alt} fetchpriority="high" />
+    </picture>
+  </div>
+
+  <div class="hero__type">
+    <h1 id="hero-title" class="hero__word display hero__word--top">PLOMBIR<span class="sr-only">{t.hero.h1Extra}</span></h1>
+    <span class="hero__word display hero__word--bottom" aria-hidden="true">PLOMBIR</span>
+  </div>
+
+  <p class="hero__lead" set:html={t.hero.lead} />
+
+  <div class="hero__next" data-ink="light">
+    <a class="hero__poster" href={next.tickets} aria-label={`${t.hero.poster}: ${next.title}`}>
+      <img src={next.poster} width="900" height="1200" alt={`${t.hero.poster}: ${next.title}`} />
+    </a>
+    <div class="hero__info">
+      <h2 class="h3">{next.title}</h2>
+      <p class="small">{next.day}, {next.date} · {next.venue}, {next.city}</p>
+    </div>
+    <div class="hero__count" data-ui data-countdown={next.start} aria-label={t.hero.countdown}>
+      {units.map((u, i) => <div><b data-u={u}>—</b><span>{t.hero.units[i]}</span></div>)}
+    </div>
+    <a class="btn hero__buy" href={next.tickets}>{t.hero.buy}</a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    --seam: 58svh;
+    position: relative; background: var(--orange); color: var(--black);
+    min-height: 100svh; padding-bottom: 0; overflow: hidden;
+    display: grid; grid-template-rows: var(--seam) auto auto;
+  }
+  .hero__photo { grid-row: 1; position: relative; overflow: hidden; background: var(--black); }
+  .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; animation: drift 18s var(--ease) both; }
+  .hero__photo::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / .28); }
+  @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
+
+  .hero__type { position: absolute; left: 0; right: 0; top: var(--seam); transform: translateY(-50%); height: 0.88em; font-size: var(--t-giant); pointer-events: none; }
+  .hero__word { position: absolute; inset: 0; display: block; text-align: center; font-size: 1em; white-space: nowrap; }
+  .hero__word--top { color: var(--cream); clip-path: inset(0 0 50% 0); }
+  .hero__word--bottom { color: var(--orange-deep); clip-path: inset(50% 0 0 0); }
+
+  .hero__lead {
+    grid-row: 2; max-width: 34ch; margin: calc(var(--t-giant) * 0.62) auto 0; padding-inline: var(--m);
+    text-align: center; font-size: clamp(18px, 1.5vw, 22px); font-weight: 500; line-height: 1.35;
+  }
+
+  .hero__next {
+    grid-row: 3; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: clamp(16px, 3vw, 48px);
+    margin: clamp(40px, 6svh, 72px) var(--m) var(--m); padding: 16px; padding-right: 24px;
+    background: var(--black); color: var(--cream); border-radius: 20px;
+  }
+  .hero__poster { width: 84px; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px; }
+  .hero__poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+  .hero__poster:hover img { transform: scale(1.06); }
+  .hero__info { display: grid; gap: 6px; }
+  .hero__info .small { color: var(--sand); }
+  .hero__count { display: flex; gap: clamp(14px, 2vw, 28px); font-variant-numeric: tabular-nums; }
+  .hero__count div { display: grid; justify-items: center; }
+  .hero__count b { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 2.6vw, 42px); line-height: 1; color: var(--orange); }
+  .hero__count span { font-size: 13px; color: var(--sand); margin-top: 6px; }
+  .hero__buy { background: var(--orange); color: var(--black); }
+
+  @media (max-width: 960px) {
+    .hero { --seam: 46svh; }
+    .hero__type { font-size: 15.4vw; }
+    .hero__lead { margin-top: calc(15.4vw * 0.62); font-size: 17px; max-width: 30ch; }
+    .hero__next { grid-template-columns: auto 1fr; padding: 14px; gap: 14px 16px; border-radius: 16px; }
+    .hero__poster { width: 64px; grid-row: span 1; }
+    .hero__count { grid-column: 1 / -1; justify-content: space-between; }
+    .hero__buy { grid-column: 1 / -1; }
+  }
+</style>

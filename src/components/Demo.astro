@@ -1,0 +1,57 @@
+---
+import { music, contacts } from '../data/site';
+import { useT } from '../i18n';
+const t = useT(Astro.currentLocale);
+---
+<section class="demo on-orange reveal" data-ink="on-orange" data-circle="music" aria-labelledby="demo-title">
+  <div class="demo__plate" data-r>
+    <img src="/img/pl066.webp" width="900" height="900" alt={t.demo.alt} loading="lazy" />
+    <span class="demo__ring" aria-hidden="true"></span>
+    <span class="demo__dot" aria-hidden="true"></span>
+  </div>
+  <div class="demo__side">
+    <nav class="demo__tabs" aria-label={t.demo.platforms} data-r style="--i:1">
+      <a class="link" href={music.beatport}>Beatport</a>
+      <a class="link" href={music.spotify}>Spotify</a>
+      <a class="link" href={music.soundcloud}>SoundCloud</a>
+      <a class="link" href={music.youtube}>YouTube</a>
+    </nav>
+    <div data-r style="--i:2">
+      <h2 id="demo-title" class="display demo__title">{t.demo.title}</h2>
+      <p class="demo__text" set:html={t.demo.text} />
+    </div>
+    <div class="demo__cells" data-r style="--i:3">
+      <a class="demo__cell demo__cell--ink" href={`mailto:${contacts.email}?subject=${encodeURIComponent(t.demo.subject)}`}>{t.demo.send}</a>
+      <a class="demo__cell" href={music.beatport}>{t.demo.listen}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo { display: grid; grid-template-columns: 1fr 1fr; min-height: 88svh; }
+  .demo__plate { position: relative; align-self: center; margin: clamp(40px, 5vw, 80px) var(--m); aspect-ratio: 1; }
+  .demo__plate img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; animation: spin 24s linear infinite; animation-play-state: paused; }
+  .demo:hover .demo__plate img, .demo__plate.is-in img { animation-play-state: running; }
+  .demo__ring { position: absolute; inset: 7%; border-radius: 50%; border: 6px solid var(--black); opacity: .9; }
+  .demo__dot { position: absolute; left: 50%; top: 50%; width: 12%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: var(--orange); border: 6px solid var(--black); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .demo__side { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: clamp(40px, 5vw, 80px) var(--m) clamp(40px, 5vw, 80px) 0; }
+  .demo__tabs { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 18px; font-weight: 500; }
+  .demo__title { font-size: clamp(36px, 4.6vw, 80px); max-width: 11ch; }
+  .demo__text { margin-top: 40px; max-width: 36ch; }
+  .demo__cells { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .demo__cell { display: flex; align-items: center; justify-content: center; height: 72px; border-radius: var(--radius); background: #ff7a4a; font-weight: 500; transition: transform .25s var(--ease), background-color .25s; }
+  .demo__cell:hover { transform: translateY(-2px); background: var(--cream); }
+  .demo__cell--ink { background: var(--black); color: var(--cream); }
+  .demo__cell--ink:hover { background: var(--graphite); }
+
+  @media (max-width: 860px) {
+    .demo { grid-template-columns: 1fr; min-height: 0; padding-bottom: 48px; }
+    .demo__plate { margin: 48px 16px 0; }
+    .demo__side { padding: 32px 16px 0; gap: 32px; }
+    .demo__title { font-size: 9vw; }
+    .demo__cells { grid-template-columns: 1fr; }
+    .demo__cell { height: 60px; }
+  }
+</style>

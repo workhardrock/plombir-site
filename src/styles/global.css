@@ -1,0 +1,97 @@
+@font-face { font-family: 'Stolzl'; src: url('/fonts/Stolzl-Book.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Stolzl'; src: url('/fonts/Stolzl-Medium.ttf') format('truetype'); font-weight: 500 700; font-display: swap; }
+
+:root {
+  /* Цвета из брендбука */
+  --black: #121413;
+  --graphite: #1f2221;
+  --orange: #ff5b22;
+  --orange-deep: #2a0c02;
+  --cream: #e6dfd5;
+  --sand: #cfc5b6;
+  --paper: #ece8e3;
+
+  --display: 'Unbounded', 'Arial Black', sans-serif;
+  --text: 'Stolzl', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Пять размеров на всю страницу */
+  --t-giant: clamp(64px, 12.5vw, 220px);
+  --t-h2: clamp(40px, 6.4vw, 112px);
+  --t-h3: clamp(24px, 2.2vw, 34px);
+  --t-body: clamp(17px, 1.25vw, 20px);
+  --t-small: 15px;
+
+  --m: clamp(16px, 2.2vw, 32px);   /* внешние поля */
+  --gap: clamp(8px, 0.8vw, 12px);
+  --section-y: clamp(96px, 11vw, 200px);
+  --radius: 999px;                 /* кнопки — только пилюли */
+
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--text);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+::selection { background: var(--orange); color: var(--black); }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.display { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.88; }
+.h2 { font-size: var(--t-h2); }
+.h3 { font-family: var(--text); font-weight: 500; font-size: var(--t-h3); line-height: 1.15; letter-spacing: -0.01em; }
+.small { font-size: var(--t-small); }
+
+.wrap { padding-inline: var(--m); }
+
+/* Главы: сплошные поля цвета */
+.chapter { position: relative; padding-block: var(--section-y); }
+.on-black { background: var(--black); color: var(--cream); }
+.on-graphite { background: var(--graphite); color: var(--cream); }
+.on-orange { background: var(--orange); color: var(--black); }
+.on-cream { background: var(--cream); color: var(--black); }
+
+.section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 24px; margin-bottom: clamp(40px, 5vw, 80px); }
+
+/* Кнопки */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 26px; border-radius: var(--radius);
+  font-family: var(--text); font-weight: 500; font-size: 16px; line-height: 1;
+  background: var(--black); color: var(--cream); border: 1.5px solid transparent;
+  transition: transform .25s var(--ease), background-color .25s, color .25s, border-color .25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.97); }
+.btn--orange { background: var(--orange); color: var(--black); }
+.btn--cream { background: var(--cream); color: var(--black); }
+.btn--ghost { background: transparent; color: inherit; border-color: currentColor; }
+.on-black .btn--ghost:hover, .on-graphite .btn--ghost:hover { color: var(--black); background: var(--cream); border-color: var(--cream); }
+.on-cream .btn--ghost:hover, .on-orange .btn--ghost:hover, .band--orange .btn--ghost:hover, .band--cream .btn--ghost:hover { color: var(--cream); background: var(--black); border-color: var(--black); }
+
+.link { text-decoration: underline 2px transparent; text-underline-offset: 5px; transition: text-decoration-color .25s; }
+.link:hover { text-decoration-color: currentColor; }
+
+/* Появление при скролле: подъём + размытие → резкость */
+.js .reveal [data-r] { opacity: 0; transform: translateY(24px); filter: blur(10px); transition: opacity .8s var(--ease), transform .8s var(--ease), filter .8s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .reveal .is-in [data-r], .js .reveal [data-r].is-in { opacity: 1; transform: none; filter: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .reveal [data-r] { opacity: 1; transform: none; filter: none; }
+}
