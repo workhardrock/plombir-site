@@ -4,12 +4,19 @@ import '@fontsource/unbounded/600.css';
 import '@fontsource/unbounded/700.css';
 import '@fontsource/unbounded/800.css';
 import '../styles/global.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
 import '../styles/calm.css';
+import '../styles/blue.css';
+import '../styles/flux.css';
 import Metrika from '../components/Metrika.astro';
 import { useT, homeHref } from '../i18n';
 import Loader from '../components/Loader.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import Hero from '../components/HeroFlux.astro';
 import Intro from '../components/Intro.astro';
 import Events from '../components/Events.astro';
 import Releases from '../components/Releases.astro';
@@ -51,7 +58,7 @@ const canonical = site + homeHref(t.lang as 'ru' | 'en');
     <link rel="preload" href="/img/hero-gate.webp" as="image" media="(min-width: 701px)" />
     <Metrika />
   </head>
-  <body class="calm" data-circle="places">
+  <body class="calm blue flux" data-circle="places">
     <Loader />
     <Header />
     <main>

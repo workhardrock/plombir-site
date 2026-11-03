@@ -26,6 +26,14 @@ const en: Dict = {
     countdown: 'Time until the event starts',
     units: ['days', 'hours', 'minutes', 'seconds'],
     buy: 'Get tickets',
+    flux: {
+      title: ['Music, people', 'and&nbsp;<em>places</em>.'],
+      sub: 'PLOMBIR festivals, parties and label. Electronic music and Kazan nightlife since&nbsp;2015.',
+      statsL: [{ n: '50K+', text: 'event guests' }, { n: '60+', text: 'label releases' }],
+      statsR: [{ n: '11', text: 'years in&nbsp;Kazan' }, { n: '2015', text: 'founded' }],
+      orb: 'Tickets',
+      cards: ['Next event', 'New release', 'Coming up'],
+    },
   },
   upcoming: [
     { title: 'LI|LU in Kazan', day: 'Saturday', venue: 'YUG22 restaurant', city: 'Kazan' },
