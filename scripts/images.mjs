@@ -56,12 +56,12 @@ const jobs = [
   ['photos/p02.jpg', 'gal-02', 900, 1200],
   ['photos/p19.jpg', 'gal-03', 900, 1200],
   ['photos/p03.jpg', 'gal-04', 900, 1200],
-  ['photos/p14.jpg', 'gal-05', 900, 1200],
+  ['photos/p32.jpg', 'gal-05', 900, 1200],
   ['photos/p28.jpg', 'gal-06', 900, 1200],
   ['photos/p45.jpg', 'gal-07', 900, 1200],
   ['photos/p35.jpg', 'gal-08', 900, 1200],
   ['photos/p05.jpg', 'gal-09', 900, 1200],
-  ['photos/p13.jpg', 'gal-10', 900, 1200],
+  ['photos/p39.jpg', 'gal-10', 900, 1200],
 ];
 
 for (const [src, name, w, h] of jobs) {
