@@ -117,6 +117,7 @@ const en: Dict = {
     ],
   },
   telegram: {
+    alt2: 'A DJ on the PLOMBIR stage in orange laser beams',
     alt: 'A crowd under blue light and PLOMBIR flags',
     title: 'News first',
     text: 'Line-ups, ticket releases and giveaways come first to&nbsp;our Telegram channel @PLMBR.',

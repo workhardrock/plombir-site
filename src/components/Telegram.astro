@@ -13,7 +13,9 @@ const t = useT(Astro.currentLocale);
       <p set:html={t.telegram.text} />
       <a class="btn" href={contacts.telegram} set:html={t.telegram.cta} />
     </div>
-    <div class="tg__flank tg__flank--ink" data-r style="--i:2"></div>
+    <figure class="tg__flank tg__flank--photo tg__flank--end" data-r style="--i:2">
+      <img src="/img/stage-laser.webp" width="1600" height="1067" alt={t.telegram.alt2} loading="lazy" />
+    </figure>
   </div>
 </section>
 
@@ -23,7 +25,8 @@ const t = useT(Astro.currentLocale);
   .tg__row > * { height: 380px; border-radius: 20px; }
   .tg__flank--photo { grid-column: 1 / 3; margin: 0; overflow: hidden; }
   .tg__flank--photo img { width: 100%; height: 100%; object-fit: cover; }
-  .tg__flank--ink { grid-column: 11 / 13; background: var(--black); }
+  .tg__flank--end { grid-column: 11 / 13; }
+  .tg__flank--end img { object-position: 30% 50%; }
   .tg__main { grid-column: 3 / 11; background: var(--orange); color: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding: 40px clamp(32px, 4vw, 64px); }
   .tg__title { font-size: clamp(36px, 4.4vw, 76px); }
   .tg__main p { max-width: 40ch; }
@@ -32,6 +35,6 @@ const t = useT(Astro.currentLocale);
     .tg__row { grid-template-columns: 1fr 1fr; margin-inline: var(--m); gap: 8px; }
     .tg__main { grid-column: 1 / -1; grid-row: 1; height: auto; padding: 28px 20px; }
     .tg__title { font-size: 9vw; }
-    .tg__flank--photo, .tg__flank--ink { grid-column: auto; height: 120px; }
+    .tg__flank--photo { grid-column: auto; height: 120px; }
   }
 </style>
