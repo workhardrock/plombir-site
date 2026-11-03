@@ -4,7 +4,7 @@ export const contacts = {
   email: 'info@plombir.events', // сюда идут все заявки: демо, букинг, заказ мероприятий
   phone: '+7 999 164 14 29',
   partnersPhone: '+7 906 122 16 99',
-  ticketsEmail: 'info@qtickets.ru',
+  ticketsEmail: 'info@plombir.events',
   telegram: 'https://t.me/PLMBR',
   instagram: 'https://instagram.com/plmbr',
   inn: '165714390934',
