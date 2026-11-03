@@ -1,0 +1,64 @@
+/* Палитра Midnight: полуночный чёрный, электрический синий, канталупный оранжевый.
+   Строится поверх сдержанной версии (calm.css). Синий — свет и детали, оранжевый — действие. */
+
+body.calm.midnight {
+  --black: #02070a !important;
+  --graphite: #07121a !important;
+  --panel: #0b1a24 !important;
+  --line: rgb(140 200 235 / .14) !important;
+  --cream: #eef3f6 !important;
+  --mute: #8aa1ae !important;
+  --sand: #8aa1ae !important;
+  --orange: #fc734d !important;
+  --blue: #0297de;
+  --glow: radial-gradient(45% 60% at 50% 105%, rgb(252 115 77 / .8), transparent 72%), radial-gradient(85% 90% at 50% 110%, rgb(2 151 222 / .75), transparent 75%);
+}
+
+/* Первый экран: фото уходит в синее свечение с оранжевым ядром внизу, поверх — вертикальные «полосы спектра» */
+body.calm.midnight .hero__photo img { filter: saturate(.55) contrast(1.05) brightness(.8) !important; }
+body.calm.midnight .hero__photo::after {
+  background:
+    radial-gradient(38% 30% at 50% 88%, rgb(252 115 77 / .85), transparent 75%),
+    radial-gradient(75% 55% at 50% 92%, rgb(2 151 222 / .8), transparent 72%),
+    linear-gradient(180deg, rgb(2 7 10 / .65) 0%, rgb(2 7 10 / .35) 30%, rgb(2 7 10 / .2) 55%, rgb(2 7 10 / .55) 88%, var(--black) 100%) !important;
+}
+body.calm.midnight .hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgb(160 220 255 / .22) 0 1px, transparent 1px 6px);
+  -webkit-mask: radial-gradient(55% 45% at 50% 84%, #000, transparent 80%); mask: radial-gradient(55% 45% at 50% 84%, #000, transparent 80%);
+  mix-blend-mode: screen;
+}
+body.calm.midnight .hero__tags .hero__sep { color: var(--blue) !important; }
+body.calm.midnight .hero__next { background: rgb(4 14 20 / .72) !important; }
+
+/* Цифры и крупные акценты — переход синий → оранжевый, как в свечении */
+body.calm.midnight .intro__facts dt,
+body.calm.midnight .rel__more .display,
+body.calm.midnight .case__guests {
+  background: linear-gradient(100deg, var(--blue), var(--orange)) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
+}
+body.calm.midnight .tile__est { color: var(--blue) !important; }
+body.calm.midnight .tile--b { background: linear-gradient(135deg, #07121a 40%, #0a2a3d) !important; }
+
+/* Лейбл: оттенки полуночного синего */
+body.calm.midnight .band--graphite { background: #050f15 !important; }
+body.calm.midnight .band--orange { background: #07141c !important; }
+body.calm.midnight .band--cream { background: #0a1a24 !important; }
+body.calm.midnight .player__bar span { background: linear-gradient(90deg, var(--blue), var(--orange)) !important; }
+body.calm.midnight .player__btn { background: var(--orange) !important; color: #02070a !important; }
+
+/* Мелкие детали синим */
+body.calm.midnight .prod__caps li::before { background: var(--blue) !important; }
+body.calm.midnight .names__track i { background: var(--blue) !important; }
+body.calm.midnight .sound[aria-pressed='true'] { background: var(--blue) !important; color: #02070a !important; }
+body.calm.midnight .link:hover, body.calm.midnight .foot a:hover { color: var(--blue) !important; }
+body.calm.midnight .demo__dot { background: var(--blue) !important; }
+body.calm.midnight :focus-visible { outline-color: var(--blue) !important; }
+body.calm.midnight ::selection { background: var(--blue); color: #02070a; }
+
+/* Telegram: плитка с тем же свечением, что на первом экране */
+body.calm.midnight .tg__main { background: var(--glow), var(--graphite) !important; border-color: rgb(2 151 222 / .35) !important; }
+body.calm.midnight .tg__main .btn { background: var(--cream) !important; color: #02070a !important; }
+
+/* Подвал: знак в градиенте */
+body.calm.midnight .blk--mark { color: var(--orange) !important; background: var(--glow), var(--graphite) !important; }
