@@ -1,10 +1,9 @@
 ---
 import Mark from './Mark.astro';
-import { tilda } from '../data/site';
 import { useT, homeHref } from '../i18n';
 const t = useT(Astro.currentLocale);
 const lang = t.lang as 'ru' | 'en';
-const links = ['#events', '#label', '#artists', '#production', tilda.shop].map((href, i) => ({ href, label: t.header.nav[i] }));
+const links = ['#events', '#label', '#artists', '#production'].map((href, i) => ({ href, label: t.header.nav[i] }));
 const langs = [{ code: 'ru', label: 'RU' }, { code: 'en', label: 'EN' }] as const;
 ---
 <header class="head" data-ink="light" id="top">

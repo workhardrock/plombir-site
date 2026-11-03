@@ -11,7 +11,7 @@ const en: Dict = {
     home: 'PLOMBIR — home',
     navLabel: 'Main menu',
     mobileNavLabel: 'Mobile menu',
-    nav: ['Events', 'Label', 'Artists', 'Book an event', 'Merch'],
+    nav: ['Events', 'Label', 'Artists', 'Book an event'],
     tickets: 'Tickets',
     menu: 'Menu',
     close: 'Close',

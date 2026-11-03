@@ -7,7 +7,7 @@ const letters = [
   ['P', 100, 'orange'], ['L', 72, 'cream'], ['O', 88, 'graphite'], ['M', 64, 'orange'],
   ['B', 94, 'cream'], ['I', 70, 'graphite'], ['R', 84, 'orange'],
 ] as const;
-const links = ['#events', '#label', '#artists', '#production', tilda.shop].map((href, i) => ({ href, label: t.header.nav[i] }));
+const links = ['#events', '#label', '#artists', '#production'].map((href, i) => ({ href, label: t.header.nav[i] }));
 const legal = legalHrefs.map((href, i) => ({ href, label: t.footer.legal[i] }));
 const year = new Date().getFullYear();
 ---
