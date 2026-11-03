@@ -18,7 +18,7 @@ const en: Dict = {
     langLabel: 'Site language',
   },
   hero: {
-    alt: 'The PLOMBIR festival entrance arch with an inflatable moon at night',
+    alt: 'The PLOMBIR hall before a party: light beams over the dance floor and the sign above the stage',
     h1Extra: ' — festivals, parties and a music label, Kazan',
     tags: ['Festivals', 'Parties', 'Label'],
     lead: 'Electronic music and Kazan night culture since&nbsp;2015',

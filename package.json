@@ -10,8 +10,9 @@
     "preview:artifact": "node scripts/preview.mjs"
   },
   "dependencies": {
+    "@fontsource/unbounded": "5.2.6",
     "astro": "5.18.2",
-    "@fontsource/unbounded": "5.2.6"
+    "three": "0.169.0"
   },
   "devDependencies": {
     "sharp": "0.33.5"

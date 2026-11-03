@@ -9,13 +9,14 @@ const units = ['d', 'h', 'm', 's'];
 <section class="hero" data-ink="on-orange" data-circle="places" aria-labelledby="hero-title">
   <div class="hero__photo" data-ink="light">
     <picture>
-      <source media="(max-width: 700px)" srcset="/img/hero-gate-m.webp" />
-      <img src="/img/hero-gate.webp" width="2400" height="1600" alt={t.hero.alt} fetchpriority="high" />
+      <source media="(max-width: 700px)" srcset="/img/stage-v.webp" />
+      <img src="/img/stage-h.webp" width="1200" height="900" alt={t.hero.alt} fetchpriority="high" />
     </picture>
   </div>
+  <div class="hero__gl" data-gl aria-hidden="true"></div>
 
   <div class="hero__type">
-    <h1 id="hero-title" class="hero__word display hero__word--top">PLOMBIR<span class="sr-only">{t.hero.h1Extra}</span></h1>
+    <h1 id="hero-title" class="hero__word display hero__word--top"><span class="sr-only">PLOMBIR{t.hero.h1Extra}</span><span class="hero__letters" aria-hidden="true">{'PLOMBIR'.split('').map((l, i) => <span style={`--k:${i}`}>{l}</span>)}</span></h1>
     <span class="hero__word display hero__word--bottom" aria-hidden="true">PLOMBIR</span>
   </div>
 
@@ -44,6 +45,21 @@ const units = ['d', 'h', 'm', 's'];
   </div>
 </section>
 
+<script>
+  // 3D-сцена грузится после основной страницы; без WebGL остаётся фото зала
+  const hero = document.querySelector<HTMLElement>('.hero');
+  const host = hero?.querySelector<HTMLElement>('[data-gl]');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGL = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; } })();
+  if (hero && host && hasGL) {
+    const boot = () => import('../scripts/hero-scene').then(({ mountHeroScene }) => {
+      mountHeroScene(host, hero, { still });
+      requestAnimationFrame(() => hero.classList.add('is-gl'));
+    }).catch(() => {});
+    'requestIdleCallback' in window ? requestIdleCallback(boot, { timeout: 1200 }) : setTimeout(boot, 300);
+  }
+</script>
+
 <style>
   .hero {
     --seam: 58svh;
@@ -52,9 +68,21 @@ const units = ['d', 'h', 'm', 's'];
     display: grid; grid-template-rows: var(--seam) auto auto; grid-template-columns: minmax(0, 1fr);
   }
   .hero__photo { grid-row: 1; position: relative; overflow: hidden; background: var(--black); }
+  .hero__photo picture { position: absolute; inset: 0; }
   .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; animation: drift 18s var(--ease) both; }
   .hero__photo::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / .28); }
   @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
+
+  .hero__gl { grid-area: 1 / 1 / 4 / 2; position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 1.2s var(--ease); pointer-events: none; }
+  .hero__gl :global(canvas) { display: block; width: 100%; height: 100%; }
+  .hero__gl::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(2 7 10 / .55) 0%, transparent 18%, transparent 55%, rgb(2 7 10 / .7) 82%, var(--black) 100%); }
+  .hero.is-gl .hero__gl { opacity: 1; }
+
+  /* Слово PLOMBIR: буквы поднимаются по очереди, при прокрутке расходятся и гаснут */
+  .hero__letters { display: inline-flex; letter-spacing: calc(var(--p, 0) * .18em); opacity: calc(1 - var(--p, 0) * 1.4); }
+  .hero__letters span { display: inline-block; animation: rise 1.1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(1.1s + var(--k) * 70ms); }
+  @keyframes rise { from { transform: translateY(.5em); opacity: 0; filter: blur(12px); } }
+  @media (prefers-reduced-motion: reduce) { .hero__letters span { animation: none; } }
 
   .hero__type { position: absolute; left: 0; right: 0; top: var(--seam); transform: translateY(-50%); height: 0.88em; font-size: var(--t-giant); pointer-events: none; z-index: 2; }
   .hero__word { position: absolute; inset: 0; display: block; text-align: center; font-size: 1em; white-space: nowrap; }
