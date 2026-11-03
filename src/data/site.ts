@@ -68,3 +68,11 @@ export const playedHere = [
   'Robbie Akbal', 'D-Nox', 'LI|LU', 'Zuma Dionys', 'Andre P', 'Gleb Filipchenkow',
   'Para Noir', 'Fairtone', 'Acrobat', 'Anton Make', 'Dinamica', 'Agraba', 'Holymolly',
 ];
+
+// Видео в блоке «Ночная культура»: mp4 без звука в public/video.
+// square — для компьютера, vertical — для телефона. null — вместо видео показывается фото.
+export const introVideo: { square: string; vertical: string; poster: string } | null = {
+  square: '/video/intro-sq.mp4',
+  vertical: '/video/intro-v.mp4',
+  poster: '/img/intro-poster.jpg',
+};

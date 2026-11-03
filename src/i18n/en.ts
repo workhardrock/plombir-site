@@ -34,6 +34,7 @@ const en: Dict = {
   intro: {
     title: 'Night<br />culture',
     since: 'Since 2015',
+    video: 'PLOMBIR events showreel: stages, artists and guests',
     alt: 'A performer holding a glowing orb in front of an inflatable moon',
     facts: [
       { n: '60+', text: 'releases on&nbsp;the PLOMBIR MUSIC label' },
