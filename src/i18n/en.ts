@@ -117,7 +117,7 @@ const en: Dict = {
     caps: ['Our own premium equipment', '3D mapping and laser shows', 'International artist booking', 'The best venues in the city', 'Photo and video coverage', 'Open-air festivals built from scratch'],
     discuss: 'Discuss a project',
     subject: 'Event enquiry',
-    alt: 'A hall with hanging decor and a dance floor in warm light',
+    alt: 'An empty hall before the party: light beams over the dance floor and the PLOMBIR sign above the stage',
     casesTitle: 'Case studies',
     guests: 'guests',
     city: 'Kazan',

@@ -49,6 +49,8 @@ const jobs = [
   ['artists/arches.jpg', 'ar-arches', 640, 800],
   ['artists/dinamica.jpg', 'ar-dinamica', 640, 800],
   ['brand/img8660.png', 'mark-grain', 900],
+  ['photos/stage-v.jpg', 'stage-v', 1000, 1250],
+  ['photos/stage-h.jpg', 'stage-h', 1200, 900],
   // Лента «Наши ночи»
   ['photos/p29.jpg', 'gal-01', 900, 1200],
   ['photos/p02.jpg', 'gal-02', 900, 1200],
