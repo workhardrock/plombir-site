@@ -139,3 +139,11 @@ body.calm .foot__h { color: var(--mute) !important; letter-spacing: .06em !impor
   body.calm .hero__tags { font-size: 11px !important; letter-spacing: .14em !important; gap: .4em .7em !important; flex-wrap: nowrap !important; }
   body.calm .hero__type { font-size: 15vw !important; }
 }
+
+/* Цифры и крупные акценты: светлый шрифт плавно уходит в оранжевый, как было в Midnight */
+body.calm .intro__facts dt,
+body.calm .rel__more .display,
+body.calm .case__guests {
+  background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
+}
+body.calm .intro__facts dt { width: fit-content !important; }
