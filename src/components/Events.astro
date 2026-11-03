@@ -3,7 +3,8 @@ import { upcoming, past, tilda } from '../data/site';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
 const next = upcoming.map((e, i) => ({ ...e, ...t.upcoming[i] }));
-const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] }));
+// на главной — три последних прошедших события
+const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] })).slice(0, 3);
 ---
 <section class="events chapter on-cream reveal" data-ink="dark" data-circle="places" id="events" aria-labelledby="events-title">
   <div class="wrap">
@@ -31,11 +32,10 @@ const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] }));
     <div class="events__past">
       <div class="past__head" data-r>
         <h3 class="h3" set:html={t.events.past} />
-        <span>{t.events.count(done.length)}</span>
       </div>
       <ul class="past__list">
         {done.map((e, i) => (
-          <li class="past" data-r style={`--i:${i % 2}`}>
+          <li class="past" data-r style={`--i:${i}`}>
             <img src={e.poster} width="400" height="533" alt="" loading="lazy" />
             <div>
               <p class="past__row"><b>{e.title}</b><span>{e.date}</span></p>
@@ -61,7 +61,7 @@ const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] }));
   .events__past { margin-top: clamp(80px, 9vw, 140px); }
   .past__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; }
   .past__head span { font-size: 16px; }
-  .past__list { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 64px; }
+  .past__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 48px; }
   .past { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; }
   .past img { width: 64px; height: 85px; object-fit: cover; border-radius: 8px; }
   .past__row { display: flex; justify-content: space-between; gap: 16px; font-size: 18px; }

@@ -100,3 +100,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .palm { position: absolute; z-index: 0; aspect-ratio: 1; pointer-events: none; background: url(/img/palm.webp) center / contain no-repeat; mix-blend-mode: multiply; }
 .on-orange:has(> .palm) { position: relative; overflow: hidden; }
 .on-orange:has(> .palm) > :not(.palm) { position: relative; z-index: 1; }
+
+/* В Unbounded после M буква B подменяется наклонной (контекстная альтернатива) — отключаем */
+body { font-variant-ligatures: none; font-feature-settings: 'calt' 0, 'liga' 0; }
+
+/* Логотип-надпись PLOMBIR из фирменного файла; цвет — currentColor */
+.wordmark { display: block; width: 100%; aspect-ratio: 8.922; background: currentColor; -webkit-mask: url('/img/wordmark.png') center / contain no-repeat; mask: url('/img/wordmark.png') center / contain no-repeat; }
+.hero__word .wordmark { width: min(6.6em, 100% - 2 * var(--m, 16px)); margin-inline: auto; }
