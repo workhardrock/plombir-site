@@ -60,7 +60,7 @@ export const artists = [
 export const cases = [
   { guests: '1580', year: '2024' },
   { guests: '1340', year: '2024' },
-  { guests: '1200', year: '' },
+  { guests: '1200', year: '2024' },
 ];
 
 // Артисты, игравшие на событиях PLOMBIR (по архиву событий).
