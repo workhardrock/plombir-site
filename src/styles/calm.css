@@ -28,21 +28,27 @@ body.calm .menu { background: var(--black) !important; color: var(--cream) !impo
 body.calm .menu a { font-weight: 500 !important; }
 
 /* Первый экран: фото на весь экран, знак и ближайшее событие поверх */
-body.calm .hero { background: var(--black) !important; color: var(--cream) !important; grid-template-rows: 1fr auto auto !important; min-height: 100svh !important; }
-body.calm .hero__photo { grid-area: 1 / 1 / 4 / 2 !important; }
-body.calm .hero__photo img { filter: saturate(.7) contrast(1.05) !important; }
-body.calm .hero__photo::after { background: linear-gradient(180deg, rgb(13 14 14 / .55) 0%, rgb(13 14 14 / .15) 30%, rgb(13 14 14 / .62) 52%, rgb(13 14 14 / .82) 72%, var(--black) 100%) !important; }
+body.calm .hero { background: var(--black) !important; color: var(--cream) !important; grid-template-rows: 1.6fr auto 1fr auto !important; min-height: 100svh !important; }
+body.calm .hero__photo { grid-area: 1 / 1 / 5 / 2 !important; }
+body.calm .hero__photo img { filter: saturate(.9) contrast(1.05) brightness(.72) !important; }
+body.calm .hero__photo::after { background: radial-gradient(55% 36% at 50% 46%, rgb(13 14 14 / .6), transparent 75%), linear-gradient(180deg, rgb(13 14 14 / .55) 0%, rgb(13 14 14 / .15) 30%, rgb(13 14 14 / .62) 52%, rgb(13 14 14 / .82) 72%, var(--black) 100%) !important; }
 body.calm .hero__type { position: relative !important; grid-area: 1 / 1 !important; align-self: end !important; top: auto !important; transform: none !important; height: auto !important; font-size: clamp(52px, 9vw, 160px) !important; z-index: 2 !important; }
 body.calm .hero__word--top { position: static !important; display: block !important; clip-path: none !important; color: var(--cream) !important; font-weight: 600 !important; letter-spacing: .02em !important; line-height: .9 !important; }
 body.calm .hero__word--bottom { display: none !important; }
 body.calm .hero__lead { grid-area: 2 / 1 !important; margin-top: 22px !important; z-index: 2 !important; }
+/* На широком экране знак ровно по центру экрана, подпись сразу под ним */
+@media (min-width: 961px) and (min-height: 640px) {
+  body.calm .hero { --fs: clamp(52px, 9vw, 160px); }
+  body.calm .hero__type { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: 45.5% !important; left: 0 !important; right: 0 !important; translate: 0 -50% !important; }
+  body.calm .hero__lead { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: calc(45.5% + var(--fs) * .37) !important; left: 0 !important; right: 0 !important; margin-top: 26px !important; }
+}
 body.calm .hero__tags { font-family: var(--text) !important; font-weight: 500 !important; font-size: clamp(13px, 1vw, 15px) !important; letter-spacing: .22em !important; gap: .6em 1.2em !important; }
 body.calm .hero__tags .hero__sep { width: .9em !important; color: var(--orange) !important; }
 body.calm .hero__sub { color: rgb(238 236 232 / .82) !important; font-size: 15px !important; text-shadow: 0 1px 12px rgb(0 0 0 / .7) !important; }
 body.calm .hero__tags { text-shadow: 0 1px 12px rgb(0 0 0 / .7) !important; }
 body.calm .hero__word--top { text-shadow: 0 2px 30px rgb(0 0 0 / .35) !important; }
 body.calm .hero__sub::before, body.calm .hero__sub::after { background: var(--line) !important; height: 1px !important; }
-body.calm .hero__next { grid-area: 3 / 1 !important; background: rgb(22 24 24 / .78) !important; border: 1px solid var(--line) !important; border-radius: 12px !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
+body.calm .hero__next { grid-area: 4 / 1 !important; background: rgb(22 24 24 / .78) !important; border: 1px solid var(--line) !important; border-radius: 12px !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; }
 body.calm .hero__poster { border-radius: 6px !important; }
 body.calm .hero__count b { color: var(--cream) !important; font-weight: 500 !important; }
 body.calm .hero__count span { color: var(--mute) !important; }
@@ -133,3 +139,11 @@ body.calm .foot__h { color: var(--mute) !important; letter-spacing: .06em !impor
   body.calm .hero__tags { font-size: 11px !important; letter-spacing: .14em !important; gap: .4em .7em !important; flex-wrap: nowrap !important; }
   body.calm .hero__type { font-size: 15vw !important; }
 }
+
+/* Цифры и крупные акценты: светлый шрифт плавно уходит в оранжевый, как было в Midnight */
+body.calm .intro__facts dt,
+body.calm .rel__more .display,
+body.calm .case__guests {
+  background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
+}
+body.calm .intro__facts dt { width: fit-content !important; }
