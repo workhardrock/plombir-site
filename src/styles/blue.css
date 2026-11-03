@@ -1,0 +1,54 @@
+/* Палитра «синяя основа»: Midnight Black + Electric Blue, детали — Cantaloupe Orange.
+   Строится поверх сдержанной версии (calm.css). Синий — кнопки, ссылки и крупные акценты,
+   оранжевый — только мелочи: разделители, точки, маркеры, «est.». */
+
+body.calm.blue {
+  --black: #02070a !important;
+  --graphite: #07121a !important;
+  --panel: #0b1a24 !important;
+  --line: rgb(140 200 235 / .14) !important;
+  --cream: #eef3f6 !important;
+  --mute: #8aa1ae !important;
+  --sand: #8aa1ae !important;
+  --orange: #0297de !important; /* основной акцент calm.css становится синим */
+  --cantaloupe: #fc734d;
+}
+
+/* Первый экран: фото в холодном полуночном тоне, синее свечение снизу */
+body.calm.blue .hero__photo img { filter: saturate(.5) contrast(1.05) brightness(.82) !important; }
+body.calm.blue .hero__photo::after {
+  background:
+    radial-gradient(70% 50% at 50% 100%, rgb(2 151 222 / .55), transparent 72%),
+    linear-gradient(180deg, rgb(2 7 10 / .6) 0%, rgb(2 7 10 / .25) 35%, rgb(2 7 10 / .45) 70%, var(--black) 100%) !important;
+}
+body.calm.blue .hero__next { background: rgb(4 14 20 / .76) !important; }
+body.calm.blue .hero__count b { color: var(--cream) !important; }
+
+/* Кнопки и действия — синий с тёмным текстом */
+body.calm.blue .btn--orange,
+body.calm.blue .head .head__cta,
+body.calm.blue .hero__buy,
+body.calm.blue .ev__body .btn,
+body.calm.blue .player__btn { background: var(--orange) !important; color: #02070a !important; }
+
+/* Крупные цифры — синие */
+body.calm.blue .intro__facts dt,
+body.calm.blue .rel__more .display,
+body.calm.blue .case__guests { color: var(--orange) !important; }
+
+/* Поверхности — оттенки полуночного синего */
+body.calm.blue .tile--b { background: linear-gradient(135deg, #07121a 40%, #0a2a3d) !important; }
+body.calm.blue .band--graphite { background: #050f15 !important; }
+body.calm.blue .band--orange { background: #07141c !important; }
+body.calm.blue .band--cream { background: #0a1a24 !important; }
+body.calm.blue .tg__main { background: radial-gradient(80% 90% at 50% 110%, rgb(2 151 222 / .45), transparent 75%), var(--graphite) !important; border-color: rgb(2 151 222 / .35) !important; }
+
+/* Детали — Cantaloupe Orange */
+body.calm.blue .hero__tags .hero__sep,
+body.calm.blue .tile__est,
+body.calm.blue .blk--mark { color: var(--cantaloupe) !important; }
+body.calm.blue .prod__caps li::before,
+body.calm.blue .names__track i,
+body.calm.blue .demo__dot { background: var(--cantaloupe) !important; }
+body.calm.blue .player__bar span { background: linear-gradient(90deg, var(--orange), var(--cantaloupe)) !important; }
+body.calm.blue .gal__count b { color: var(--cantaloupe) !important; }

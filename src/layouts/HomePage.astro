@@ -5,6 +5,7 @@ import '@fontsource/unbounded/700.css';
 import '@fontsource/unbounded/800.css';
 import '../styles/global.css';
 import '../styles/calm.css';
+import '../styles/blue.css';
 import Metrika from '../components/Metrika.astro';
 import { useT, homeHref } from '../i18n';
 import Loader from '../components/Loader.astro';
@@ -51,7 +52,7 @@ const canonical = site + homeHref(t.lang as 'ru' | 'en');
     <link rel="preload" href="/img/hero-gate.webp" as="image" media="(min-width: 701px)" />
     <Metrika />
   </head>
-  <body class="calm" data-circle="places">
+  <body class="calm blue" data-circle="places">
     <Loader />
     <Header />
     <main>
