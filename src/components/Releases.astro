@@ -3,7 +3,6 @@ import { releases, music } from '../data/site';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
 const tones = ['graphite', 'orange', 'cream', 'graphite', 'orange'];
-const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', cream: 'dark' };
 ---
 <section class="rel on-black reveal" data-ink="light" data-circle="music" id="label" aria-labelledby="rel-title">
   <div class="wrap section-head rel__head">
@@ -13,7 +12,7 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
 
   <ol class="rel__stack">
     {releases.map((r, i) => (
-      <li class={`band band--${tones[i]}`} style={`--n:${i}`} data-ink={inks[tones[i]]}>
+      <li class={`band band--${tones[i]}`} data-r style={`--i:${i}`}>
         <div class="band__strip">
           <span class="band__tab">{r.cat}</span>
           <span class="band__meta">{r.artist}</span>
@@ -35,12 +34,11 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
           </div>
           <div class="band__text">
             <h3 class="display band__track">{r.track}</h3>
-            <p class="h3">{r.artist}</p>
-            <p set:html={t.releases.note(r.cat)} />
+            <p class="band__artist">{r.artist}</p>
             <div class="band__links">
-              <a class="btn" href={music.beatport}>Beatport</a>
-              <a class="btn btn--ghost" href={music.spotify}>Spotify</a>
-              <a class="btn btn--ghost" href={music.soundcloud}>SoundCloud</a>
+              <a class="btn btn--sm" href={music.beatport}>Beatport</a>
+              <a class="btn btn--ghost btn--sm" href={music.spotify}>Spotify</a>
+              <a class="btn btn--ghost btn--sm" href={music.soundcloud}>SoundCloud</a>
             </div>
           </div>
         </div>
@@ -56,16 +54,13 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
 <style>
   .rel { padding-top: var(--section-y); }
   .rel__head { margin-bottom: clamp(40px, 5vw, 84px); }
-  .rel__stack { position: relative; }
-  .band {
-    position: sticky; top: calc(84px + var(--n) * 60px);
-    min-height: calc(86svh - var(--n) * 60px);
-    border-radius: 20px 20px 0 0; overflow: hidden;
-  }
+  /* Три релиза в один ряд */
+  .rel__stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); padding: 0 var(--m) clamp(48px, 6vw, 96px); list-style: none; }
+  .band { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; }
   .band--graphite { background: var(--graphite); color: var(--cream); }
   .band--orange { background: var(--orange); color: var(--black); }
   .band--cream { background: var(--cream); color: var(--black); }
-  .band__strip { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); }
+  .band__strip { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; }
   .band__tab {
     display: inline-flex; align-items: center; height: 40px; padding: 0 28px 0 18px;
     font-family: var(--display); font-weight: 700; font-size: 18px;
@@ -75,7 +70,7 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
   }
   .band--graphite .band__tab { background: var(--orange); color: var(--black); }
   .band__meta { font-size: 16px; font-weight: 500; }
-  .band__body { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--gap); padding: clamp(16px, 2vw, 32px) var(--m) clamp(32px, 4vw, 64px); align-items: start; }
+  .band__body { display: grid; gap: 20px; padding: 0 16px 20px; flex: 1; align-content: start; }
   .band__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
   .band__cover:has(.is-playing) img { transform: scale(1.03); }
   .player {
@@ -98,11 +93,13 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
   .player__time { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--sand); }
   .player__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgb(230 223 213 / .15); }
   .player__bar span { display: block; height: 100%; width: 100%; background: var(--orange); transform: scaleX(var(--p, 0)); transform-origin: left; }
-  .band__cover { position: relative; overflow: hidden; grid-column: 1 / 6; width: 100%; aspect-ratio: 1; border-radius: 12px; max-height: calc(100svh - 84px - var(--n) * 60px - 140px); max-width: calc(100svh - 84px - var(--n) * 60px - 140px); }
-  .band__text { grid-column: 7 / 13; display: grid; gap: 18px; align-content: start; }
-  .band__track { font-size: clamp(44px, 5.2vw, 92px); }
-  .band__text p:not(.h3) { max-width: 36ch; }
-  .band__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .band__cover { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1; border-radius: 12px; }
+  .band__text { display: grid; gap: 8px; align-content: start; }
+  .band__track { font-size: clamp(26px, 2.3vw, 40px); line-height: 1; }
+  .band__artist { font-size: 16px; font-weight: 500; }
+  .band__links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .band__links .btn--sm { min-height: 36px; padding: 0 14px; font-size: 13px; }
+  .band .band__meta { display: none; }
   .band--graphite .band__links .btn:first-child { background: var(--orange); color: var(--black); }
 
   .rel__more {
@@ -113,12 +110,9 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
   .rel__more:hover .display { transform: translateX(12px); }
 
   @media (max-width: 760px) {
-    .band { position: relative; top: auto; min-height: 0; border-radius: 16px 16px 0 0; }
-    .band__body { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    .band__cover, .band__text { grid-column: 1; max-width: none; max-height: none; }
-    .band__track { font-size: 11vw; }
+    .rel__stack { grid-template-columns: 1fr; gap: 16px; padding-inline: 16px; }
+    .band__track { font-size: 9vw; }
     .band__tab { font-size: 15px; }
-    .band__meta { font-size: 14px; text-align: right; }
   }
 </style>
 
