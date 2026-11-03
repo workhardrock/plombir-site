@@ -9,7 +9,7 @@ const langs = [{ code: 'ru', label: 'RU' }, { code: 'en', label: 'EN' }] as cons
 <header class="head" data-ink="light" id="top">
   <a class="head__brand" href={homeHref(lang)} aria-label={t.header.home}>
     <Mark class="head__mark" />
-    <span class="head__word">PLOMBIR</span>
+    <span class="head__word"><span class="sr-only">PLOMBIR</span><span class="wordmark" aria-hidden="true"></span></span>
   </a>
   <nav class="head__nav" aria-label={t.header.navLabel}>
     {links.map((n) => <a class="link" href={n.href}>{n.label}</a>)}
@@ -49,7 +49,7 @@ const langs = [{ code: 'ru', label: 'RU' }, { code: 'en', label: 'EN' }] as cons
 
   .head__brand { display: inline-flex; align-items: center; gap: 12px; }
   .head__brand :global(.head__mark) { width: 34px; height: auto; }
-  .head__word { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.02em; }
+  .head__word { display: block; width: 118px; }
   :global(body[data-circle='music']) .head :global(.mark__c--music),
   :global(body[data-circle='people']) .head :global(.mark__c--people),
   :global(body[data-circle='places']) .head :global(.mark__c--places) { fill: var(--hl); transform: scale(1.12); }
@@ -78,6 +78,6 @@ const langs = [{ code: 'ru', label: 'RU' }, { code: 'en', label: 'EN' }] as cons
   }
   @media (max-width: 520px) {
     .head__cta { display: none; }
-    .head__word { font-size: 18px; }
+    .head__word { width: 104px; }
   }
 </style>
