@@ -49,6 +49,17 @@ const jobs = [
   ['artists/arches.jpg', 'ar-arches', 640, 800],
   ['artists/dinamica.jpg', 'ar-dinamica', 640, 800],
   ['brand/img8660.png', 'mark-grain', 900],
+  // Лента «Наши ночи»
+  ['photos/p29.jpg', 'gal-01', 900, 1200],
+  ['photos/p02.jpg', 'gal-02', 900, 1200],
+  ['photos/p19.jpg', 'gal-03', 900, 1200],
+  ['photos/p03.jpg', 'gal-04', 900, 1200],
+  ['photos/p14.jpg', 'gal-05', 900, 1200],
+  ['photos/p28.jpg', 'gal-06', 900, 1200],
+  ['photos/p45.jpg', 'gal-07', 900, 1200],
+  ['photos/p35.jpg', 'gal-08', 900, 1200],
+  ['photos/p05.jpg', 'gal-09', 900, 1200],
+  ['photos/p13.jpg', 'gal-10', 900, 1200],
 ];
 
 for (const [src, name, w, h] of jobs) {
