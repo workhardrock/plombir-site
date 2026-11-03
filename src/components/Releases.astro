@@ -19,7 +19,20 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
           <span class="band__meta">{r.artist}</span>
         </div>
         <div class="band__body">
-          <img class="band__cover" src={r.cover} width="900" height="900" alt={t.releases.cover(r.artist, r.track)} loading="lazy" />
+          <div class="band__cover">
+            <img src={r.cover} width="900" height="900" alt={t.releases.cover(r.artist, r.track)} loading="lazy" />
+            {r.preview && (
+              <div class="player" data-player={r.preview} data-play={t.releases.play(r.track)} data-pause={t.releases.pause(r.track)}>
+                <button class="player__btn" type="button" aria-label={t.releases.play(r.track)}>
+                  <svg class="player__icon player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+                  <span class="player__icon player__icon--eq" aria-hidden="true"><i></i><i></i><i></i></span>
+                </button>
+                <span class="player__label">{t.releases.preview}</span>
+                <span class="player__time" data-ui>0:00</span>
+                <span class="player__bar" aria-hidden="true"><span></span></span>
+              </div>
+            )}
+          </div>
           <div class="band__text">
             <h3 class="display band__track">{r.track}</h3>
             <p class="h3">{r.artist}</p>
@@ -63,7 +76,29 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
   .band--graphite .band__tab { background: var(--orange); color: var(--black); }
   .band__meta { font-size: 16px; font-weight: 500; }
   .band__body { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 var(--gap); padding: clamp(16px, 2vw, 32px) var(--m) clamp(32px, 4vw, 64px); align-items: start; }
-  .band__cover { grid-column: 1 / 6; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; max-height: calc(100svh - 84px - var(--n) * 60px - 140px); max-width: calc(100svh - 84px - var(--n) * 60px - 140px); }
+  .band__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+  .band__cover:has(.is-playing) img { transform: scale(1.03); }
+  .player {
+    position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 12px;
+    padding: 8px 18px 8px 8px; border-radius: 999px; background: rgb(18 20 19 / .82); color: var(--cream);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); overflow: hidden;
+  }
+  .player__btn { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--orange); color: var(--black); transition: transform .25s var(--ease); }
+  .player__btn:hover { transform: scale(1.08); }
+  .player__icon { grid-area: 1 / 1; }
+  .player__icon--play { width: 22px; height: 22px; fill: currentColor; }
+  .player__icon--eq { display: none; gap: 3px; align-items: flex-end; height: 18px; }
+  .player__icon--eq i { width: 4px; height: 100%; border-radius: 2px; background: currentColor; animation: eq .8s ease-in-out infinite alternate; transform-origin: bottom; }
+  .player__icon--eq i:nth-child(2) { animation-delay: -.3s; }
+  .player__icon--eq i:nth-child(3) { animation-delay: -.6s; }
+  @keyframes eq { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+  .is-playing .player__icon--play { display: none; }
+  .is-playing .player__icon--eq { display: flex; }
+  .player__label { font-weight: 600; font-size: 15px; }
+  .player__time { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--sand); }
+  .player__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgb(230 223 213 / .15); }
+  .player__bar span { display: block; height: 100%; width: 100%; background: var(--orange); transform: scaleX(var(--p, 0)); transform-origin: left; }
+  .band__cover { position: relative; overflow: hidden; grid-column: 1 / 6; width: 100%; aspect-ratio: 1; border-radius: 12px; max-height: calc(100svh - 84px - var(--n) * 60px - 140px); max-width: calc(100svh - 84px - var(--n) * 60px - 140px); }
   .band__text { grid-column: 7 / 13; display: grid; gap: 18px; align-content: start; }
   .band__track { font-size: clamp(44px, 5.2vw, 92px); }
   .band__text p:not(.h3) { max-width: 36ch; }
@@ -86,3 +121,33 @@ const inks: Record<string, string> = { graphite: 'light', orange: 'on-orange', c
     .band__meta { font-size: 14px; text-align: right; }
   }
 </style>
+
+<script>
+  // Отрывки релизов: один общий плеер, одновременно играет один трек
+  const audio = new Audio();
+  audio.preload = 'none';
+  let current: HTMLElement | null = null;
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const setState = (el: HTMLElement, playing: boolean) => {
+    el.classList.toggle('is-playing', playing);
+    el.querySelector('button')!.setAttribute('aria-label', (playing ? el.dataset.pause : el.dataset.play) || '');
+  };
+  document.querySelectorAll<HTMLElement>('[data-player]').forEach((el) => {
+    el.querySelector('button')!.addEventListener('click', () => {
+      if (current === el && !audio.paused) { audio.pause(); return; }
+      if (current !== el) {
+        if (current) { setState(current, false); current.style.removeProperty('--p'); current.querySelector('.player__time')!.textContent = '0:00'; }
+        current = el; audio.src = el.dataset.player!;
+      }
+      audio.play().catch(() => setState(el, false));
+    });
+  });
+  audio.addEventListener('play', () => current && setState(current, true));
+  audio.addEventListener('pause', () => current && setState(current, false));
+  audio.addEventListener('ended', () => { if (current) { current.style.setProperty('--p', '0'); audio.currentTime = 0; } });
+  audio.addEventListener('timeupdate', () => {
+    if (!current || !Number.isFinite(audio.duration)) return;
+    current.style.setProperty('--p', String(audio.currentTime / audio.duration));
+    current.querySelector('.player__time')!.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+  });
+</script>

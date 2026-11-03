@@ -66,6 +66,15 @@ const canonical = site + homeHref(t.lang as 'ru' | 'en');
     <Footer />
 
     <script>
+      // Ссылки на другие страницы и сайты открываются в новой вкладке, чтобы главная оставалась открытой.
+      // В той же вкладке остаются якоря, почта, телефон и переключатель языка.
+      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((a) => {
+        const h = a.getAttribute('href')!;
+        if (/^(#|mailto:|tel:)/.test(h) || h === '/' || h === '/en/') return;
+        a.target = '_blank';
+        a.rel = 'noopener';
+      });
+
       // Появление частей секций
       const io = new IntersectionObserver((entries) => {
         for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }

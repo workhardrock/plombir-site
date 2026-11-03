@@ -43,7 +43,8 @@ export const past = [
   { date: '06.06.26', poster: '/img/ev-0606.webp' },
 ];
 
-export const releases = [
+// preview — отрывок трека в public/audio (mp3, 30–60 секунд). Без него кнопка не показывается.
+export const releases: { cat: string; artist: string; track: string; cover: string; preview?: string }[] = [
   { cat: 'PLMBR066', artist: 'Volobotti, Gar1sson', track: 'Different', cover: '/img/pl066.webp' },
   { cat: 'PLMBR065', artist: 'Space Food', track: '1000 Desires', cover: '/img/pl065.webp' },
   { cat: 'PLMBR064', artist: 'Fairtone, Tiger Smth', track: 'Demension', cover: '/img/pl064.webp' },
