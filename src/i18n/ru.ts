@@ -131,6 +131,7 @@ const ru = {
     sentence: 'Они играли на&nbsp;событиях PLOMBIR&nbsp;— от&nbsp;Мексики и&nbsp;Германии до&nbsp;Москвы и&nbsp;Петербурга.',
     press: 'О&nbsp;нас пишут',
     articles: [
+      { outlet: 'Бизнес Online', title: 'Булат Мубаракзянов: «По сравнению с 2022 годом организация мероприятий подорожала в 2,5 раза»', url: 'https://www.business-gazeta.ru/article/714099' },
       { outlet: 'Enter Media', title: 'Идеолог Plombir — о заработке на вечеринках и миссии музыки' },
       { outlet: 'Бизнес Online', title: 'Топ-20 героев ночной жизни Казани' },
       { outlet: 'Бизнес Online', title: 'Что в кошельках у ведущих и аниматоров Казани' },

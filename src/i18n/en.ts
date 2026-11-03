@@ -132,6 +132,7 @@ const en: Dict = {
     sentence: 'They have played PLOMBIR events, from Mexico and Germany to&nbsp;Moscow and St&nbsp;Petersburg.',
     press: 'In&nbsp;the press',
     articles: [
+      { outlet: 'Business Online', title: 'Bulat Mubarakzyanov: “Compared with 2022, putting on an event costs 2.5 times more”', url: 'https://www.business-gazeta.ru/article/714099' },
       { outlet: 'Enter Media', title: 'The founder of Plombir on making money from parties and the mission of music' },
       { outlet: 'Business Online', title: 'Top 20 heroes of Kazan nightlife' },
       { outlet: 'Business Online', title: 'What Kazan hosts and entertainers earn' },

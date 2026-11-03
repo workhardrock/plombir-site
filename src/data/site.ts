@@ -4,7 +4,7 @@ export const contacts = {
   email: 'info@plombir.events', // сюда идут все заявки: демо, букинг, заказ мероприятий
   phone: '+7 999 164 14 29',
   partnersPhone: '+7 906 122 16 99',
-  ticketsEmail: 'info@qtickets.ru',
+  ticketsEmail: 'info@plombir.events',
   telegram: 'https://t.me/PLMBR',
   instagram: 'https://instagram.com/plmbr',
   inn: '165714390934',
@@ -60,7 +60,7 @@ export const artists = [
 export const cases = [
   { guests: '1580', year: '2024' },
   { guests: '1340', year: '2024' },
-  { guests: '1200', year: '' },
+  { guests: '1200', year: '2024' },
 ];
 
 // Артисты, игравшие на событиях PLOMBIR (по архиву событий).
