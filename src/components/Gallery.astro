@@ -1,40 +1,154 @@
 ---
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
-const [altA, altB, altC] = t.gallery.alts;
+const shots = t.gallery.alts.map((alt, i) => ({ src: `/img/gal-${String(i + 1).padStart(2, '0')}.webp`, alt }));
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 <section class="gal on-black reveal" data-ink="light" data-circle="people" aria-labelledby="gal-title">
-  <h2 id="gal-title" class="display gal__title" data-r set:html={t.gallery.title} />
-  <figure class="print print--a" data-r style="--i:1">
-    <img src="/img/performer.webp" width="720" height="1080" alt={altA} loading="lazy" />
-  </figure>
-  <figure class="print print--b" data-r style="--i:2">
-    <img src="/img/dj-hands.webp" width="900" height="1260" alt={altB} loading="lazy" />
-  </figure>
-  <figure class="print print--c" data-r style="--i:3">
-    <img src="/img/orange-crowd.webp" width="1280" height="852" alt={altC} loading="lazy" />
-  </figure>
-  <p class="gal__note small" set:html={t.gallery.note} />
+  <header class="gal__head">
+    <h2 id="gal-title" class="gal__title" data-r set:html={t.gallery.title} />
+    <div class="gal__side" data-r style="--i:1">
+      <div class="gal__ctrl">
+        <span class="gal__count" aria-hidden="true"><b data-now>01</b> / {pad(shots.length)}</span>
+        <button class="gal__btn" type="button" data-prev aria-label={t.gallery.prev}>←</button>
+        <button class="gal__btn" type="button" data-next aria-label={t.gallery.next}>→</button>
+      </div>
+    </div>
+  </header>
+
+  <ul class="gal__track" data-track tabindex="0" aria-label={t.gallery.label}>
+    {shots.map((s, i) => (
+      <li class="print" style={`--tilt:${[-2.5, 1.8, -1.2, 2.4, -1.8, 1.2][i % 6]}deg`}>
+        <button type="button" data-open={i} aria-label={`${t.gallery.open}: ${s.alt}`}>
+          <img src={s.src} width="900" height="1200" alt={s.alt} loading={i < 4 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  <dialog class="lb" data-lb aria-label={t.gallery.label}>
+    <img data-lb-img alt="" />
+    <p class="lb__cap small" data-lb-cap />
+    <button class="gal__btn lb__x" type="button" data-lb-close aria-label={t.gallery.close}>✕</button>
+    <button class="gal__btn lb__p" type="button" data-lb-prev aria-label={t.gallery.prev}>←</button>
+    <button class="gal__btn lb__n" type="button" data-lb-next aria-label={t.gallery.next}>→</button>
+  </dialog>
 </section>
 
+<script>
+  document.querySelectorAll<HTMLElement>('.gal').forEach((gal) => {
+    const track = gal.querySelector<HTMLElement>('[data-track]')!;
+    const items = [...track.children] as HTMLElement[];
+    const now = gal.querySelector<HTMLElement>('[data-now]')!;
+    const pad = (n: number) => String(n).padStart(2, '0');
+
+    const current = () => {
+      const x = track.scrollLeft;
+      let best = 0;
+      items.forEach((el, i) => { if (Math.abs(el.offsetLeft - items[0].offsetLeft - x) < Math.abs(items[best].offsetLeft - items[0].offsetLeft - x)) best = i; });
+      return best;
+    };
+    // idx — куда лента едет сейчас, чтобы быстрые нажатия стрелок не терялись
+    let idx = 0, settle = 0;
+    const go = (i: number) => {
+      idx = Math.max(0, Math.min(items.length - 1, i));
+      const el = items[idx];
+      track.scrollTo({ left: el.offsetLeft - items[0].offsetLeft, behavior: 'smooth' });
+    };
+    track.addEventListener('scroll', () => {
+      now.textContent = pad(current() + 1);
+      clearTimeout(settle);
+      settle = window.setTimeout(() => { idx = current(); }, 150);
+    }, { passive: true });
+    gal.querySelector('[data-prev]')!.addEventListener('click', () => go(idx - 1));
+    gal.querySelector('[data-next]')!.addEventListener('click', () => go(idx + 1));
+
+    // Перетаскивание мышью; на тач-экранах работает родной свайп
+    let downX = 0, startLeft = 0, moved = false, dragging = false;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      dragging = true; moved = false; downX = e.clientX; startLeft = track.scrollLeft;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - downX;
+      if (Math.abs(dx) > 5 && !moved) { moved = true; track.classList.add('is-drag'); }
+      if (moved) track.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false;
+      if (moved) { track.classList.remove('is-drag'); go(current()); }
+    });
+
+    // Просмотр снимка на весь экран
+    const lb = gal.querySelector<HTMLDialogElement>('[data-lb]')!;
+    const img = lb.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const cap = lb.querySelector<HTMLElement>('[data-lb-cap]')!;
+    let open = 0;
+    const show = (i: number) => {
+      open = (i + items.length) % items.length;
+      const src = items[open].querySelector('img')!;
+      img.src = src.src; img.alt = src.alt;
+      cap.textContent = `${pad(open + 1)} / ${pad(items.length)} — ${src.alt}`;
+    };
+    track.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('[data-open]');
+      if (!b) return;
+      if (moved) { moved = false; e.preventDefault(); return; }
+      show(+b.dataset.open!);
+      lb.showModal();
+    });
+    lb.querySelector('[data-lb-close]')!.addEventListener('click', () => lb.close());
+    lb.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(open - 1));
+    lb.querySelector('[data-lb-next]')!.addEventListener('click', () => show(open + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
+    lb.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(open - 1);
+      if (e.key === 'ArrowRight') show(open + 1);
+    });
+    lb.addEventListener('close', () => go(open));
+  });
+</script>
+
 <style>
-  .gal { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; padding: var(--section-y) var(--m); }
-  .gal__title { font-size: clamp(110px, 17vw, 300px); text-align: center; line-height: .85; color: var(--orange); }
-  .print { position: absolute; margin: 0; padding: 8px; background: var(--cream); border-radius: 4px; transition: opacity .8s var(--ease), filter .8s var(--ease), transform .8s var(--ease), rotate .35s var(--ease); cursor: zoom-in; }
-  .print img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-  .print--a { width: 24vw; left: 26vw; top: 22%; rotate: -8deg; z-index: 2; }
-  .print--b { width: 24vw; left: 46vw; top: 30%; rotate: 6deg; z-index: 3; }
-  .print--c { width: 18vw; right: 6vw; bottom: -6%; rotate: -3deg; z-index: 1; }
-  .print--c img { aspect-ratio: 4 / 3; }
-  .print:hover { rotate: 0deg; z-index: 5; transform: scale(1.04); transition: rotate .25s var(--ease), transform .25s var(--ease); }
-  .gal__note { position: absolute; left: var(--m); bottom: 24px; max-width: 34ch; }
+  .gal { position: relative; overflow: hidden; padding: var(--section-y) 0; }
+  .gal__head { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 0 var(--m); margin-bottom: clamp(32px, 4vw, 56px); }
+  .gal__title { margin: 0; font-size: clamp(16px, 1.3vw, 20px); font-weight: 500; letter-spacing: .02em; line-height: 1.3; }
+  .gal__ctrl { display: flex; align-items: center; gap: 10px; }
+  .gal__count { font-variant-numeric: tabular-nums; margin-right: 10px; opacity: .7; }
+  .gal__count b { opacity: 1; color: var(--cream); font-weight: 600; }
+  .gal__btn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid currentColor; background: transparent; color: inherit; font-size: 20px; cursor: pointer; transition: background .2s, color .2s; }
+  .gal__btn:hover, .gal__btn:focus-visible { background: var(--cream); color: var(--black, #000); }
+
+  .gal__track { list-style: none; margin: 0; display: flex; gap: clamp(16px, 2vw, 32px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--m); padding: 24px var(--m) 32px; scrollbar-width: none; cursor: grab; }
+  .gal__track::-webkit-scrollbar { display: none; }
+  .gal__track.is-drag { cursor: grabbing; scroll-snap-type: none; }
+  .gal__track.is-drag .print { pointer-events: none; }
+  .print { flex: 0 0 clamp(240px, 24vw, 400px); scroll-snap-align: start; margin: 0; padding: 8px; background: var(--cream); border-radius: 4px; rotate: var(--tilt); transition: rotate .35s var(--ease), transform .35s var(--ease); }
+  .print:last-child { margin-right: var(--m); }
+  .print button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .print img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; user-select: none; }
+  .print:hover, .print:focus-within { rotate: 0deg; transform: scale(1.03); }
+
+  .lb { width: 100vw; height: 100svh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(0, 0, 0, .92); color: var(--cream); }
+  .lb[open] { display: grid; place-items: center; }
+  .lb::backdrop { background: transparent; }
+  .lb img { max-width: min(92vw, 900px); max-height: 80svh; object-fit: contain; border-radius: 4px; }
+  .lb__cap { position: absolute; left: var(--m); bottom: 24px; right: 140px; }
+  .lb__x { position: absolute; top: 20px; right: 20px; }
+  .lb__p, .lb__n { position: absolute; top: 50%; translate: 0 -50%; }
+  .lb__p { left: 20px; }
+  .lb__n { right: 20px; }
 
   @media (max-width: 760px) {
-    .gal { min-height: 86svh; }
-    .gal__title { font-size: 22vw; }
-    .print--a { width: 50vw; left: 6vw; top: 26%; }
-    .print--b { width: 50vw; left: 42vw; top: 34%; }
-    .print--c { display: none; }
-    .gal__note { left: 16px; right: 16px; bottom: 20px; }
+    .gal__head { gap: 16px; padding: 0 16px; }
+    .gal__count { display: none; }
+    .gal__btn { width: 44px; height: 44px; font-size: 18px; }
+    .gal__track { padding-inline: 16px; scroll-padding-inline: 16px; }
+    .print { flex-basis: 72vw; }
+    .print:last-child { margin-right: 16px; }
+    .lb__p, .lb__n { top: auto; bottom: 64px; translate: none; }
+    .lb__cap { right: 16px; bottom: 20px; left: 16px; }
   }
 </style>

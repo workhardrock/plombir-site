@@ -91,7 +91,7 @@ body.calm .demo__cell--ink { background: var(--cream) !important; color: var(--b
 body.calm .demo__cell--ink:hover { background: #fff !important; }
 
 /* Галерея */
-body.calm .gal__title { color: var(--cream) !important; font-weight: 600 !important; font-size: clamp(80px, 12vw, 210px) !important; }
+body.calm .gal__title { color: var(--cream) !important; }
 body.calm .print { background: var(--panel) !important; border-radius: 6px !important; }
 body.calm .gal__note { color: var(--mute) !important; }
 

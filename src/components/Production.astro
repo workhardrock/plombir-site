@@ -21,7 +21,10 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
         </div>
       </div>
       <figure class="prod__photo" data-r style="--i:2">
-        <img src="/img/golden-room.webp" width="1200" height="674" alt={t.production.alt} loading="lazy" />
+        <picture>
+        <source media="(max-width: 760px)" srcset="/img/stage-h.webp" width="1200" height="900" />
+        <img src="/img/stage-v.webp" width="1000" height="1250" alt={t.production.alt} loading="lazy" />
+      </picture>
       </figure>
     </div>
 
@@ -33,9 +36,9 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
             <p class="case__guests display">{c.guests}</p>
             <div>
               <p class="case__name">{c.name}</p>
-              <p>{c.brief}</p>
+              <p set:html={c.brief} />
             </div>
-            <p class="case__where">{c.guests} {t.production.guests}<br />{t.production.city}, {c.year}</p>
+            <p class="case__where">{c.guests} {t.production.guests}<br />{t.production.city}{c.year && `, ${c.year}`}</p>
           </li>
         ))}
       </ul>
@@ -55,7 +58,7 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
   .prod__caps li::before { content: ''; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--black); translate: 0 -2px; }
   .prod__actions { display: flex; flex-wrap: wrap; gap: 10px; }
   .prod__photo { grid-column: 7 / 13; margin: 0; border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 5; }
-  .prod__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .prod__photo picture, .prod__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   .prod__cases { margin-top: clamp(80px, 9vw, 140px); }
   .prod__cases h3 { margin-bottom: 24px; }
