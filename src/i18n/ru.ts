@@ -84,7 +84,7 @@ const ru = {
     subject: 'Демо для PLOMBIR MUSIC',
   },
   gallery: {
-    title: 'Наши<br />ночи',
+    title: 'Фото с&nbsp;событий PLOMBIR',
     label: 'Фото с событий PLOMBIR',
     alts: [
       'Перформер в светящемся костюме на open air PLOMBIR',

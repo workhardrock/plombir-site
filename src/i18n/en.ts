@@ -85,7 +85,7 @@ const en: Dict = {
     subject: 'Demo for PLOMBIR MUSIC',
   },
   gallery: {
-    title: 'Our<br />nights',
+    title: 'Photos from PLOMBIR events',
     label: 'Photos from PLOMBIR events',
     alts: [
       'A performer in a glowing costume at a PLOMBIR open air',
