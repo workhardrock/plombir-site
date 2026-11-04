@@ -53,6 +53,8 @@ const ru = {
     buy: 'Купить билет',
     poster: 'Афиша',
     soon: 'Скоро в&nbsp;2027',
+    early: 'Ранний доступ',
+    soonTickets: 'Билеты скоро',
     soonList: [
       { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Фестиваль «Пломбир»', venue: 'White Place' },
