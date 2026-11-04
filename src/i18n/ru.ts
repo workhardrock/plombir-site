@@ -107,6 +107,7 @@ const ru = {
     title: 'Артисты',
     booking: 'Букинг артиста',
     subject: 'Букинг артиста PLOMBIR',
+    ig: (name: string) => `${name} в Instagram`,
     styles: ['Progressive house', 'Downtempo, progressive, indie dance', 'Deep, soulful, funky house', 'Indie dance, organic house'],
   },
   production: {

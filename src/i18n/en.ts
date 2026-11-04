@@ -108,6 +108,7 @@ const en: Dict = {
     title: 'Artists',
     booking: 'Book an artist',
     subject: 'PLOMBIR artist booking',
+    ig: (name: string) => `${name} on Instagram`,
     styles: ['Progressive house', 'Downtempo, progressive, indie dance', 'Deep, soulful, funky house', 'Indie dance, organic house'],
   },
   production: {

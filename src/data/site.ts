@@ -50,10 +50,10 @@ export const releases: { cat: string; artist: string; track: string; cover: stri
 ];
 
 export const artists = [
-  { name: 'Anton Make', photo: '/img/ar-antonmake.webp' },
-  { name: 'Disharino', photo: '/img/ar-disharino.webp' },
-  { name: 'Fanky', photo: '/img/ar-fanky.webp' },
-  { name: 'Maydellin', photo: '/img/ar-maydellin.webp' },
+  { name: 'Anton Make', ig: 'https://www.instagram.com/antonmake/', photo: '/img/ar-antonmake.webp' },
+  { name: 'Disharino', ig: 'https://www.instagram.com/disharino/', photo: '/img/ar-disharino.webp' },
+  { name: 'Fanky', ig: 'https://www.instagram.com/djfankystyle/', photo: '/img/ar-fanky.webp' },
+  { name: 'Maydellin', ig: 'https://www.instagram.com/mmaydellin/', photo: '/img/ar-maydellin.webp' },
 ];
 
 export const cases = [
