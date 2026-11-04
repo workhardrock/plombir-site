@@ -16,14 +16,14 @@ const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] })).slice(0, 3)
     <ul class="events__next">
       {next.map((e, i) => (
         <li class="ev" data-ink="light" data-r style={`--i:${i + 1}`}>
-          <a class="ev__poster" href={e.tickets}>
+          <a class="ev__poster" href={e.tickets} data-widget={e.widget}>
             <img src={e.poster} width="900" height="1200" alt={`${t.events.poster}: ${e.title}`} loading="lazy" />
           </a>
           <div class="ev__body">
             <p class="ev__date display">{e.date}</p>
             <h3 class="h3">{e.title}</h3>
             <p>{e.day} · {e.venue}, {e.city}</p>
-            <a class="btn" href={e.tickets}>{t.events.buy}</a>
+            <a class="btn" href={e.tickets} data-widget={e.widget}>{t.events.buy}</a>
           </div>
         </li>
       ))}

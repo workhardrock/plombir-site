@@ -1,36 +1,30 @@
 ---
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
-// Билетные сервисы, которые открываем во всплывающем окне вместо новой вкладки
-const hosts = ['voroh.ru'];
 ---
-<dialog class="tix" data-tix data-hosts={hosts.join(',')} aria-label={t.ticketPopup.label}>
+<dialog class="tix" data-tix aria-label={t.ticketPopup.label}>
   <div class="tix__box">
     <div class="tix__bar">
       <a class="tix__ext small" data-tix-ext href="#" target="_blank" rel="noopener">{t.ticketPopup.newTab} ↗</a>
       <button class="tix__x" type="button" data-tix-close aria-label={t.ticketPopup.close}>✕</button>
     </div>
-    <iframe data-tix-frame title={t.ticketPopup.label} loading="lazy" allow="payment"></iframe>
+    <iframe data-tix-frame title={t.ticketPopup.label} referrerpolicy="same-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-popups-to-escape-sandbox" allow="clipboard-write; payment"></iframe>
   </div>
 </dialog>
 
 <script>
-  // Ссылки на билетный сервис открывают попап с его страницей; без скрипта ссылка работает как обычно
+  // Ссылки с data-widget открывают виджет билетного сервиса в попапе; без скрипта ссылка ведёт на страницу события
   const dlg = document.querySelector<HTMLDialogElement>('[data-tix]');
   if (dlg) {
-    const hosts = dlg.dataset.hosts!.split(',');
     const frame = dlg.querySelector<HTMLIFrameElement>('[data-tix-frame]')!;
     const ext = dlg.querySelector<HTMLAnchorElement>('[data-tix-ext]')!;
     document.addEventListener('click', (e) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
-      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
-      if (!a || a.closest('[data-tix]')) return;
-      let url: URL;
-      try { url = new URL(a.href); } catch { return; }
-      if (!hosts.some((h) => url.hostname === h || url.hostname.endsWith('.' + h))) return;
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-widget]');
+      if (!a) return;
       e.preventDefault();
-      if (frame.src !== url.href) frame.src = url.href;
-      ext.href = url.href;
+      if (frame.src !== a.dataset.widget) frame.src = a.dataset.widget!;
+      ext.href = a.href;
       dlg.showModal();
       document.body.style.overflow = 'hidden';
     });

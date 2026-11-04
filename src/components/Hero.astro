@@ -29,7 +29,7 @@ const units = ['d', 'h', 'm', 's'];
   </div>
 
   <div class="hero__next" data-ink="light">
-    <a class="hero__poster" href={next.tickets} aria-label={`${t.hero.poster}: ${next.title}`}>
+    <a class="hero__poster" href={next.tickets} data-widget={next.widget} aria-label={`${t.hero.poster}: ${next.title}`}>
       <img src={next.poster} width="900" height="1200" alt={`${t.hero.poster}: ${next.title}`} />
     </a>
     <div class="hero__info">
@@ -39,7 +39,7 @@ const units = ['d', 'h', 'm', 's'];
     <div class="hero__count" data-ui data-countdown={next.start} aria-label={t.hero.countdown}>
       {units.map((u, i) => <div><b data-u={u}>—</b><span>{t.hero.units[i]}</span></div>)}
     </div>
-    <a class="btn hero__buy" href={next.tickets}>{t.hero.buy}</a>
+    <a class="btn hero__buy" href={next.tickets} data-widget={next.widget}>{t.hero.buy}</a>
   </div>
 </section>
 
