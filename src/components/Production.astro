@@ -33,12 +33,12 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
       <ul>
         {list.map((c, i) => (
           <li class="case" data-r style={`--i:${i}`}>
-            <p class="case__guests display">{c.guests}</p>
+            <p class="case__count"><span class="case__guests display">{c.guests}</span><span class="case__unit">{t.production.guests}</span></p>
             <div>
               <p class="case__name">{c.name}</p>
               <p set:html={c.brief} />
             </div>
-            <p class="case__where">{c.guests} {t.production.guests}<br />{t.production.city}{c.year && `, ${c.year}`}</p>
+            <p class="case__where">{'venue' in c && <><span set:html={c.venue} /><br /></>}{t.production.city}{c.year && `, ${c.year}`}</p>
           </li>
         ))}
       </ul>
@@ -65,7 +65,9 @@ const list = cases.map((c, i) => ({ ...c, ...t.production.cases[i] }));
   .prod__cases ul { display: grid; gap: 8px; }
   .case { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2fr); gap: 24px; align-items: center; padding: 24px clamp(20px, 2.4vw, 36px); background: #ff6c38; border-radius: 20px; transition: background-color .3s; }
   .case:hover { background: var(--cream); }
+  .case__count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 14px; }
   .case__guests { font-size: clamp(44px, 5vw, 88px); }
+  .case__unit { font-size: clamp(16px, 1.4vw, 22px); font-weight: 500; }
   .case__name { font-weight: 500; font-size: var(--t-h3); line-height: 1.15; margin-bottom: 6px; }
   .case__where { text-align: right; font-weight: 500; }
 
