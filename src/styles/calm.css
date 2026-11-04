@@ -147,3 +147,4 @@ body.calm .case__guests {
   background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
 }
 body.calm .intro__facts dt { width: fit-content !important; }
+body.calm .case__unit { color: var(--mute) !important; }
