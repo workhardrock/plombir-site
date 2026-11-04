@@ -145,6 +145,7 @@ const ru = {
     text: 'Лайнапы, старт продаж и&nbsp;розыгрыши билетов&nbsp;— в&nbsp;нашем телеграм-канале @PLMBR.',
     cta: 'Подписаться в&nbsp;Telegram',
   },
+  ticketPopup: { label: 'Покупка билета', close: 'Закрыть', newTab: 'Открыть в новой вкладке' },
   footer: {
     sections: 'Разделы',
     music: 'Музыка',
