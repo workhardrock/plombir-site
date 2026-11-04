@@ -30,7 +30,7 @@ export const legalHrefs = ['/offerta', '/policy', '/soglashenye', '/oplata_bank_
 
 // Ближайшие события. start — для обратного отсчёта, с часовым поясом площадки.
 export const upcoming = [
-  { start: '2026-11-28T22:00:00+03:00', date: '28.11', poster: '/img/ev-2811.webp', tickets: 'https://voroh.ru/event/1044113/' },
+  { start: '2026-11-28T22:00:00+03:00', date: '28.11', poster: '/img/ev-2811.webp', tickets: 'https://voroh.ru/event/1044113/', widget: 'https://voroh.ru/widget/event/1044113/01a1a509-c104-8164-9b4e-8cf8cc30e8c5/' },
   { start: '2026-12-24T20:00:00+07:00', date: '24.12', poster: '/img/ev-2412.webp', tickets: tilda.phuket },
 ];
 

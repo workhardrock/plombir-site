@@ -146,6 +146,7 @@ const en: Dict = {
     text: 'Line-ups, ticket releases and giveaways come first to&nbsp;our Telegram channel @PLMBR.',
     cta: 'Join on&nbsp;Telegram',
   },
+  ticketPopup: { label: 'Buy a ticket', close: 'Close', newTab: 'Open in a new tab' },
   footer: {
     sections: 'Sections',
     music: 'Music',
