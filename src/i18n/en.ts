@@ -70,7 +70,7 @@ const en: Dict = {
     cover: (artist: string, track: string) => `Cover of ${artist} — ${track}`,
     play: (track: string) => `Play a preview of ${track}`,
     pause: (track: string) => `Pause ${track}`,
-    preview: 'Preview',
+    preview: 'Listen',
     note: (cat: string) => `Original Mix. Released on&nbsp;PLOMBIR MUSIC as&nbsp;${cat}.`,
     more: 'Full catalogue',
     moreText: '60+ PLOMBIR MUSIC releases on Beatport',
@@ -123,8 +123,8 @@ const en: Dict = {
     city: 'Kazan',
     cases: [
       { name: 'Lukomorye festival', brief: 'A festival inspired by&nbsp;Russian fairy tales' },
-      { name: 'Tantana', brief: 'A festival of contemporary Tatar culture, White Place' },
-      { name: 'Cosmonautics Day', brief: 'A space-themed visual show, Ak&nbsp;Bars Retro Cars' },
+      { name: 'Tantana', brief: 'A festival of contemporary Tatar culture' },
+      { name: 'Cosmonautics Day', brief: 'A space-themed visual show' },
     ],
   },
   names: {

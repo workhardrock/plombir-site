@@ -69,7 +69,7 @@ const ru = {
     cover: (artist: string, track: string) => `Обложка релиза ${artist} — ${track}`,
     play: (track: string) => `Слушать отрывок ${track}`,
     pause: (track: string) => `Пауза: ${track}`,
-    preview: 'Отрывок',
+    preview: 'Прослушать',
     note: (cat: string) => `Original Mix. Вышел на&nbsp;PLOMBIR MUSIC под номером ${cat}.`,
     more: 'Весь каталог',
     moreText: 'Больше 60 релизов PLOMBIR MUSIC на Beatport',
@@ -122,8 +122,8 @@ const ru = {
     city: 'Казань',
     cases: [
       { name: 'Фестиваль «Лукоморье»', brief: 'Фестиваль по&nbsp;мотивам русских сказок' },
-      { name: 'Tantana', brief: 'Фестиваль современной татарской культуры, White Place' },
-      { name: '«День космонавтики»', brief: 'Визуальное шоу в&nbsp;космическом стиле, Ak&nbsp;Bars Retro Cars' },
+      { name: 'Tantana', brief: 'Фестиваль современной татарской культуры' },
+      { name: '«День космонавтики»', brief: 'Визуальное шоу в&nbsp;космическом стиле' },
     ],
   },
   names: {
