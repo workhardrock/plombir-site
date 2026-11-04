@@ -28,7 +28,7 @@ body.calm .menu { background: var(--black) !important; color: var(--cream) !impo
 body.calm .menu a { font-weight: 500 !important; }
 
 /* Первый экран: фото на весь экран, знак и ближайшее событие поверх */
-body.calm .hero { background: var(--black) !important; color: var(--cream) !important; grid-template-rows: 1.6fr auto 1fr auto !important; min-height: 100svh !important; }
+body.calm .hero { background: var(--black) !important; color: var(--cream) !important; grid-template-rows: 2.2fr auto 1fr auto !important; min-height: 100svh !important; }
 body.calm .hero__photo { grid-area: 1 / 1 / 5 / 2 !important; }
 body.calm .hero__photo img { filter: saturate(.9) contrast(1.05) brightness(.72) !important; }
 body.calm .hero__photo::after { background: radial-gradient(55% 36% at 50% 46%, rgb(13 14 14 / .6), transparent 75%), linear-gradient(180deg, rgb(13 14 14 / .55) 0%, rgb(13 14 14 / .15) 30%, rgb(13 14 14 / .62) 52%, rgb(13 14 14 / .82) 72%, var(--black) 100%) !important; }
