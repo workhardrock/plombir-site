@@ -146,7 +146,7 @@ const en: Dict = {
     text: 'Line-ups, ticket releases and giveaways come first to&nbsp;our Telegram channel @PLMBR.',
     cta: 'Join on&nbsp;Telegram',
   },
-  ticketPopup: { label: 'Buy a ticket', close: 'Close', newTab: 'Open in a new tab' },
+  ticketPopup: { label: 'Buy a ticket', close: 'Close', newTab: 'Open in a new tab', slow: 'The ticket service is&nbsp;taking too long. This can happen with a&nbsp;VPN on: turn it off and reload the page, or open the ticket sale directly.', open: 'Open the ticket sale', wait: 'Loading the ticket sale…' },
   footer: {
     sections: 'Sections',
     music: 'Music',
