@@ -44,7 +44,7 @@ const en: Dict = {
       { n: '11', text: 'years of&nbsp;events in&nbsp;Kazan and&nbsp;beyond' },
     ],
     text: [
-      '<b>PLOMBIR</b> is&nbsp;an&nbsp;independent music and event brand from&nbsp;Russia. Since <b>2015</b> we&nbsp;have produced open-air festivals and themed parties, brought world-class DJs and released music on&nbsp;our own label.',
+      '<b>PLOMBIR</b> is&nbsp;an&nbsp;independent music and event brand from&nbsp;Kazan. Since <b>2015</b> we&nbsp;have produced open-air festivals and themed parties, brought world-class DJs and released music on&nbsp;our own label.',
       'For us an&nbsp;event starts long before the first track: the venue, the light, the decor, the sound and the people who come for the atmosphere. <b>MUSIC, PEOPLE, PLACES</b>: the three circles of&nbsp;our mark and the three things we&nbsp;work for.',
     ],
   },
