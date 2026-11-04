@@ -62,13 +62,14 @@ const later = soon.map((e, i) => ({ ...e, ...t.events.soonList[i] }));
   .past__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; }
   .past__head span { font-size: 16px; }
   .past__list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 32px; }
-  .past { display: grid; gap: 6px; align-content: start; padding-top: 20px; border-top: 1px solid currentColor; }
+  .past { display: flex; flex-direction: column; gap: 6px; padding-top: 20px; border-top: 1px solid currentColor; }
   .past__date { font-size: clamp(36px, 3.4vw, 56px); line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
   .past__title { font-size: 18px; font-weight: 600; }
-  .past__venue { font-size: 16px; color: #4a453f; }
-  .past__btn { justify-self: start; margin-top: 14px; min-height: 40px; padding: 0 18px; font-size: 14px; white-space: nowrap; }
+  .past__venue { font-size: 16px; color: #4a453f; margin-bottom: 14px; }
+  /* кнопки и «Билеты скоро» прижаты к низу, чтобы стояли в одну линию при названиях разной длины */
+  .past__btn { align-self: flex-start; margin-top: auto; min-height: 40px; padding: 0 18px; font-size: 14px; white-space: nowrap; }
   @media (max-width: 520px) { .past__list { grid-template-columns: minmax(0, 1fr) !important; } }
-  .past__note { margin-top: 14px; min-height: 40px; display: flex; align-items: center; font-size: 14px; font-weight: 500; letter-spacing: .02em; }
+  .past__note { margin-top: auto; min-height: 40px; display: flex; align-items: center; font-size: 14px; font-weight: 500; letter-spacing: .02em; }
 
   @media (max-width: 900px) {
     .events__next { grid-template-columns: 1fr; }
