@@ -68,7 +68,7 @@ body.calm .intro__facts dd { color: var(--mute) !important; }
 body.calm .ev { background: var(--graphite) !important; border: 1px solid var(--line) !important; border-radius: 12px !important; }
 body.calm .ev__date { color: var(--cream) !important; font-weight: 500 !important; }
 body.calm .ev__body .btn { background: var(--orange) !important; color: var(--black) !important; }
-body.calm .past img { border-radius: 4px !important; filter: saturate(.6) !important; }
+body.calm .past { border-top-color: var(--line) !important; }
 body.calm .past__venue { color: var(--mute) !important; }
 body.calm .past__head span { color: var(--mute) !important; }
 
@@ -142,8 +142,10 @@ body.calm .foot__h { color: var(--mute) !important; letter-spacing: .06em !impor
 
 /* Цифры и крупные акценты: светлый шрифт плавно уходит в оранжевый, как было в Midnight */
 body.calm .intro__facts dt,
+body.calm .past__date,
 body.calm .rel__more .display,
 body.calm .case__guests {
   background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
 }
 body.calm .intro__facts dt { width: fit-content !important; }
+body.calm .past__date { width: fit-content !important; }

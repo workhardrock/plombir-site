@@ -53,15 +53,12 @@ const en: Dict = {
     all: 'All events',
     buy: 'Get tickets',
     poster: 'Poster',
-    past: 'Past events in&nbsp;2026',
-    count: (n: number) => `${n} events`,
-    pastList: [
-      { title: 'Zuma Dionys & Sasha Smaga', venue: 'Gorynych restaurant' },
-      { title: 'PLOMBIR 11 HB w/ Robbie Akbal', venue: 'Ular restaurant' },
-      { title: 'Season Sunset', venue: 'White Place' },
-      { title: 'White Night', venue: 'White Place' },
-      { title: 'D-Nox, first time in Kazan', venue: 'Prizma yacht club' },
+    soon: 'Coming in&nbsp;2027',
+    soonList: [
+      { title: 'Season Opening', venue: 'White Place' },
       { title: 'Plombir Festival', venue: 'White Place' },
+      { title: 'Midsummer Festival', venue: 'Yacht club' },
+      { title: 'Full Moon Festival', venue: 'White Place' },
     ],
   },
   releases: {

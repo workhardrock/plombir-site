@@ -52,15 +52,12 @@ const ru = {
     all: 'Все события',
     buy: 'Купить билет',
     poster: 'Афиша',
-    past: 'Прошедшие в&nbsp;2026',
-    count: (n: number) => `${n} событий`,
-    pastList: [
-      { title: 'Zuma Dionys & Sasha Smaga', venue: 'Ресторан «Горыныч»' },
-      { title: 'PLOMBIR 11 HB w/ Robbie Akbal', venue: 'Ресторан «Улар»' },
-      { title: 'Закат сезона', venue: 'White Place' },
-      { title: 'Белая ночь', venue: 'White Place' },
-      { title: 'D-Nox — впервые в Казани', venue: 'Яхт-клуб «Призма»' },
+    soon: 'Скоро в&nbsp;2027',
+    soonList: [
+      { title: 'Season Opening', venue: 'White Place' },
       { title: 'Фестиваль «Пломбир»', venue: 'White Place' },
+      { title: 'Midsummer Festival', venue: 'Яхт-клуб' },
+      { title: 'Full Moon Festival', venue: 'White Place' },
     ],
   },
   releases: {

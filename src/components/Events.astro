@@ -1,10 +1,9 @@
 ---
-import { upcoming, past, tilda } from '../data/site';
+import { upcoming, soon, tilda } from '../data/site';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
 const next = upcoming.map((e, i) => ({ ...e, ...t.upcoming[i] }));
-// на главной — три последних прошедших события
-const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] })).slice(0, 3);
+const later = soon.map((e, i) => ({ ...e, ...t.events.soonList[i] }));
 ---
 <section class="events chapter on-cream reveal" data-ink="dark" data-circle="places" id="events" aria-labelledby="events-title">
   <div class="wrap">
@@ -31,16 +30,14 @@ const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] })).slice(0, 3)
 
     <div class="events__past">
       <div class="past__head" data-r>
-        <h3 class="h3" set:html={t.events.past} />
+        <h3 class="h3" set:html={t.events.soon} />
       </div>
       <ul class="past__list">
-        {done.map((e, i) => (
+        {later.map((e, i) => (
           <li class="past" data-r style={`--i:${i}`}>
-            <img src={e.poster} width="400" height="533" alt="" loading="lazy" />
-            <div>
-              <p class="past__row"><b>{e.title}</b><span>{e.date}</span></p>
-              <p class="past__venue">{e.venue}</p>
-            </div>
+            <p class="past__date display">{e.date}</p>
+            <p class="past__title">{e.title}</p>
+            <p class="past__venue">{e.venue}</p>
           </li>
         ))}
       </ul>
@@ -61,18 +58,15 @@ const done = past.map((e, i) => ({ ...e, ...t.events.pastList[i] })).slice(0, 3)
   .events__past { margin-top: clamp(80px, 9vw, 140px); }
   .past__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; }
   .past__head span { font-size: 16px; }
-  .past__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 48px; }
-  .past { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; }
-  .past img { width: 64px; height: 85px; object-fit: cover; border-radius: 8px; }
-  .past__row { display: flex; justify-content: space-between; gap: 16px; font-size: 18px; }
-  .past__row span { font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .past__venue { font-size: 16px; margin-top: 4px; color: #4a453f; }
+  .past__list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 32px; }
+  .past { display: grid; gap: 6px; align-content: start; padding-top: 20px; border-top: 1px solid currentColor; }
+  .past__date { font-size: clamp(36px, 3.4vw, 56px); line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+  .past__title { font-size: 18px; font-weight: 600; }
+  .past__venue { font-size: 16px; color: #4a453f; }
 
   @media (max-width: 900px) {
     .events__next { grid-template-columns: 1fr; }
-    .past__list { grid-template-columns: 1fr; gap: 24px; }
-    .past { grid-template-columns: 52px 1fr; gap: 16px; }
-    .past img { width: 52px; height: 69px; }
+    .past__list { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
   }
   @media (max-width: 520px) {
     .ev { grid-template-columns: 1fr; }
