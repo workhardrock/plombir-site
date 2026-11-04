@@ -39,8 +39,8 @@ body.calm .hero__lead { grid-area: 2 / 1 !important; margin-top: 22px !important
 /* На широком экране знак ровно по центру экрана, подпись сразу под ним */
 @media (min-width: 961px) and (min-height: 640px) {
   body.calm .hero { --fs: clamp(52px, 9vw, 160px); }
-  body.calm .hero__type { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: 45.5% !important; left: 0 !important; right: 0 !important; translate: 0 -50% !important; }
-  body.calm .hero__lead { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: calc(45.5% + var(--fs) * .37) !important; left: 0 !important; right: 0 !important; margin-top: 26px !important; }
+  body.calm .hero__type { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: calc(50% - 20px) !important; left: 0 !important; right: 0 !important; translate: 0 -50% !important; }
+  body.calm .hero__lead { position: absolute !important; grid-area: 1 / 1 / 5 / 2 !important; top: calc(50% - 20px + var(--fs) * .37) !important; left: 0 !important; right: 0 !important; margin-top: 26px !important; }
 }
 body.calm .hero__tags { font-family: var(--text) !important; font-weight: 500 !important; font-size: clamp(13px, 1vw, 15px) !important; letter-spacing: .22em !important; gap: .6em 1.2em !important; }
 body.calm .hero__tags .hero__sep { width: .9em !important; color: var(--orange) !important; }
