@@ -36,7 +36,7 @@ export const upcoming = [
 
 // Анонсы следующего сезона: дата и площадка, без билетов
 export const soon = [
-  { date: '29.05' },
+  { date: '22.05' },
   { date: '19.06' },
   { date: '17.07' },
   { date: '14.08' },

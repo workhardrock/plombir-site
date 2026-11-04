@@ -54,7 +54,7 @@ const ru = {
     poster: 'Афиша',
     soon: 'Скоро в&nbsp;2027',
     soonList: [
-      { title: 'Season Opening', venue: 'White Place' },
+      { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Фестиваль «Пломбир»', venue: 'White Place' },
       { title: 'Midsummer Festival', venue: 'Яхт-клуб' },
       { title: 'Full Moon Festival', venue: 'White Place' },

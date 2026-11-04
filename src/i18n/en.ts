@@ -55,7 +55,7 @@ const en: Dict = {
     poster: 'Poster',
     soon: 'Coming in&nbsp;2027',
     soonList: [
-      { title: 'Season Opening', venue: 'White Place' },
+      { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Plombir Festival', venue: 'White Place' },
       { title: 'Midsummer Festival', venue: 'Yacht club' },
       { title: 'Full Moon Festival', venue: 'White Place' },
