@@ -149,3 +149,6 @@ body.calm .case__guests {
 }
 body.calm .intro__facts dt { width: fit-content !important; }
 body.calm .past__date { width: fit-content !important; }
+
+/* Анонсы сезона — отдельной светлой плашкой, чтобы не сливались с афишей */
+body.calm .events__past { background: #1b1e1e !important; border: 1px solid var(--line) !important; border-radius: 16px !important; padding: clamp(28px, 3.4vw, 52px) !important; }
