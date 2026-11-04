@@ -108,7 +108,7 @@ const en: Dict = {
     title: 'Artists',
     booking: 'Book an artist',
     subject: 'PLOMBIR artist booking',
-    styles: ['Downtempo, progressive, indie dance', 'Indie dance, organic house', 'Top 5 progressive house', 'Deep, soulful, funky house'],
+    styles: ['Progressive house', 'Downtempo, progressive, indie dance', 'Deep, soulful, funky house', 'Indie dance, organic house'],
   },
   production: {
     title: 'Your event<br />as a brand',
