@@ -20,7 +20,7 @@ const en: Dict = {
   hero: {
     alt: 'Abstract visual: a glowing sphere in a stream of blue and orange particles',
     h1Extra: ' — festivals, parties and a music label, Kazan',
-    tags: ['Festivals', 'Parties', 'Label'],
+    tags: ['Music', 'People', 'Places'],
     lead: 'Electronic music and Kazan night culture since&nbsp;2015',
     poster: 'Poster',
     countdown: 'Time until the event starts',

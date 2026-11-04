@@ -26,7 +26,6 @@ const units = ['d', 'h', 'm', 's'];
     <p class="hero__tags">
       {t.hero.tags.map((w, i) => <>{i > 0 && <Mark class="hero__sep" />}<span>{w}</span></>)}
     </p>
-    <p class="hero__sub" set:html={t.hero.lead} />
   </div>
 
   <div class="hero__next" data-ink="light">
