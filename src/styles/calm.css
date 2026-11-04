@@ -155,3 +155,4 @@ body.calm .past__date { width: fit-content !important; }
 body.calm .events__past { background: #25292a !important; border: 1px solid var(--line) !important; border-radius: 16px !important; padding: clamp(28px, 3.4vw, 52px) !important; }
 body.calm .past__btn { background: var(--orange) !important; color: var(--black) !important; }
 body.calm .past__note { color: var(--mute) !important; }
+body.calm .artist__ig { color: var(--orange) !important; }
