@@ -54,6 +54,8 @@ const en: Dict = {
     buy: 'Get tickets',
     poster: 'Poster',
     soon: 'Coming in&nbsp;2027',
+    early: 'Early access',
+    soonTickets: 'Tickets soon',
     soonList: [
       { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Plombir Festival', venue: 'White Place' },

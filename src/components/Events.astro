@@ -38,6 +38,9 @@ const later = soon.map((e, i) => ({ ...e, ...t.events.soonList[i] }));
             <p class="past__date display">{e.date}</p>
             <p class="past__title">{e.title}</p>
             <p class="past__venue">{e.venue}</p>
+            {'tickets' in e
+              ? <a class="btn btn--sm past__btn" href={e.tickets} target="_blank" rel="noopener">{t.events.early}</a>
+              : <p class="past__note">{t.events.soonTickets}</p>}
           </li>
         ))}
       </ul>
@@ -63,6 +66,9 @@ const later = soon.map((e, i) => ({ ...e, ...t.events.soonList[i] }));
   .past__date { font-size: clamp(36px, 3.4vw, 56px); line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
   .past__title { font-size: 18px; font-weight: 600; }
   .past__venue { font-size: 16px; color: #4a453f; }
+  .past__btn { justify-self: start; margin-top: 14px; min-height: 40px; padding: 0 18px; font-size: 14px; white-space: nowrap; }
+  @media (max-width: 520px) { .past__list { grid-template-columns: minmax(0, 1fr) !important; } }
+  .past__note { margin-top: 14px; min-height: 40px; display: flex; align-items: center; font-size: 14px; font-weight: 500; letter-spacing: .02em; }
 
   @media (max-width: 900px) {
     .events__next { grid-template-columns: 1fr; }

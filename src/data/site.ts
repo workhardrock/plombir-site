@@ -34,11 +34,11 @@ export const upcoming = [
   { start: '2026-12-24T20:00:00+07:00', date: '24.12', poster: '/img/ev-2412.webp', tickets: tilda.phuket },
 ];
 
-// Анонсы следующего сезона: дата и площадка, без билетов
+// Анонсы следующего сезона; tickets — ранний доступ, без него показываем «Билеты скоро»
 export const soon = [
-  { date: '22.05' },
-  { date: '19.06' },
-  { date: '17.07' },
+  { date: '22.05', tickets: 'https://voroh.ru/event/1044425/' },
+  { date: '19.06', tickets: 'https://voroh.ru/event/1044423/' },
+  { date: '17.07', tickets: 'https://voroh.ru/event/1044421/' },
   { date: '14.08' },
 ];
 
