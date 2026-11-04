@@ -34,13 +34,12 @@ export const upcoming = [
   { start: '2026-12-24T20:00:00+07:00', date: '24.12', poster: '/img/ev-2412.webp', tickets: tilda.phuket },
 ];
 
-export const past = [
-  { date: '30.10.26', poster: '/img/ev-3010.webp' },
-  { date: '09.10.26', poster: '/img/ev-0910.webp' },
-  { date: '29.08.26', poster: '/img/ev-2908.webp' },
-  { date: '01.08.26', poster: '/img/ev-0108.webp' },
-  { date: '17.07.26', poster: '/img/ev-1707.webp' },
-  { date: '06.06.26', poster: '/img/ev-0606.webp' },
+// Анонсы следующего сезона: дата и площадка, без билетов
+export const soon = [
+  { date: '22.05' },
+  { date: '19.06' },
+  { date: '17.07' },
+  { date: '14.08' },
 ];
 
 // preview — отрывок трека в public/audio (mp3, 30–60 секунд). Без него кнопка не показывается.
