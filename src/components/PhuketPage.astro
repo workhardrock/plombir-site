@@ -2,6 +2,9 @@
 // Лендинг PLOMBIR × LI|LU на Пхукете. Раньше страница жила на Tilda; статическая страница перекрывает прокси из vercel.json.
 import '@fontsource/unbounded/700.css';
 import '@fontsource/unbounded/800.css';
+import '@fontsource/noto-sans-thai/400.css';
+import '@fontsource/noto-sans-thai/500.css';
+import '@fontsource/noto-sans-thai/800.css';
 import '../styles/global.css';
 import Metrika from './Metrika.astro';
 import Mark from './Mark.astro';
@@ -19,8 +22,11 @@ const ev = {
 
 const { lang = 'ru' } = Astro.props as { lang?: PhuketLang };
 const t = phuketText[lang];
-const home = lang === 'en' ? '/en/' : '/';
-const path = lang === 'en' ? '/en/phuket' : '/phuket';
+// Тайской главной нет, поэтому с тайской страницы ведём на английскую
+const home = lang === 'ru' ? '/' : '/en/';
+const path = lang === 'ru' ? '/phuket' : `/${lang}/phuket`;
+const siteLocale = lang === 'ru' ? 'ru' : 'en';
+const langs = [{ code: 'ru', href: '/phuket' }, { code: 'en', href: '/en/phuket' }, { code: 'th', href: '/th/phuket' }] as const;
 const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
 ---
 <!doctype html>
@@ -34,6 +40,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     <link rel="canonical" href={site + path} />
     <link rel="alternate" hreflang="ru" href={site + '/phuket'} />
     <link rel="alternate" hreflang="en" href={site + '/en/phuket'} />
+    <link rel="alternate" hreflang="th" href={site + '/th/phuket'} />
     <link rel="alternate" hreflang="x-default" href={site + '/phuket'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
@@ -44,7 +51,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     <meta property="og:description" content={t.description} />
     <meta property="og:url" content={site + path} />
     <meta property="og:image" content={site + '/phuket-og.jpg'} />
-    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
+    <meta property="og:locale" content={{ ru: 'ru_RU', en: 'en_US', th: 'th_TH' }[lang]} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preload" href="/img/phk-duo.webp" as="image" />
     <Metrika />
@@ -63,8 +70,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
       </nav>
       <div class="bar__end">
         <nav class="lang" aria-label={t.langLabel}>
-          <a href="/phuket" hreflang="ru" lang="ru" aria-current={lang === 'ru' ? 'true' : undefined}>RU</a>
-          <a href="/en/phuket" hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+          {langs.map((l) => <a href={l.href} hreflang={l.code} lang={l.code} aria-current={l.code === lang ? 'true' : undefined}>{l.code.toUpperCase()}</a>)}
         </nav>
         <a class="btn btn--orange bar__cta" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
       </div>
@@ -189,8 +195,8 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
       </section>
     </main>
 
-    <Footer home={home} />
-    <TicketPopup />
+    <Footer home={home} locale={siteLocale} />
+    <TicketPopup locale={siteLocale} />
 
     <!-- Кнопка покупки на телефоне, когда первый экран ушёл вверх -->
     <a class="dock btn btn--orange" href={ev.tickets} data-widget={ev.widget} data-dock hidden>{t.dock}</a>
@@ -232,6 +238,9 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
 </html>
 
 <style>
+  /* Тайский: латиница остаётся в фирменных шрифтах, тайские буквы берёт Noto Sans Thai */
+  :global(html:lang(th)) { --display: 'Unbounded', 'Noto Sans Thai', 'Arial Black', sans-serif; --text: 'Stolzl', 'Noto Sans Thai', 'Helvetica Neue', Arial, sans-serif; }
+  :global(html:lang(th) .display) { line-height: 1.12; letter-spacing: -0.01em; }
   .phk { --line: rgba(230, 223, 213, .14); --mute: rgba(230, 223, 213, .62); }
 
   .eyebrow { font-size: var(--t-small); color: var(--orange); font-weight: 500; letter-spacing: .02em; margin-bottom: 18px; }
