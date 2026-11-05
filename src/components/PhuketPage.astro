@@ -137,7 +137,6 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
             ))}
           </ol>
         </div>
-        <figure class="program__pic"><img src="/img/phk-stage.webp" width="1680" height="792" alt={t.stageAlt} loading="lazy" /></figure>
       </section>
 
       <!-- Место -->
@@ -294,7 +293,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .guests p:last-child { max-width: 26em; color: var(--mute); }
 
   /* Программа */
-  .program { background: var(--graphite); padding-bottom: 0; }
+  .program { background: var(--graphite); }
   .program__note { color: var(--mute); font-size: var(--t-small); }
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
   .step { display: flex; flex-direction: column; padding: 28px 24px 32px; border-radius: 16px; background: #25292a; border: 1px solid var(--line); }
@@ -304,8 +303,6 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .step--main { background: var(--orange); border-color: var(--orange); }
   .step--main .step__time, .step--main .step__title { color: var(--black); }
   .step--main .step__text { color: rgba(18, 20, 19, .78); }
-  .program__pic { margin-top: clamp(56px, 7vw, 112px); }
-  .program__pic img { width: 100%; height: clamp(260px, 38vw, 620px); object-fit: cover; }
 
   /* Место */
   .place__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 96px); align-items: center; }
