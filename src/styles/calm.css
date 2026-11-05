@@ -131,8 +131,6 @@ body.calm .tg__main { background: var(--graphite) !important; color: var(--cream
 body.calm .tg__flank img { filter: saturate(.7) !important; }
 
 /* Подвал */
-body.calm .blk { background: var(--graphite) !important; color: var(--cream) !important; font-weight: 600 !important; border-radius: 8px !important; }
-body.calm .blk--mark { color: var(--orange) !important; }
 body.calm .foot__h { color: var(--mute) !important; letter-spacing: .06em !important; }
 
 @media (max-width: 760px) {
