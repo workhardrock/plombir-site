@@ -148,7 +148,9 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
       <!-- Место -->
       <section class="place chapter" id="place">
         <div class="wrap place__grid">
-          <figure class="place__pic"><img src="/img/phk-beach.webp" width="960" height="1280" alt={t.beachAlt} loading="lazy" /></figure>
+          <figure class="place__pic">
+            <video src="/video/phk-banana.mp4" poster="/img/phk-banana-poster.webp" width="624" height="832" autoplay muted loop playsinline preload="metadata" aria-label={t.beachAlt} data-autoplay></video>
+          </figure>
           <div class="place__text">
             <p class="eyebrow">{t.placeEyebrow}</p>
             <h2 class="display h2">Banana Beach Club</h2>
@@ -225,6 +227,13 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
         tick(); setInterval(tick, 30000);
       }
 
+      // Видео площадки: играет, только пока видно, и не играет при «уменьшить движение»
+      const vid = document.querySelector<HTMLVideoElement>('[data-autoplay]');
+      if (vid) {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) { vid.removeAttribute('autoplay'); vid.pause(); vid.controls = true; }
+        else new IntersectionObserver(([e]) => { if (e.isIntersecting) vid.play().catch(() => {}); else vid.pause(); }).observe(vid);
+      }
+
       // Нижняя кнопка: показываем после первого экрана и прячем у финального призыва
       const dock = document.querySelector<HTMLElement>('[data-dock]')!;
       const hero = document.querySelector('.hero')!;
@@ -259,7 +268,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .lang { display: flex; gap: 10px; font-size: 14px; font-weight: 500; }
   .lang a { color: var(--mute); }
   .lang a[aria-current] { color: var(--cream); }
-  .bar__cta { min-height: 42px; padding: 0 20px; font-size: 15px; }
+  .bar__cta { white-space: nowrap; min-height: 42px; padding: 0 20px; font-size: 15px; }
 
   /* Первый экран */
   .hero { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100svh; }
@@ -316,7 +325,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   /* Место */
   .place__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 96px); align-items: center; }
   .place__pic { border-radius: 16px; overflow: hidden; }
-  .place__pic img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .place__pic video { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; background: var(--graphite); }
   .place__lead { font-size: var(--t-h3); line-height: 1.25; margin: 28px 0 18px; }
   .place__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; padding-top: 24px; border-top: 1px solid var(--line); }
   .place__facts dt { font-size: var(--t-small); color: var(--mute); margin-bottom: 6px; }
@@ -347,6 +356,9 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
   .dock { display: none; }
 
+  /* Узкие телефоны: в шапке остаются знак, языки и кнопка */
+  @media (max-width: 430px) { .bar__word { display: none; } }
+
   @media (max-width: 1100px) {
     .bar__nav { display: none; }
     .bar { grid-template-columns: 1fr auto; }
@@ -354,6 +366,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   }
 
   @media (max-width: 860px) {
+    .place__pic video { aspect-ratio: 4 / 5; }
     .hero { grid-template-columns: 1fr; }
     .hero__pic { height: 64svh; }
     .hero__pic::after { background: linear-gradient(180deg, transparent 55%, var(--black)); }
@@ -362,17 +375,15 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     .artist__text { grid-column: 1 / -1; margin-bottom: 16px; }
     .artist__pic--a { transform: none; }
     .place__grid, .faq__grid { grid-template-columns: 1fr; }
-    .place__pic img { aspect-ratio: 4 / 3; }
   }
 
   @media (max-width: 560px) {
     .bar { padding-block: 10px; }
     .bar__word { width: 92px; }
-    .bar__end { display: flex; align-items: center; gap: 18px; }
-  .lang { display: flex; gap: 10px; font-size: 14px; font-weight: 500; }
-  .lang a { color: var(--mute); }
-  .lang a[aria-current] { color: var(--cream); }
-  .bar__cta { min-height: 38px; padding: 0 16px; font-size: 14px; }
+    .bar { gap: 12px; }
+    .bar__end { gap: 12px; }
+    .lang { gap: 8px; }
+    .bar__cta { min-height: 38px; padding: 0 16px; font-size: 14px; }
     .hero__title { font-size: clamp(64px, 22vw, 96px); }
     .hero__facts { grid-template-columns: 1fr 1fr; gap: 0 16px; }
     .hero__facts .display { font-size: 30px; }
