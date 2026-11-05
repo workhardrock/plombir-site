@@ -2,9 +2,9 @@
 import Mark from './Mark.astro';
 import { contacts, music, legalHrefs, tilda } from '../data/site';
 import { useT } from '../i18n';
-const t = useT(Astro.currentLocale);
+const t = useT((Astro.props as { locale?: string }).locale ?? Astro.currentLocale);
 // На отдельных страницах (например, /phuket) якоря ведут на главную
-const { home = '' } = Astro.props as { home?: string };
+const { home = '' } = Astro.props as { home?: string; locale?: string };
 const letters = [
   ['P', 100, 'orange'], ['L', 72, 'cream'], ['O', 88, 'graphite'], ['M', 64, 'orange'],
   ['B', 94, 'cream'], ['I', 70, 'graphite'], ['R', 84, 'orange'],

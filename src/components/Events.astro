@@ -2,7 +2,8 @@
 import { upcoming, soon } from '../data/site';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
-const next = upcoming.map((e, i) => ({ ...e, ...t.upcoming[i] }));
+// Свои страницы событий (например, /phuket) на английской версии ведут на /en/...
+const next = upcoming.map((e, i) => ({ ...e, ...t.upcoming[i], tickets: t.lang === 'en' && e.tickets.startsWith('/') ? '/en' + e.tickets : e.tickets }));
 const later = soon.map((e, i) => ({ ...e, ...t.events.soonList[i] }));
 ---
 <section class="events chapter on-cream reveal" data-ink="dark" data-circle="places" id="events" aria-labelledby="events-title">
