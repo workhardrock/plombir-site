@@ -244,7 +244,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
 
   /* Шапка */
   .bar { position: fixed; inset: 0 0 auto; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;
-    padding: 14px var(--m); background: rgba(18, 20, 19, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    padding: 14px var(--m); background: rgba(18, 20, 19, .55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
   .bar__brand { display: flex; align-items: center; gap: 12px; color: var(--cream); }
   .bar__brand :global(.bar__mark) { width: 30px; height: auto; }
   .bar__word { display: block; width: 108px; }
@@ -252,11 +252,11 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .bar__cta { min-height: 42px; padding: 0 20px; font-size: 15px; }
 
   /* Первый экран */
-  .hero { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100svh; padding-top: 72px; }
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100svh; }
   .hero__pic { position: relative; overflow: hidden; }
   .hero__pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .hero__pic::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--black)); }
-  .hero__text { display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 5vw, 80px) var(--m) clamp(32px, 5vw, 80px) clamp(24px, 3vw, 56px); }
+  .hero__text { display: flex; flex-direction: column; justify-content: center; padding: calc(72px + clamp(24px, 4vw, 64px)) var(--m) clamp(32px, 5vw, 80px) clamp(24px, 3vw, 56px); }
   .hero__pre { font-size: var(--t-small); color: var(--mute); text-transform: uppercase; letter-spacing: .16em; margin-bottom: 20px; }
   .hero__title { font-size: clamp(72px, 10vw, 176px); color: var(--cream); }
   .hero__title span { display: block; font-size: .3em; line-height: 1.05; letter-spacing: -0.02em; margin-top: .35em; color: var(--orange); }
@@ -346,8 +346,8 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   }
 
   @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; padding-top: 64px; }
-    .hero__pic { height: 58svh; }
+    .hero { grid-template-columns: 1fr; }
+    .hero__pic { height: 64svh; }
     .hero__pic::after { background: linear-gradient(180deg, transparent 55%, var(--black)); }
     .hero__text { padding: 0 var(--m) 48px; margin-top: -84px; position: relative; }
     .artist__grid { grid-template-columns: 1fr 1fr; }
