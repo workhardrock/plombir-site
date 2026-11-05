@@ -2,7 +2,7 @@
 import type { APIRoute } from 'astro';
 import { tilda } from '../data/site';
 
-const paths = ['/', '/en/', tilda.phuket, tilda.events];
+const paths = ['/', '/en/', tilda.phuket, '/en' + tilda.phuket, tilda.events];
 
 export const GET: APIRoute = ({ site }) => {
   const base = site!.toString().replace(/\/$/, '');

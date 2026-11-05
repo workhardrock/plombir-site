@@ -3,7 +3,7 @@ import { upcoming } from '../data/site';
 import Mark from './Mark.astro';
 import { useT } from '../i18n';
 const t = useT(Astro.currentLocale);
-const next = { ...upcoming[0], ...t.upcoming[0] };
+const next = { ...upcoming[0], ...t.upcoming[0], tickets: t.lang === 'en' && upcoming[0].tickets.startsWith('/') ? '/en' + upcoming[0].tickets : upcoming[0].tickets };
 const units = ['d', 'h', 'm', 's'];
 ---
 <section class="hero" data-ink="on-orange" data-circle="places" aria-labelledby="hero-title">

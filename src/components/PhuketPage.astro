@@ -1,0 +1,381 @@
+---
+// Лендинг PLOMBIR × LI|LU на Пхукете. Раньше страница жила на Tilda; статическая страница перекрывает прокси из vercel.json.
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
+import '../styles/global.css';
+import Metrika from './Metrika.astro';
+import Mark from './Mark.astro';
+import Footer from './Footer.astro';
+import TicketPopup from './TicketPopup.astro';
+import { phuketText, type PhuketLang } from '../i18n/phuket';
+
+const ev = {
+  start: '2026-12-24T20:00:00+07:00',
+  tickets: 'https://voroh.ru/event/1043849/',
+  widget: 'https://voroh.ru/widget/event/1043849/019d1a45-a297-8045-af63-9113dea2be71/',
+  map: 'https://yandex.kz/maps/-/CXb~64J3',
+  music: 'https://music.yandex.kz/artist/25792091',
+};
+
+const { lang = 'ru' } = Astro.props as { lang?: PhuketLang };
+const t = phuketText[lang];
+const home = lang === 'en' ? '/en/' : '/';
+const path = lang === 'en' ? '/en/phuket' : '/phuket';
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+---
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.description} />
+    <meta name="theme-color" content="#121413" />
+    <link rel="canonical" href={site + path} />
+    <link rel="alternate" hreflang="ru" href={site + '/phuket'} />
+    <link rel="alternate" hreflang="en" href={site + '/en/phuket'} />
+    <link rel="alternate" hreflang="x-default" href={site + '/phuket'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PLOMBIR" />
+    <meta property="og:title" content={t.ogTitle} />
+    <meta property="og:description" content={t.description} />
+    <meta property="og:url" content={site + path} />
+    <meta property="og:image" content={site + '/phuket-og.jpg'} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/img/phk-duo.webp" as="image" />
+    <Metrika />
+  </head>
+  <body class="phk">
+    <header class="bar" id="top">
+      <a class="bar__brand" href={home} aria-label={t.home}>
+        <Mark class="bar__mark" />
+        <span class="bar__word"><span class="wordmark" aria-hidden="true"></span></span>
+      </a>
+      <nav class="bar__nav" aria-label={t.navLabel}>
+        <a class="link" href="#artist">{t.nav[0]}</a>
+        <a class="link" href="#program">{t.nav[1]}</a>
+        <a class="link" href="#place">{t.nav[2]}</a>
+        <a class="link" href="#faq">{t.nav[3]}</a>
+      </nav>
+      <div class="bar__end">
+        <nav class="lang" aria-label={t.langLabel}>
+          <a href="/phuket" hreflang="ru" lang="ru" aria-current={lang === 'ru' ? 'true' : undefined}>RU</a>
+          <a href="/en/phuket" hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+        </nav>
+        <a class="btn btn--orange bar__cta" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Первый экран: кто, где, когда -->
+      <section class="hero">
+        <figure class="hero__pic">
+          <img src="/img/phk-duo.webp" width="1100" height="1461" alt={t.heroAlt} fetchpriority="high" />
+        </figure>
+        <div class="hero__text">
+          <p class="hero__pre">PLOMBIR presents</p>
+          <h1 class="hero__title display">LI|LU <span set:html={t.heroSub} /></h1>
+          <p class="hero__lead" set:html={t.heroLead} />
+          <dl class="hero__facts">
+            <div><dt>{t.when}</dt><dd class="display">24.12</dd><dd class="hero__sub" set:html={t.day} /></div>
+            <div><dt>{t.where}</dt><dd class="display">Banana Beach</dd><dd class="hero__sub">Banana Beach Club by&nbsp;Sollis 2.0</dd></div>
+          </dl>
+          <div class="hero__act">
+            <a class="btn btn--orange btn--big" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+            <div class="count" data-countdown={ev.start} aria-label={t.countLabel}>
+              <span><b data-u="d">--</b> {t.units[0]}</span><span><b data-u="h">--</b> {t.units[1]}</span><span><b data-u="m">--</b> {t.units[2]}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Бегущая строка жанров -->
+      <div class="tape" aria-hidden="true">
+        <div class="tape__run">
+          {[0, 1].map(() => <span>Deep <i>✺</i> Groove <i>✺</i> Electronic <i>✺</i> Phuket 24.12 <i>✺</i> PLOMBIR presents <i>✺</i> </span>)}
+        </div>
+      </div>
+
+      <!-- Артист -->
+      <section class="artist chapter" id="artist">
+        <div class="wrap artist__grid">
+          <div class="artist__text">
+            <p class="eyebrow">{t.headliner}</p>
+            <h2 class="display h2">LI|LU</h2>
+            <p class="artist__tags">Deep · Groove · Electronic</p>
+            <p class="artist__lead" set:html={t.artistLead} />
+            <p set:html={t.artistText} />
+            <a class="btn btn--line" href={ev.music} set:html={t.listen} />
+          </div>
+          <figure class="artist__pic artist__pic--a"><img src="/img/phk-dj1.webp" width="900" height="1260" alt={t.dj1Alt} loading="lazy" /></figure>
+          <figure class="artist__pic artist__pic--b"><img src="/img/phk-dj2.webp" width="853" height="1280" alt={t.dj2Alt} loading="lazy" /></figure>
+        </div>
+        <div class="wrap guests">
+          <p class="display">+ Secret guests</p>
+          <p set:html={t.guests} />
+        </div>
+      </section>
+
+      <!-- Программа -->
+      <section class="program chapter" id="program">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 class="display h2">{t.programTitle}</h2>
+            <p class="program__note" set:html={t.programNote} />
+          </div>
+          <ol class="steps">
+            {t.program.map((p) => (
+              <li class:list={['step', { 'step--main': 'main' in p && p.main }]}>
+                <p class="step__time display">{p.time}</p>
+                <h3 class="step__title">{p.title}</h3>
+                <p class="step__text" set:html={p.text} />
+              </li>
+            ))}
+          </ol>
+        </div>
+        <figure class="program__pic"><img src="/img/phk-stage.webp" width="1680" height="792" alt={t.stageAlt} loading="lazy" /></figure>
+      </section>
+
+      <!-- Место -->
+      <section class="place chapter" id="place">
+        <div class="wrap place__grid">
+          <figure class="place__pic"><img src="/img/phk-beach.webp" width="960" height="1280" alt={t.beachAlt} loading="lazy" /></figure>
+          <div class="place__text">
+            <p class="eyebrow">{t.placeEyebrow}</p>
+            <h2 class="display h2">Banana Beach Club</h2>
+            <p class="place__lead" set:html={t.placeLead} />
+            <p set:html={t.placeText} />
+            <dl class="place__facts">
+              <div><dt set:html={t.navAddr} /><dd>Banana Beach Club by&nbsp;Sollis 2.0</dd></div>
+              <div><dt>{t.howTo}</dt><dd set:html={t.howToText} /></div>
+            </dl>
+            <a class="btn btn--line" href={ev.map} set:html={t.map} />
+          </div>
+        </div>
+      </section>
+
+      <!-- Вопросы -->
+      <section class="faq chapter" id="faq">
+        <div class="wrap faq__grid">
+          <h2 class="display h2">{t.faqTitle}</h2>
+          <div class="faq__list">
+            {t.faq.map((f, i) => (
+              <details class="qa" open={i === 0}>
+                <summary class="h3" set:html={f.q} />
+                <p set:html={f.a} />
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Финальный призыв -->
+      <section class="last">
+        <img class="last__bg" src="/img/phk-lasers.webp" width="1600" height="1280" alt="" loading="lazy" />
+        <div class="wrap last__in">
+          <p class="eyebrow">{t.limited}</p>
+          <h2 class="display last__title" set:html={t.lastTitle} />
+          <p class="last__meta">24.12 · Banana Beach Club · <span style="white-space:nowrap">20:00–04:00</span></p>
+          <a class="btn btn--orange btn--big" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+        </div>
+      </section>
+
+      <section class="about wrap">
+        <p set:html={t.about} />
+        <a class="btn btn--line" href={home} set:html={t.toSite} />
+      </section>
+    </main>
+
+    <Footer home={home} />
+    <TicketPopup />
+
+    <!-- Кнопка покупки на телефоне, когда первый экран ушёл вверх -->
+    <a class="dock btn btn--orange" href={ev.tickets} data-widget={ev.widget} data-dock hidden>{t.dock}</a>
+
+    <script>
+      // Внешние ссылки — в новой вкладке
+      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((a) => {
+        const h = a.getAttribute('href')!;
+        if (/^(#|mailto:|tel:|\/)/.test(h) && !h.startsWith('//')) return;
+        a.target = '_blank'; a.rel = 'noopener';
+      });
+
+      // Обратный отсчёт
+      const cd = document.querySelector<HTMLElement>('[data-countdown]');
+      if (cd) {
+        const target = new Date(cd.dataset.countdown!).getTime();
+        const units = { d: 86400, h: 3600, m: 60 } as const;
+        const tick = () => {
+          let left = Math.max(0, Math.floor((target - Date.now()) / 1000));
+          for (const [u, size] of Object.entries(units)) {
+            const v = Math.floor(left / size); left -= v * size;
+            const el = cd.querySelector(`[data-u="${u}"]`);
+            if (el) el.textContent = String(v).padStart(2, '0');
+          }
+        };
+        tick(); setInterval(tick, 30000);
+      }
+
+      // Нижняя кнопка: показываем после первого экрана и прячем у финального призыва
+      const dock = document.querySelector<HTMLElement>('[data-dock]')!;
+      const hero = document.querySelector('.hero')!;
+      const last = document.querySelector('.last')!;
+      let heroOut = false, lastIn = false;
+      const upd = () => { dock.hidden = !(heroOut && !lastIn); };
+      new IntersectionObserver(([e]) => { heroOut = !e.isIntersecting; upd(); }).observe(hero);
+      new IntersectionObserver(([e]) => { lastIn = e.isIntersecting; upd(); }).observe(last);
+    </script>
+  </body>
+</html>
+
+<style>
+  .phk { --line: rgba(230, 223, 213, .14); --mute: rgba(230, 223, 213, .62); }
+
+  .eyebrow { font-size: var(--t-small); color: var(--orange); font-weight: 500; letter-spacing: .02em; margin-bottom: 18px; }
+  .btn--big { min-height: 60px; padding: 0 38px; font-size: 18px; }
+  .btn--line { background: transparent; color: var(--cream); border-color: rgba(230, 223, 213, .4); }
+  .btn--line:hover { border-color: var(--cream); }
+
+  /* Шапка */
+  .bar { position: fixed; inset: 0 0 auto; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;
+    padding: 14px var(--m); background: rgba(18, 20, 19, .55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .bar__brand { display: flex; align-items: center; gap: 12px; color: var(--cream); }
+  .bar__brand :global(.bar__mark) { width: 30px; height: auto; }
+  .bar__word { display: block; width: 108px; }
+  .bar__nav { display: flex; justify-content: center; gap: 28px; font-size: 15px; }
+  .bar__end { display: flex; align-items: center; gap: 18px; }
+  .lang { display: flex; gap: 10px; font-size: 14px; font-weight: 500; }
+  .lang a { color: var(--mute); }
+  .lang a[aria-current] { color: var(--cream); }
+  .bar__cta { min-height: 42px; padding: 0 20px; font-size: 15px; }
+
+  /* Первый экран */
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100svh; }
+  .hero__pic { position: relative; overflow: hidden; }
+  .hero__pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero__pic::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--black)); }
+  .hero__text { display: flex; flex-direction: column; justify-content: center; padding: calc(72px + clamp(24px, 4vw, 64px)) var(--m) clamp(32px, 5vw, 80px) clamp(24px, 3vw, 56px); }
+  .hero__pre { font-size: var(--t-small); color: var(--mute); text-transform: uppercase; letter-spacing: .16em; margin-bottom: 20px; }
+  .hero__title { font-size: clamp(72px, 10vw, 176px); color: var(--cream); }
+  .hero__title span { display: block; font-size: .3em; line-height: 1.05; letter-spacing: -0.02em; margin-top: .35em; color: var(--orange); }
+  .hero__lead { max-width: 34em; margin-top: 28px; }
+  .hero__facts { display: grid; grid-template-columns: auto 1fr; gap: 0 clamp(24px, 3vw, 48px); margin: 36px 0 0; padding-top: 28px; border-top: 1px solid var(--line); }
+  .hero__facts dt { font-size: var(--t-small); color: var(--mute); margin-bottom: 8px; }
+  .hero__facts dd { margin: 0; }
+  .hero__facts .display { font-size: clamp(32px, 3.4vw, 56px); line-height: 1; background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; }
+  .hero__sub { font-size: var(--t-small); color: var(--mute); margin-top: 8px !important; }
+  .hero__act { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 40px; }
+  .count { display: flex; gap: 18px; color: var(--mute); font-size: var(--t-small); }
+  .count b { font-family: var(--display); font-weight: 700; font-size: 26px; color: var(--cream); font-variant-numeric: tabular-nums; }
+
+  /* Бегущая строка */
+  .tape { overflow: hidden; background: var(--orange); color: var(--black); padding: 16px 0; }
+  .tape__run { display: flex; width: max-content; animation: tape 38s linear infinite; }
+  .tape span { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(22px, 2.4vw, 36px); letter-spacing: -0.02em; white-space: pre; }
+  .tape i { font-style: normal; margin: 0 .5em; }
+  @keyframes tape { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .tape__run { animation: none; } }
+
+  /* Артист */
+  .artist__grid { display: grid; grid-template-columns: 1.1fr .8fr .8fr; gap: clamp(16px, 2vw, 32px); align-items: end; }
+  .artist__text > p + p { margin-top: 18px; }
+  .artist__text .btn { margin-top: 32px; }
+  .artist__tags { margin-top: 18px; color: var(--orange); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: var(--t-small); }
+  .artist__lead { font-size: var(--t-h3); line-height: 1.25; margin-top: 28px; }
+  .artist__pic { border-radius: 16px; overflow: hidden; }
+  .artist__pic img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .artist__pic--a { transform: translateY(-48px); }
+  .guests { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px; margin-top: clamp(56px, 7vw, 112px); padding-top: 32px; border-top: 1px solid var(--line); }
+  .guests .display { font-size: clamp(36px, 5vw, 80px); color: var(--orange); }
+  .guests p:last-child { max-width: 26em; color: var(--mute); }
+
+  /* Программа */
+  .program { background: var(--graphite); padding-bottom: 0; }
+  .program__note { color: var(--mute); font-size: var(--t-small); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+  .step { display: flex; flex-direction: column; padding: 28px 24px 32px; border-radius: 16px; background: #25292a; border: 1px solid var(--line); }
+  .step__time { font-size: clamp(44px, 4.6vw, 76px); line-height: 1; color: var(--cream); }
+  .step__title { font-weight: 500; font-size: var(--t-h3); margin-top: 28px; }
+  .step__text { color: var(--mute); margin-top: 12px; font-size: 16px; }
+  .step--main { background: var(--orange); border-color: var(--orange); }
+  .step--main .step__time, .step--main .step__title { color: var(--black); }
+  .step--main .step__text { color: rgba(18, 20, 19, .78); }
+  .program__pic { margin-top: clamp(56px, 7vw, 112px); }
+  .program__pic img { width: 100%; height: clamp(260px, 38vw, 620px); object-fit: cover; }
+
+  /* Место */
+  .place__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 5vw, 96px); align-items: center; }
+  .place__pic { border-radius: 16px; overflow: hidden; }
+  .place__pic img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .place__lead { font-size: var(--t-h3); line-height: 1.25; margin: 28px 0 18px; }
+  .place__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; padding-top: 24px; border-top: 1px solid var(--line); }
+  .place__facts dt { font-size: var(--t-small); color: var(--mute); margin-bottom: 6px; }
+  .place__facts dd { margin: 0; font-weight: 500; }
+
+  /* Вопросы */
+  .faq { background: var(--graphite); }
+  .faq__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 5vw, 96px); align-items: start; }
+  .qa { border-bottom: 1px solid var(--line); }
+  .qa:first-child { border-top: 1px solid var(--line); }
+  .qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; padding: 26px 0; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary::after { content: '+'; color: var(--orange); font-family: var(--display); transition: transform .25s var(--ease); }
+  .qa[open] summary::after { transform: rotate(45deg); }
+  .qa p { padding: 0 0 28px; max-width: 36em; color: var(--mute); }
+  .qa p :global(a) { color: var(--cream); }
+
+  /* Финал */
+  .last { position: relative; overflow: hidden; min-height: 86svh; display: grid; align-items: end; }
+  .last__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .last::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(18,20,19,.2) 0%, rgba(18,20,19,.55) 50%, var(--black) 100%); }
+  .last__in { position: relative; z-index: 2; min-width: 0; padding-block: var(--section-y) clamp(56px, 7vw, 112px); }
+  .last__title { font-size: var(--t-h2); }
+  .last__meta { margin: 24px 0 36px; font-weight: 500; }
+
+  .about { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; padding-block: 56px; border-top: 1px solid var(--line); }
+  .about p { max-width: 44em; color: var(--mute); }
+
+  .dock { display: none; }
+
+  @media (max-width: 1100px) {
+    .bar__nav { display: none; }
+    .bar { grid-template-columns: 1fr auto; }
+    .steps { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero__pic { height: 64svh; }
+    .hero__pic::after { background: linear-gradient(180deg, transparent 55%, var(--black)); }
+    .hero__text { padding: 0 var(--m) 48px; margin-top: -84px; position: relative; }
+    .artist__grid { grid-template-columns: 1fr 1fr; }
+    .artist__text { grid-column: 1 / -1; margin-bottom: 16px; }
+    .artist__pic--a { transform: none; }
+    .place__grid, .faq__grid { grid-template-columns: 1fr; }
+    .place__pic img { aspect-ratio: 4 / 3; }
+  }
+
+  @media (max-width: 560px) {
+    .bar { padding-block: 10px; }
+    .bar__word { width: 92px; }
+    .bar__end { display: flex; align-items: center; gap: 18px; }
+  .lang { display: flex; gap: 10px; font-size: 14px; font-weight: 500; }
+  .lang a { color: var(--mute); }
+  .lang a[aria-current] { color: var(--cream); }
+  .bar__cta { min-height: 38px; padding: 0 16px; font-size: 14px; }
+    .hero__title { font-size: clamp(64px, 22vw, 96px); }
+    .hero__facts { grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .hero__facts .display { font-size: 30px; }
+    .hero__act .btn { width: 100%; }
+    .steps { grid-template-columns: 1fr; }
+    .step__title { margin-top: 16px; }
+    .place__facts { grid-template-columns: 1fr; }
+    .last__title { font-size: 7.6vw; }
+    .last__in .btn { width: 100%; }
+    .dock:not([hidden]) { display: flex; position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); min-height: 56px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+  }
+</style>
