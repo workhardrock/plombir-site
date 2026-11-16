@@ -42,7 +42,7 @@ const ru = {
   faq: [
     { q: 'Во&nbsp;сколько начало?', a: 'Старт в&nbsp;19:00, TRIP OF LIFE в&nbsp;20:00, LI|LU в&nbsp;22:00, секретный гость PLOMBIR в&nbsp;00:00.' },
     { q: 'Как забронировать стол?', a: 'Через организаторов: напишите на&nbsp;<a class="link" href="mailto:info@plombir.events">info@plombir.events</a> или в&nbsp;<a class="link" href="https://t.me/PLMBR">Telegram</a>.' },
-    { q: 'Какой возрастной ценз?', a: 'Уточним при анонсе продаж.' },
+    { q: 'Какой возрастной ценз?', a: '18+.' },
     { q: 'Как добраться?', a: 'Клуб стоит на&nbsp;пляже Banana Beach, на&nbsp;северо-западном побережье Пхукета, рядом с&nbsp;Лаяном и&nbsp;Банг Тао. Удобнее всего на&nbsp;такси или арендованном транспорте. У&nbsp;клуба есть парковка, от&nbsp;неё минута пешком до&nbsp;пляжа. В&nbsp;навигаторе ищите «Banana Beach Club by&nbsp;Sollis&nbsp;2.0».' },
   ],
   limited: 'Количество мест ограничено',
@@ -98,7 +98,7 @@ const en: Dict = {
   faq: [
     { q: 'What time does it&nbsp;start?', a: 'Doors at&nbsp;7&nbsp;pm, TRIP OF LIFE at&nbsp;8&nbsp;pm, LI|LU at&nbsp;10&nbsp;pm, PLOMBIR secret guest at&nbsp;midnight.' },
     { q: 'How do&nbsp;I&nbsp;book a&nbsp;table?', a: 'Through the organisers: email <a class="link" href="mailto:info@plombir.events">info@plombir.events</a> or&nbsp;message us&nbsp;on&nbsp;<a class="link" href="https://t.me/PLMBR">Telegram</a>.' },
-    { q: 'Is&nbsp;there an&nbsp;age limit?', a: 'We&nbsp;will confirm it&nbsp;when ticket sales are announced.' },
+    { q: 'Is&nbsp;there an&nbsp;age limit?', a: '18+.' },
     { q: 'How do&nbsp;I&nbsp;get there?', a: 'The club is&nbsp;on&nbsp;Banana Beach, on&nbsp;the north-west coast of&nbsp;Phuket, near Layan and Bang Tao. A&nbsp;taxi or&nbsp;rented transport is&nbsp;easiest. There is&nbsp;parking at&nbsp;the club, a&nbsp;minute’s walk from the beach. Search for “Banana Beach Club by&nbsp;Sollis&nbsp;2.0” in&nbsp;your navigation app.' },
   ],
   limited: 'Limited capacity',
@@ -139,7 +139,7 @@ const th: Dict = {
   program: [
     { time: '19:00', title: 'เริ่มงาน', text: 'มาพบปะ ทำความรู้จัก และเตรียมพร้อมสำหรับค่ำคืนนี้ ค็อกเทลแก้วแรก ดนตรี และค่ำคืนริมทะเลอันดามัน' },
     { time: '20:00', title: 'TRIP OF LIFE', text: '“บ้านแห่งดนตรี” จากเซนต์ปีเตอร์สเบิร์กเล่นริมทะเลเป็นครั้งแรก จริงใจ อบอุ่น และมีชีวิตชีวา', main: true },
-    { time: '22:00', title: 'LI|LU', text: 'ถึงเวลาเร่งเสียง LI|LU ขึ้นเล่น กรูฟที่ทรงพลัง พลังงานที่ติดต่อกันได้ และจุดพีคของค่ำคืนนี้', main: true },
+    { time: '22:00', title: 'LI|LU', text: 'ถึงเวลาเร่งเสียง LI|LU ขึ้นเล่น กรูฟที่ทรงพลัง พลังงานที่เร้าใจ และจุดพีคของค่ำคืนนี้', main: true },
     { time: '00:00', title: 'แขกรับเชิญลับจาก PLOMBIR', text: 'เราเก็บชื่อไว้เป็นความลับ และจะเปิดเผยใกล้วันงาน' },
   ],
   beachAlt: 'วิดีโอ: ชายหาดและปาร์ตี้ที่ Banana Beach Club',
@@ -152,7 +152,7 @@ const th: Dict = {
   faq: [
     { q: 'งานเริ่มกี่โมง?', a: 'เริ่มงาน 19:00 น. TRIP OF LIFE 20:00 น. LI|LU 22:00 น. และแขกรับเชิญลับจาก PLOMBIR เที่ยงคืน' },
     { q: 'จองโต๊ะได้อย่างไร?', a: 'ติดต่อผู้จัดงานทางอีเมล <a class="link" href="mailto:info@plombir.events">info@plombir.events</a> หรือ <a class="link" href="https://t.me/PLMBR">Telegram</a>' },
-    { q: 'มีการจำกัดอายุหรือไม่?', a: 'เราจะแจ้งเมื่อประกาศเปิดขายบัตร' },
+    { q: 'มีการจำกัดอายุหรือไม่?', a: '18+ เท่านั้น' },
     { q: 'เดินทางอย่างไร?', a: 'คลับตั้งอยู่บนหาด Banana Beach ชายฝั่งตะวันตกเฉียงเหนือของภูเก็ต ใกล้ลายันและบางเทา สะดวกที่สุดคือแท็กซี่หรือรถเช่า คลับมีที่จอดรถ เดินถึงชายหาดเพียงหนึ่งนาที ค้นหา “Banana Beach Club by Sollis 2.0” ในแอปนำทาง' },
   ],
   limited: 'บัตรมีจำนวนจำกัด',
