@@ -29,7 +29,7 @@ const en: Dict = {
   },
   upcoming: [
     { title: 'LI|LU in Kazan', day: 'Saturday', venue: 'YUG22 restaurant', city: 'Kazan' },
-    { title: 'PLOMBIR Phuket w/ LI|LU', day: 'Thursday', venue: 'Banana Beach Club', city: 'Phuket' },
+    { title: 'PLOMBIR Phuket w/ LI|LU, Trip of Life', day: 'Thursday', venue: 'Banana Beach Club', city: 'Phuket' },
   ],
   intro: {
     title: 'Night<br />culture',

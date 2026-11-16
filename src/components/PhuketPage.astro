@@ -13,7 +13,7 @@ import TicketPopup from './TicketPopup.astro';
 import { phuketText, type PhuketLang } from '../i18n/phuket';
 
 const ev = {
-  start: '2026-12-24T20:00:00+07:00',
+  start: '2026-12-24T19:00:00+07:00',
   tickets: 'https://voroh.ru/event/1043849/',
   widget: 'https://voroh.ru/widget/event/1043849/019d1a45-a297-8045-af63-9113dea2be71/',
   map: 'https://yandex.kz/maps/-/CXb~64J3',
@@ -102,7 +102,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
       <!-- Бегущая строка жанров -->
       <div class="tape" aria-hidden="true">
         <div class="tape__run">
-          {[0, 1].map(() => <span>Deep <i>✺</i> Groove <i>✺</i> Electronic <i>✺</i> Phuket 24.12 <i>✺</i> PLOMBIR presents <i>✺</i> </span>)}
+          {[0, 1].map(() => <span>LI|LU <i>✺</i> Trip of Life <i>✺</i> Deep <i>✺</i> Groove <i>✺</i> Electronic <i>✺</i> Phuket 24.12 <i>✺</i> PLOMBIR presents <i>✺</i> </span>)}
         </div>
       </div>
 
@@ -120,9 +120,15 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
           <figure class="artist__pic artist__pic--a"><img src="/img/phk-dj1.webp" width="900" height="1260" alt={t.dj1Alt} loading="lazy" /></figure>
           <figure class="artist__pic artist__pic--b"><img src="/img/phk-dj2.webp" width="853" height="1280" alt={t.dj2Alt} loading="lazy" /></figure>
         </div>
-        <div class="wrap guests">
-          <p class="display">+ Secret guests</p>
-          <p set:html={t.guests} />
+        <div class="wrap tol">
+          <figure class="tol__pic"><img src="/img/phk-tol.webp" width="900" height="490" alt={t.tolAlt} loading="lazy" /></figure>
+          <div class="tol__text">
+            <p class="eyebrow">{t.tolEyebrow}</p>
+            <h2 class="display h2">Trip of&nbsp;Life</h2>
+            <p class="artist__tags">{t.tolCity}</p>
+            <p class="artist__lead" set:html={t.tolLead} />
+            <p set:html={t.tolText} />
+          </div>
         </div>
       </section>
 
@@ -186,7 +192,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
         <div class="wrap last__in">
           <p class="eyebrow">{t.limited}</p>
           <h2 class="display last__title" set:html={t.lastTitle} />
-          <p class="last__meta">24.12 · Banana Beach Club · <span style="white-space:nowrap">20:00–04:00</span></p>
+          <p class="last__meta">24.12 · Banana Beach Club · <span style="white-space:nowrap">19:00</span></p>
           <a class="btn btn--orange btn--big" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
         </div>
       </section>
@@ -306,9 +312,10 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .artist__pic { border-radius: 16px; overflow: hidden; }
   .artist__pic img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
   .artist__pic--a { transform: translateY(-48px); }
-  .guests { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px; margin-top: clamp(56px, 7vw, 112px); padding-top: 32px; border-top: 1px solid var(--line); }
-  .guests .display { font-size: clamp(36px, 5vw, 80px); color: var(--orange); }
-  .guests p:last-child { max-width: 26em; color: var(--mute); }
+  .tol { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 96px); align-items: center; margin-top: clamp(72px, 9vw, 144px); padding-top: clamp(56px, 7vw, 112px); border-top: 1px solid var(--line); }
+  .tol__pic { border-radius: 16px; overflow: hidden; }
+  .tol__pic img { width: 100%; aspect-ratio: 900 / 490; object-fit: cover; }
+  .tol__text > p + p { margin-top: 18px; }
 
   /* Программа */
   .program { background: var(--graphite); }
@@ -374,6 +381,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     .artist__grid { grid-template-columns: 1fr 1fr; }
     .artist__text { grid-column: 1 / -1; margin-bottom: 16px; }
     .artist__pic--a { transform: none; }
+    .tol { grid-template-columns: 1fr; }
     .place__grid, .faq__grid { grid-template-columns: 1fr; }
   }
 
