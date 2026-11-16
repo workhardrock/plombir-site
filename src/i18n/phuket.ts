@@ -29,7 +29,7 @@ const ru = {
   program: [
     { time: '19:00', title: 'Старт', text: 'Собираемся, знакомимся и&nbsp;настраиваемся на&nbsp;ночь. Первые коктейли, музыка и&nbsp;вечер у&nbsp;Андаманского моря.' },
     { time: '20:00', title: 'TRIP OF LIFE', text: '«Музыкальный дом» из&nbsp;Санкт-Петербурга впервые играет у&nbsp;моря: искренне, уютно и&nbsp;живо.', main: true },
-    { time: '22:00', title: 'LI|LU', text: 'Время прибавить громкость. За&nbsp;пультом LI|LU: глубокий грув, тонкая селекция и&nbsp;танцы у&nbsp;самой воды.', main: true },
+    { time: '22:00', title: 'LI|LU', text: 'Время прибавить громкость. За&nbsp;пультом LI|LU: мощный грув, заразительная энергия и&nbsp;пик этой ночи.', main: true },
     { time: '00:00', title: 'Секретный гость PLOMBIR', text: 'Имя держим в&nbsp;секрете и&nbsp;откроем ближе к&nbsp;дате.' },
   ],
   beachAlt: 'Видео: пляж и вечеринка в Banana Beach Club',
@@ -85,7 +85,7 @@ const en: Dict = {
   program: [
     { time: '19:00', title: 'Doors', text: 'Arrive, meet and tune in&nbsp;to&nbsp;the night. First cocktails, music and an&nbsp;evening by&nbsp;the Andaman Sea.' },
     { time: '20:00', title: 'TRIP OF LIFE', text: 'The “music home” from Saint Petersburg plays by&nbsp;the sea for the first time: sincere, cosy and alive.', main: true },
-    { time: '22:00', title: 'LI|LU', text: 'Time to&nbsp;turn it&nbsp;up. LI|LU take the decks: deep groove, refined selection and dancing by&nbsp;the water.', main: true },
+    { time: '22:00', title: 'LI|LU', text: 'Time to&nbsp;turn it&nbsp;up. LI|LU take the decks: powerful groove, infectious energy and the peak of&nbsp;the night.', main: true },
     { time: '00:00', title: 'PLOMBIR secret guest', text: 'The name stays secret until closer to&nbsp;the date.' },
   ],
   beachAlt: 'Video: the beach and a party at Banana Beach Club',
@@ -139,7 +139,7 @@ const th: Dict = {
   program: [
     { time: '19:00', title: 'เริ่มงาน', text: 'มาพบปะ ทำความรู้จัก และเตรียมพร้อมสำหรับค่ำคืนนี้ ค็อกเทลแก้วแรก ดนตรี และค่ำคืนริมทะเลอันดามัน' },
     { time: '20:00', title: 'TRIP OF LIFE', text: '“บ้านแห่งดนตรี” จากเซนต์ปีเตอร์สเบิร์กเล่นริมทะเลเป็นครั้งแรก จริงใจ อบอุ่น และมีชีวิตชีวา', main: true },
-    { time: '22:00', title: 'LI|LU', text: 'ถึงเวลาเร่งเสียง LI|LU ขึ้นเล่น ดีพกรูฟ การคัดเพลงอย่างประณีต และการเต้นริมน้ำ', main: true },
+    { time: '22:00', title: 'LI|LU', text: 'ถึงเวลาเร่งเสียง LI|LU ขึ้นเล่น กรูฟที่ทรงพลัง พลังงานที่ติดต่อกันได้ และจุดพีคของค่ำคืนนี้', main: true },
     { time: '00:00', title: 'แขกรับเชิญลับจาก PLOMBIR', text: 'เราเก็บชื่อไว้เป็นความลับ และจะเปิดเผยใกล้วันงาน' },
   ],
   beachAlt: 'วิดีโอ: ชายหาดและปาร์ตี้ที่ Banana Beach Club',
