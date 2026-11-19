@@ -39,7 +39,7 @@ export const soon = [
   { date: '22.05', tickets: 'https://voroh.ru/event/1044425/' },
   { date: '19.06', tickets: 'https://voroh.ru/event/1044423/' },
   { date: '24.07', tickets: 'https://voroh.ru/event/1044421/' },
-  { date: '14.08' },
+  { date: '21.08' },
 ];
 
 // preview — отрывок трека в public/audio (mp3, 30–60 секунд). Без него кнопка не показывается.
