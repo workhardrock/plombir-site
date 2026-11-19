@@ -43,10 +43,11 @@ export const soon = [
 ];
 
 // preview — отрывок трека в public/audio (mp3, 30–60 секунд). Без него кнопка не показывается.
-export const releases: { cat: string; artist: string; track: string; cover: string; preview?: string }[] = [
+// url — страница релиза на Beatport; preorder — дата выхода, пока релиз на предзаказе
+export const releases: { cat: string; artist: string; track: string; cover: string; preview?: string; url?: string; preorder?: string }[] = [
+  { cat: 'PLMBR067', artist: 'Yassen ft. Kit Kayo', track: 'Fat Booty', cover: '/img/pl067.webp', preview: '/audio/pl067.mp3', url: 'https://www.beatport.com/release/fat-booty-ft-kit-kayo/7684118', preorder: '27.11' },
   { cat: 'PLMBR066', artist: 'Volobotti, Gar1sson', track: 'Different', cover: '/img/pl066.webp', preview: '/audio/pl066.mp3' },
   { cat: 'PLMBR065', artist: 'Space Food', track: '1000 Desires', cover: '/img/pl065.webp', preview: '/audio/pl065.mp3' },
-  { cat: 'PLMBR064', artist: 'Fairtone, Tiger Smth', track: 'Demension', cover: '/img/pl064.webp', preview: '/audio/pl064.mp3' },
 ];
 
 export const artists = [
