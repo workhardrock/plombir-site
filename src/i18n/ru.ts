@@ -69,6 +69,8 @@ const ru = {
     play: (track: string) => `Слушать отрывок ${track}`,
     pause: (track: string) => `Пауза: ${track}`,
     preview: 'Прослушать',
+    preorder: 'Предзаказ на&nbsp;Beatport',
+    out: (date: string) => `Предзаказ · ${date}`,
     note: (cat: string) => `Original Mix. Вышел на&nbsp;PLOMBIR MUSIC под номером ${cat}.`,
     more: 'Весь каталог',
     moreText: 'Больше 60 релизов PLOMBIR MUSIC на Beatport',

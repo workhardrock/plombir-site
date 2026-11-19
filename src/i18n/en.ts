@@ -70,6 +70,8 @@ const en: Dict = {
     play: (track: string) => `Play a preview of ${track}`,
     pause: (track: string) => `Pause ${track}`,
     preview: 'Listen',
+    preorder: 'Pre-order on&nbsp;Beatport',
+    out: (date: string) => `Pre-order · ${date}`,
     note: (cat: string) => `Original Mix. Released on&nbsp;PLOMBIR MUSIC as&nbsp;${cat}.`,
     more: 'Full catalogue',
     moreText: '60+ PLOMBIR MUSIC releases on Beatport',
