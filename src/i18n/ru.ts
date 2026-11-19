@@ -58,7 +58,7 @@ const ru = {
     soonList: [
       { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Фестиваль «Пломбир»', venue: 'White Place' },
-      { title: 'Midsummer Festival', venue: 'Яхт-клуб' },
+      { title: 'Midsummer Festival', venue: 'White Place' },
       { title: 'Full Moon Festival', venue: 'White Place' },
     ],
   },

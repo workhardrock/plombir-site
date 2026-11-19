@@ -59,7 +59,7 @@ const en: Dict = {
     soonList: [
       { title: 'Season Opening', venue: 'Villa Terrace' },
       { title: 'Plombir Festival', venue: 'White Place' },
-      { title: 'Midsummer Festival', venue: 'Yacht club' },
+      { title: 'Midsummer Festival', venue: 'White Place' },
       { title: 'Full Moon Festival', venue: 'White Place' },
     ],
   },

@@ -38,7 +38,7 @@ export const upcoming = [
 export const soon = [
   { date: '22.05', tickets: 'https://voroh.ru/event/1044425/' },
   { date: '19.06', tickets: 'https://voroh.ru/event/1044423/' },
-  { date: '17.07', tickets: 'https://voroh.ru/event/1044421/' },
+  { date: '24.07', tickets: 'https://voroh.ru/event/1044421/' },
   { date: '14.08' },
 ];
 
