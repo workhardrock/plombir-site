@@ -15,6 +15,7 @@ import { phuketText, type PhuketLang } from '../i18n/phuket';
 const ev = {
   start: '2026-12-24T19:00:00+07:00',
   tickets: 'https://voroh.ru/event/1043849/',
+  internationalTickets: 'https://sales.ticketing.cm.com/PlombirLILUandTOL',
   widget: 'https://voroh.ru/widget/event/1043849/019d1a45-a297-8045-af63-9113dea2be71/',
   map: 'https://yandex.kz/maps/-/CXb~64J3',
   music: 'https://music.yandex.kz/artist/25792091',
@@ -22,6 +23,9 @@ const ev = {
 
 const { lang = 'ru' } = Astro.props as { lang?: PhuketLang };
 const t = phuketText[lang];
+const voroh = { url: ev.tickets, widget: ev.widget, label: t.payVoroh, service: 'Voroh · RUB' };
+const international = { url: ev.internationalTickets, widget: undefined, label: t.payInternational, service: 'CM.com · EUR' };
+const paymentOptions = lang === 'ru' ? [voroh, international] : [international, voroh];
 // Тайской главной нет, поэтому с тайской страницы ведём на английскую
 const home = lang === 'ru' ? '/' : '/en/';
 const path = lang === 'ru' ? '/phuket' : `/${lang}/phuket`;
@@ -72,7 +76,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
         <nav class="lang" aria-label={t.langLabel}>
           {langs.map((l) => <a href={l.href} hreflang={l.code} lang={l.code} aria-current={l.code === lang ? 'true' : undefined}>{l.code.toUpperCase()}</a>)}
         </nav>
-        <a class="btn btn--orange bar__cta" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+        <a class="btn btn--orange bar__cta" href="#tickets">{t.buy}</a>
       </div>
     </header>
 
@@ -91,7 +95,14 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
             <div><dt>{t.where}</dt><dd class="display">Banana Beach</dd><dd class="hero__sub">Banana Beach Club by&nbsp;Sollis 2.0</dd></div>
           </dl>
           <div class="hero__act">
-            <a class="btn btn--orange btn--big" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+            <div class="payment-options" id="tickets" role="group" aria-label={t.buy}>
+              {paymentOptions.map((option, index) => (
+                <a class:list={['btn', 'payment-option', index === 0 ? 'btn--orange' : 'btn--line']} href={option.url} data-widget={option.widget}>
+                  <span>{option.label}</span>
+                  <small>{option.service}</small>
+                </a>
+              ))}
+            </div>
             <div class="count" data-countdown={ev.start} aria-label={t.countLabel}>
               <span><b data-u="d">--</b> {t.units[0]}</span><span><b data-u="h">--</b> {t.units[1]}</span><span><b data-u="m">--</b> {t.units[2]}</span>
             </div>
@@ -225,7 +236,14 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
           <p class="eyebrow">{t.limited}</p>
           <h2 class="display last__title" set:html={t.lastTitle} />
           <p class="last__meta">24.12 · Banana Beach Club · <span style="white-space:nowrap">19:00</span></p>
-          <a class="btn btn--orange btn--big" href={ev.tickets} data-widget={ev.widget}>{t.buy}</a>
+          <div class="payment-options" role="group" aria-label={t.buy}>
+            {paymentOptions.map((option, index) => (
+              <a class:list={['btn', 'payment-option', index === 0 ? 'btn--orange' : 'btn--line']} href={option.url} data-widget={option.widget}>
+                <span>{option.label}</span>
+                <small>{option.service}</small>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -239,7 +257,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
     <TicketPopup locale={siteLocale} />
 
     <!-- Кнопка покупки на телефоне, когда первый экран ушёл вверх -->
-    <a class="dock btn btn--orange" href={ev.tickets} data-widget={ev.widget} data-dock hidden>{t.dock}</a>
+    <a class="dock btn btn--orange" href="#tickets" data-dock hidden>{t.dock}</a>
 
     <script>
       // Внешние ссылки — в новой вкладке
@@ -324,6 +342,9 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .hero__facts .display { font-size: clamp(32px, 3.4vw, 56px); line-height: 1; background: linear-gradient(100deg, var(--cream) 15%, var(--orange) 110%); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; }
   .hero__sub { font-size: var(--t-small); color: var(--mute); margin-top: 8px !important; }
   .hero__act { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 40px; }
+  .payment-options { display: flex; flex-wrap: wrap; gap: 10px; scroll-margin-top: 88px; }
+  .payment-option { flex-direction: column; gap: 2px; min-height: 56px; padding: 8px 16px; font-size: 14px; line-height: 1.3; }
+  .payment-option small { font-size: 12px; font-weight: 500; }
   .count { display: flex; gap: 18px; color: var(--mute); font-size: var(--t-small); }
   .count b { font-family: var(--display); font-weight: 700; font-size: 26px; color: var(--cream); font-variant-numeric: tabular-nums; }
 
