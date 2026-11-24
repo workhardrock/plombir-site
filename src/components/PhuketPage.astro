@@ -130,14 +130,15 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
             <p set:html={t.tolText} />
           </div>
         </div>
-        <div class="wrap tol">
-          <figure class="tol__pic"><img src="/img/phk-bulat.webp" width="1200" height="800" alt={t.bulatAlt} loading="lazy" /></figure>
+        <div class="wrap tol" id="bulat">
+          <figure class="tol__pic tol__pic--bulat"><img src="/img/phk-bulat-amber.webp" width="1200" height="800" alt={t.bulatAlt} loading="lazy" /></figure>
           <div class="tol__text">
             <p class="eyebrow">{t.bulatEyebrow}</p>
             <h2 class="display h2">BULAT</h2>
             <p class="artist__tags">LA / Chicago</p>
             <p class="artist__lead">{t.bulatLead}</p>
             <p>{t.bulatText}</p>
+            <a class="btn btn--line" href="https://www.youtube.com/watch?v=wwGcpSj0OrU">{t.bulatListen}</a>
           </div>
         </div>
       </section>
@@ -325,7 +326,10 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .tol { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 96px); align-items: center; margin-top: clamp(72px, 9vw, 144px); padding-top: clamp(56px, 7vw, 112px); border-top: 1px solid var(--line); }
   .tol__pic { border-radius: 16px; overflow: hidden; }
   .tol__pic img { width: 100%; aspect-ratio: 900 / 490; object-fit: cover; }
+  .tol__pic--bulat img { aspect-ratio: 3 / 2; }
   .tol__text > p + p { margin-top: 18px; }
+  .tol__text .btn { margin-top: 32px; }
+  #bulat { scroll-margin-top: 76px; }
 
   /* Программа */
   .program { background: var(--graphite); }
