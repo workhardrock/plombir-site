@@ -102,7 +102,7 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
       <!-- Бегущая строка жанров -->
       <div class="tape" aria-hidden="true">
         <div class="tape__run">
-          {[0, 1].map(() => <span>LI|LU <i>✺</i> Trip of Life <i>✺</i> Deep <i>✺</i> Groove <i>✺</i> Electronic <i>✺</i> Phuket 24.12 <i>✺</i> PLOMBIR presents <i>✺</i> </span>)}
+          {[0, 1].map(() => <span>LI|LU <i>✺</i> Trip of Life <i>✺</i> BULAT <i>✺</i> Deep <i>✺</i> Groove <i>✺</i> Electronic <i>✺</i> Phuket 24.12 <i>✺</i> PLOMBIR presents <i>✺</i> </span>)}
         </div>
       </div>
 
@@ -128,6 +128,16 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
             <p class="artist__tags">{t.tolCity}</p>
             <p class="artist__lead" set:html={t.tolLead} />
             <p set:html={t.tolText} />
+          </div>
+        </div>
+        <div class="wrap tol">
+          <figure class="tol__pic"><img src="/img/phk-bulat.webp" width="1200" height="800" alt={t.bulatAlt} loading="lazy" /></figure>
+          <div class="tol__text">
+            <p class="eyebrow">{t.bulatEyebrow}</p>
+            <h2 class="display h2">BULAT</h2>
+            <p class="artist__tags">LA / Chicago</p>
+            <p class="artist__lead">{t.bulatLead}</p>
+            <p>{t.bulatText}</p>
           </div>
         </div>
       </section>

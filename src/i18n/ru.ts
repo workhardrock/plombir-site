@@ -28,7 +28,7 @@ const ru = {
   },
   upcoming: [
     { title: 'LI|LU в Казани', day: 'Суббота', venue: 'Ресторан «ЮГ22»', city: 'Казань' },
-    { title: 'PLOMBIR Phuket w/ LI|LU, Trip of Life', day: 'Четверг', venue: 'Banana Beach Club', city: 'Пхукет' },
+    { title: 'PLOMBIR Phuket w/ LI|LU, Trip of Life, BULAT', day: 'Четверг', venue: 'Banana Beach Club', city: 'Пхукет' },
   ],
   intro: {
     title: 'Ночная<br />культура',
