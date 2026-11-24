@@ -111,7 +111,11 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
         <div class="wrap artist__grid">
           <div class="artist__text">
             <p class="eyebrow">{t.headliner}</p>
-            <h2 class="display h2">LI|LU</h2>
+            <h2 class="display h2">
+              <a class="artist__name-link" href="https://www.instagram.com/li.lu.music/" target="_blank" rel="noopener noreferrer">
+                LI|LU <span aria-hidden="true">↗</span>
+              </a>
+            </h2>
             <p class="artist__tags">Deep · Groove · Electronic</p>
             <p class="artist__lead" set:html={t.artistLead} />
             <p set:html={t.artistText} />
@@ -124,7 +128,11 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
           <figure class="tol__pic"><img src="/img/phk-tol.webp" width="900" height="490" alt={t.tolAlt} loading="lazy" /></figure>
           <div class="tol__text">
             <p class="eyebrow">{t.tolEyebrow}</p>
-            <h2 class="display h2">Trip of&nbsp;Life</h2>
+            <h2 class="display h2">
+              <a class="artist__name-link" href="https://www.instagram.com/trip_of_life_music/" target="_blank" rel="noopener noreferrer">
+                Trip of&nbsp;Life <span aria-hidden="true">↗</span>
+              </a>
+            </h2>
             <p class="artist__tags">{t.tolCity}</p>
             <p class="artist__lead" set:html={t.tolLead} />
             <p set:html={t.tolText} />
@@ -134,7 +142,11 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
           <figure class="tol__pic tol__pic--bulat"><img src="/img/phk-bulat-amber.webp" width="1200" height="800" alt={t.bulatAlt} loading="lazy" /></figure>
           <div class="tol__text">
             <p class="eyebrow">{t.bulatEyebrow}</p>
-            <h2 class="display h2">BULAT</h2>
+            <h2 class="display h2">
+              <a class="artist__name-link" href="https://www.instagram.com/bulat_ofc/" target="_blank" rel="noopener noreferrer">
+                BULAT <span aria-hidden="true">↗</span>
+              </a>
+            </h2>
             <p class="artist__tags">LA / Chicago</p>
             <p class="artist__lead">{t.bulatLead}</p>
             <p>{t.bulatText}</p>
@@ -319,6 +331,9 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
   .artist__text > p + p { margin-top: 18px; }
   .artist__text .btn { margin-top: 32px; }
   .artist__tags { margin-top: 18px; color: var(--orange); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: var(--t-small); }
+  .artist__name-link { color: inherit; text-decoration: none; }
+  .artist__name-link span { color: var(--orange); font: 500 .45em var(--text); vertical-align: middle; }
+  .artist__name-link:hover, .artist__name-link:focus-visible { text-decoration: underline; text-decoration-thickness: .045em; text-underline-offset: .12em; }
   .artist__lead { font-size: var(--t-h3); line-height: 1.25; margin-top: 28px; }
   .artist__pic { border-radius: 16px; overflow: hidden; }
   .artist__pic img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
