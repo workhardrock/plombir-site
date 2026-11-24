@@ -18,7 +18,6 @@ const ev = {
   internationalTickets: 'https://sales.ticketing.cm.com/PlombirLILUandTOL',
   widget: 'https://voroh.ru/widget/event/1043849/019d1a45-a297-8045-af63-9113dea2be71/',
   map: 'https://yandex.kz/maps/-/CXb~64J3',
-  music: 'https://music.yandex.kz/artist/25792091',
 };
 
 const { lang = 'ru' } = Astro.props as { lang?: PhuketLang };
@@ -131,7 +130,6 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
             <p class="artist__lead" set:html={t.artistLead} />
             <p set:html={t.artistText} />
             <div class="artist__links">
-              <a class="btn btn--line" href={ev.music} set:html={t.listen} />
               <a class="btn btn--line" href="https://www.youtube.com/watch?v=GDKT0p1UrOc" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
             </div>
           </div>
